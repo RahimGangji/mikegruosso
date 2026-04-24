@@ -40,7 +40,10 @@ export default function OurTeam() {
         {/* Eyebrow */}
         <div className="flex items-center gap-3 mb-4">
           <span className="block h-px w-8 bg-[#15234b]" />
-          <span className="text-xs font-semibold uppercase tracking-[0.18em]" style={{ color: "#15234b" }}>
+          <span
+            className="text-xs font-semibold uppercase tracking-[0.18em] font-[family-name:var(--font-manrope)]"
+            style={{ color: "#15234b" }}
+          >
             Our Team
           </span>
         </div>
@@ -48,10 +51,13 @@ export default function OurTeam() {
         {/* Heading + Nav */}
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-4">
           <div>
-            <h2 className="text-3xl sm:text-4xl font-bold leading-tight tracking-tight" style={{ color: "#15234b" }}>
+            <h2
+              className="text-3xl sm:text-4xl font-normal leading-tight tracking-wide font-[family-name:var(--font-arapey)]"
+              style={{ color: "#15234b" }}
+            >
               The People Behind Every Deal.
             </h2>
-            <p className="text-gray-500 text-base mt-3 max-w-xl leading-relaxed">
+            <p className="text-gray-500 text-base mt-3 max-w-xl leading-relaxed font-[family-name:var(--font-karla)]">
               Our team of dedicated professionals brings local expertise, market insight, and a passion for results so every client feels like the only client.
             </p>
           </div>
@@ -107,8 +113,12 @@ export default function OurTeam() {
 
                     {/* Name overlay on image bottom */}
                     <div className="absolute bottom-0 left-0 right-0 p-5">
-                      <p className="text-white font-bold text-lg leading-tight">{member.name}</p>
-                      <p className="text-white/75 text-xs mt-0.5 tracking-wide">{member.role}</p>
+                      <p className="text-white font-normal text-lg leading-tight font-[family-name:var(--font-arapey)]">
+                        {member.name}
+                      </p>
+                      <p className="text-white/75 text-xs mt-0.5 tracking-wide font-[family-name:var(--font-karla)]">
+                        {member.role}
+                      </p>
                     </div>
                   </div>
 

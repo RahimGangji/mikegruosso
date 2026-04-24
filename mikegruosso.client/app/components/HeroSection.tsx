@@ -6,9 +6,9 @@ const tabs = ["Buy", "Sell", "Invest"] as const;
 type Tab = (typeof tabs)[number];
 
 const placeholders: Record<Tab, string> = {
-  Buy: "Search by city, neighborhood, or ZIP code...",
-  Sell: "Enter your property address...",
-  Invest: "Enter market or property type...",
+  Buy: "Search by city, county, or zip",
+  Sell: "Enter your property address",
+  Invest: "Enter market or property type",
 };
 
 export default function HeroSection() {
@@ -35,70 +35,65 @@ export default function HeroSection() {
       {/* Dark Overlay */}
       <div className="absolute inset-0 bg-black/60 pointer-events-none" />
 
-      {/* Content — normal flow so all controls stay inside the viewport on mobile */}
+      {/* Content */}
       <div className="relative z-10 w-full flex flex-col items-center">
         <div className="w-full max-w-3xl flex flex-col items-center text-center">
 
           {/* Tagline */}
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight tracking-tight mb-5">
-            Unlocking the Best of Monmouth &amp; Ocean County.
+          <h1 className="text-3xl sm:text-4xl font-normal text-white leading-tight tracking-wide mb-5 font-[family-name:var(--font-arapey)] md:text-[57px]">
+          UNLOCK YOUR FUTURE
           </h1>
 
           {/* Description */}
-          <p className="text-sm sm:text-base md:text-lg text-white/80 max-w-2xl mb-8 leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg text-white font-bold max-w-2xl mb-10 leading-relaxed tracking-wide font-[family-name:var(--font-arapey)]">
             Whether it&apos;s a luxury waterfront home or a strategic commercial
             investment, The Gruosso Group delivers expert pricing, strategic
             marketing, and fast closings.
           </p>
 
-          {/* Tab Card */}
-          <div className="w-full max-w-2xl bg-white rounded-2xl shadow-2xl overflow-hidden">
+          {/* Tab Card — transparent style */}
+          <div className="w-full max-w-2xl">
+
             {/* Tabs */}
-            <div className="flex border-b border-gray-200">
+            <div className="flex gap-10 mb-0 px-1">
               {tabs.map((tab) => (
                 <button
                   key={tab}
                   type="button"
                   onClick={() => handleTabChange(tab)}
-                  className={`flex-1 py-3.5 text-sm font-semibold tracking-wide transition-colors duration-200 touch-manipulation ${
+                  className={`pb-2.5 text-sm font-semibold uppercase tracking-widest transition-all duration-200 touch-manipulation border-b-2 font-[family-name:var(--font-manrope)] ${
                     activeTab === tab
-                      ? "text-white"
-                      : "text-gray-500 hover:text-gray-700"
+                      ? "text-white border-white"
+                      : "text-white/60 border-transparent hover:text-white/90"
                   }`}
-                  style={
-                    activeTab === tab
-                      ? { backgroundColor: "#15234b", color: "#fff" }
-                      : {}
-                  }
                 >
                   {tab}
                 </button>
               ))}
             </div>
 
-            {/* Input Area */}
-            <div className="p-4 sm:p-6">
-              <div className="flex flex-col sm:flex-row gap-3">
-                <input
-                  type="text"
-                  value={inputValue}
-                  onChange={(e) => setInputValue(e.target.value)}
-                  placeholder={placeholders[activeTab]}
-                  className="flex-1 px-4 py-3 rounded-lg border border-gray-300 text-gray-800 placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-[#15234b] transition"
-                />
-                <button
-                  type="button"
-                  className="w-full sm:w-auto px-6 py-3 rounded-lg text-white font-semibold text-sm transition-opacity hover:opacity-90 whitespace-nowrap touch-manipulation"
-                  style={{ backgroundColor: "#15234b" }}
-                >
-                  {activeTab === "Buy"
-                    ? "Search Homes"
-                    : activeTab === "Sell"
-                    ? "Get My Value"
-                    : "Explore Deals"}
-                </button>
-              </div>
+            {/* Input Row */}
+            <div className="flex items-center bg-white/95 overflow-hidden shadow-2xl mt-4">
+              <input
+                type="text"
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                placeholder={placeholders[activeTab]}
+                className="flex-1 px-5 py-4 text-sm text-gray-800 placeholder-gray-400 bg-transparent focus:outline-none font-[family-name:var(--font-manrope)]"
+              />
+              <button
+                type="button"
+                className="flex-shrink-0 px-5 py-4 flex items-center justify-center touch-manipulation"
+                style={{ color: "#15234b" }}
+                aria-label="Search"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2.2} viewBox="0 0 24 24">
+                  <circle cx="11" cy="11" r="7" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-4.35-4.35" />
+                </svg>
+              </button>
             </div>
+
           </div>
 
         </div>

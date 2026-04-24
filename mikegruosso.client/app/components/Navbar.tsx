@@ -66,7 +66,7 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-sm font-medium tracking-wide transition-colors duration-200 ${
+                className={`text-sm font-medium tracking-wide transition-colors duration-200 font-[family-name:var(--font-karla)] ${
                   scrolled
                     ? "text-gray-800 hover:text-[#15234b]"
                     : "text-white hover:text-white/70"

@@ -3,7 +3,8 @@
     "allow": [
       "Bash(npm run *)",
       "mcp__Claude_Preview__preview_start",
-      "Bash(npm install *)"
+      "Bash(npm install *)",
+      "WebFetch(domain:mikegruosso.com)"
     ]
   }
 }

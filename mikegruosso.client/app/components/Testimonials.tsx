@@ -5,7 +5,7 @@ import { Pagination, A11y } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 
-const testimonials = [
+export const testimonials = [
   {
     name: "Albert",
     quote:
