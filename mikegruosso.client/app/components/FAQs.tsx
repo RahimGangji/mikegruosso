@@ -42,12 +42,12 @@ export default function FAQs() {
           {/* Left — sticky label */}
           <div className="lg:w-2/5 flex-shrink-0 lg:self-start lg:sticky lg:top-24">
             <div className="flex items-center gap-3 mb-4">
-              <span className="block h-px w-8 bg-[#15234b]" />
-              <span className="text-xs font-semibold uppercase tracking-[0.18em]" style={{ color: "#15234b" }}>
+              <span className="block h-px w-8 bg-black" />
+              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-black">
                 FAQs
               </span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-bold leading-tight tracking-tight mb-4" style={{ color: "#15234b" }}>
+            <h2 className="text-3xl sm:text-4xl font-bold leading-tight tracking-tight mb-4 text-black">
               Got Questions? We Have Answers.
             </h2>
             <p className="text-gray-500 text-base leading-relaxed">
@@ -63,7 +63,7 @@ export default function FAQs() {
                 <div
                   key={i}
                   className={`rounded-xl border transition-all duration-200 overflow-hidden ${
-                    isOpen ? "border-[#15234b]/30 shadow-sm" : "border-gray-200"
+                    isOpen ? "border-[#3aaacf]/30 shadow-sm" : "border-gray-200"
                   }`}
                 >
                   <button
@@ -71,13 +71,13 @@ export default function FAQs() {
                     className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left"
                   >
                     <span className={`text-sm font-semibold leading-snug ${isOpen ? "" : "text-gray-800"}`}
-                      style={isOpen ? { color: "#15234b" } : {}}>
+                      style={isOpen ? { color: "#3aaacf" } : {}}>
                       {faq.q}
                     </span>
                     <span
                       className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-all duration-300"
                       style={{
-                        backgroundColor: isOpen ? "#15234b" : "#f1f5f9",
+                        backgroundColor: isOpen ? "#3aaacf" : "#f1f5f9",
                         color: isOpen ? "#fff" : "#64748b",
                         transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
                       }}

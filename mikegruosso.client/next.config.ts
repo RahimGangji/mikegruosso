@@ -9,6 +9,18 @@ const nextConfig: NextConfig = {
     "10.0.0.*",
     "*.local",
   ],
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.brivityidx.com",
+      },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
+    ],
+  },
 };
 
 export default nextConfig;

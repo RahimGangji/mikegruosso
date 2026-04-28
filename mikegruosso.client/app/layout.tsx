@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Arapey, Manrope, Karla } from "next/font/google";
+import { Geist, Geist_Mono, Arapey, Manrope, Karla, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -29,6 +29,12 @@ const manrope = Manrope({
 const karla = Karla({
   variable: "--font-karla",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+});
+
+const cormorantGaramond = Cormorant_Garamond({
+  variable: "--font-cormorant-garamond",
+  subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
 
@@ -45,7 +51,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${arapey.variable} ${manrope.variable} ${karla.variable} antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${arapey.variable} ${manrope.variable} ${karla.variable} ${cormorantGaramond.variable} antialiased`}
     >
       <body className="flex flex-col">
         <Navbar />

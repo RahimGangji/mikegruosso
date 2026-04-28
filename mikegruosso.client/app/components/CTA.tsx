@@ -6,9 +6,9 @@ export default function CTA() {
       <div className="max-w-7xl mx-auto px-4 sm:px-8 w-full">
         <div
           className="rounded-lg shadow-lg border border-white/10 px-6 sm:px-10 py-10 sm:py-12"
-          style={{ backgroundColor: "#15234b" }}
+          style={{ backgroundColor: "#3aaacf" }}
         >
-          <h2 className="text-center text-2xl sm:text-3xl md:text-[1.75rem] font-normal text-white leading-tight font-[family-name:var(--font-arapey)] tracking-wide">
+          <h2 className="text-center text-2xl sm:text-3xl md:text-[1.75rem] font-normal text-black leading-tight font-[family-name:var(--font-cormorant-garamond)] tracking-wide">
             How Much Is Your Home Really Worth?
           </h2>
 
@@ -26,7 +26,7 @@ export default function CTA() {
               type="text"
               autoComplete="street-address"
               placeholder="Enter Home Address"
-              className="min-w-0 flex-1 rounded border-2 border-green-600 bg-transparent px-4 py-3 text-sm text-green-500 placeholder:text-green-500 focus:border-green-400 focus:outline-none focus:ring-2 focus:ring-green-500/30 font-[family-name:var(--font-karla)]"
+              className="min-w-0 flex-1 rounded border-2 border-[#161f2d] bg-transparent px-4 py-3 text-sm text-[#161f2d] placeholder:text-[#161f2d]/65 focus:border-[#161f2d] focus:outline-none focus:ring-0 font-[family-name:var(--font-karla)]"
             />
             <label htmlFor="cta-unit" className="sr-only">
               Unit number (optional)
@@ -36,11 +36,11 @@ export default function CTA() {
               name="unit"
               type="text"
               placeholder="Unit # (optional)"
-              className="sm:w-44 shrink-0 rounded border-2 border-green-600 bg-transparent px-4 py-3 text-sm text-green-500 placeholder:text-green-500 focus:border-green-400 focus:outline-none focus:ring-2 focus:ring-green-500/30 font-[family-name:var(--font-karla)]"
+              className="sm:w-44 shrink-0 rounded border-2 border-[#161f2d] bg-transparent px-4 py-3 text-sm text-[#161f2d] placeholder:text-[#161f2d]/65 focus:border-[#161f2d] focus:outline-none focus:ring-0 font-[family-name:var(--font-karla)]"
             />
             <button
               type="submit"
-              className="shrink-0 rounded bg-green-600 px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-green-700 font-[family-name:var(--font-manrope)] sm:px-10"
+              className="shrink-0 rounded bg-[#161f2d] px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#0f1622] font-[family-name:var(--font-manrope)] sm:px-10"
             >
               Find Out
             </button>

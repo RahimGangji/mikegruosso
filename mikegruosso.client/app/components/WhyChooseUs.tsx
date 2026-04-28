@@ -63,14 +63,14 @@ export default function WhyChooseUs() {
 
           {/* Eyebrow */}
           <div className="flex items-center gap-3 mb-4">
-            <span className="block h-px w-8 bg-[#15234b]" />
-            <span className="text-xs font-semibold uppercase tracking-[0.18em]" style={{ color: "#15234b" }}>
+            <span className="block h-px w-8 bg-black" />
+            <span className="text-xs font-semibold uppercase tracking-[0.18em] text-black">
               Why Partner with Us
             </span>
           </div>
 
           {/* Heading */}
-          <h2 className="text-3xl sm:text-4xl font-bold leading-tight tracking-tight mb-5" style={{ color: "#15234b" }}>
+          <h2 className="text-3xl sm:text-4xl font-bold leading-tight tracking-tight mb-5 text-black">
             Expect More From Your Real Estate Experience.
           </h2>
 
@@ -87,9 +87,9 @@ export default function WhyChooseUs() {
               <li key={point.label} className="flex items-center gap-3">
                 <span
                   className="flex-shrink-0 w-2 h-2 rounded-full"
-                  style={{ backgroundColor: "#15234b" }}
+                  style={{ backgroundColor: "#3aaacf" }}
                 />
-                <span className="text-base font-semibold" style={{ color: "#15234b" }}>
+                <span className="text-base font-semibold" style={{ color: "#3aaacf" }}>
                   {point.value}
                 </span>
                 {/* <span className="text-gray-400 text-sm">— {point.label}</span> */}

@@ -5,11 +5,11 @@ export default function ElevatingSection() {
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-8">
         <div
           className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 p-8 sm:p-10"
-          style={{ backgroundColor: "#15234b" }}
+          style={{ backgroundColor: "#3aaacf" }}
         >
           {/* Left — Heading */}
           <div className="flex items-start">
-            <h2 className="text-2xl sm:text-3xl font-normal leading-snug text-white font-[family-name:var(--font-arapey)] tracking-wide">
+            <h2 className="text-2xl sm:text-3xl font-normal leading-snug text-white font-[family-name:var(--font-cormorant-garamond)] tracking-wide">
               Elevating Real Estate on the Jersey Shore
             </h2>
           </div>
@@ -42,7 +42,7 @@ export default function ElevatingSection() {
         className="relative z-0 w-full h-56 sm:h-72 md:h-96 -mt-24 sm:-mt-32 md:-mt-44"
         style={{
           backgroundImage:
-            "url('https://images.brivityidx.com/assets/images/uploads/2751/beachhouses.jpg')",
+            "url('/home-beach.jpg')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",

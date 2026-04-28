@@ -3,18 +3,29 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-const navLinks = [
-  { label: "About Us", href: "/about" },
+const leftLinks = [
   { label: "Buy Properties", href: "/buy" },
-  { label: "Property Value", href: "/property-value" },
+  { label: "Sell Properties", href: "/property-value" },
   { label: "Investment", href: "/investment" },
-  { label: "Our Portfolio", href: "/portfolio" },
+  { label: "Commercial", href: "/commercial" },
 ];
+
+const rightLinks = [
+  { label: "Properties Sold", href: "/portfolio" },
+  { label: "About Us", href: "/about" },
+  { label: "Join Gruosso Group", href: "/join" },
+  { label: "Contact Us", href: "/contact" },
+];
+
+const mobileLinks = [...leftLinks, ...rightLinks];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
@@ -34,19 +45,86 @@ export default function Navbar() {
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? "bg-white shadow-md" : "bg-transparent"
+          scrolled || !isHome ? "bg-white shadow-md" : "bg-transparent"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 flex items-center justify-between h-20">
-          {/* Logo */}
-          <Link href="/" className={`flex items-center gap-3 flex-shrink-0 transition-opacity duration-300 ${menuOpen ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-8">
+
+          {/* Mobile — logo left, hamburger right */}
+          <div className="flex min-[940px]:hidden items-center justify-between h-20 gap-4">
+            <Link
+              href="/"
+              className={`relative flex shrink-0 transition-opacity duration-300 ${
+                menuOpen ? "opacity-0 pointer-events-none" : "opacity-100"
+              }`}
+            >
+              <div className="relative w-[120px] h-[80px]">
+                <Image
+                  src="/mike-icon.png"
+                  alt="The Gruosso Group"
+                  fill
+                  sizes="120px"
+                  className={`object-contain transition-opacity duration-300 ${scrolled || !isHome ? "opacity-0" : "opacity-100"}`}
+                  priority
+                />
+                <Image
+                  src="/mike-icon-black-removebg-preview.png"
+                  alt="The Gruosso Group"
+                  fill
+                  sizes="120px"
+                  className={`object-contain transition-opacity duration-300 ${scrolled || !isHome ? "opacity-100" : "opacity-0"}`}
+                  priority
+                />
+              </div>
+            </Link>
+            {!menuOpen && (
+              <button
+                type="button"
+                className="relative flex shrink-0 flex-col justify-center gap-1.5 p-2 z-[60] touch-manipulation ml-auto"
+                onClick={() => setMenuOpen(true)}
+                aria-label="Open menu"
+              >
+                <span className={`pointer-events-none block h-0.5 w-6 transition-all duration-300 ${scrolled || !isHome ? "bg-gray-800" : "bg-white"}`} />
+                <span className={`pointer-events-none block h-0.5 w-6 transition-all duration-300 ${scrolled || !isHome ? "bg-gray-800" : "bg-white"}`} />
+                <span className={`pointer-events-none block h-0.5 w-6 transition-all duration-300 ${scrolled || !isHome ? "bg-gray-800" : "bg-white"}`} />
+              </button>
+            )}
+          </div>
+
+          {/* Desktop — left nav · centered logo · right nav */}
+          <div className="hidden min-[940px]:grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center h-20 gap-6">
+
+          {/* Left — Primary nav */}
+          <nav className="flex items-center gap-7 justify-start">
+            {leftLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`text-sm font-medium tracking-wide transition-colors duration-200 font-[family-name:var(--font-karla)] ${
+                  scrolled || !isHome
+                    ? "text-gray-800 hover:text-[#3aaacf]"
+                    : "text-white hover:text-white/70"
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+
+          {/* Center — Logo (desktop) */}
+          <Link
+            href="/"
+            className={`hidden min-[940px]:flex items-center justify-self-center transition-opacity duration-300 ${
+              menuOpen ? "opacity-0 pointer-events-none" : "opacity-100"
+            }`}
+          >
             <div className="relative w-[120px] h-[80px]">
               <Image
                 src="/mike-icon.png"
                 alt="The Gruosso Group"
                 fill
                 sizes="120px"
-                className={`object-contain transition-opacity duration-300 ${scrolled ? "opacity-0" : "opacity-100"}`}
+                className={`object-contain transition-opacity duration-300 ${scrolled || !isHome ? "opacity-0" : "opacity-100"}`}
                 priority
               />
               <Image
@@ -54,49 +132,29 @@ export default function Navbar() {
                 alt="The Gruosso Group"
                 fill
                 sizes="120px"
-                className={`object-contain transition-opacity duration-300 ${scrolled ? "opacity-100" : "opacity-0"}`}
+                className={`object-contain transition-opacity duration-300 ${scrolled || !isHome ? "opacity-100" : "opacity-0"}`}
                 priority
               />
             </div>
           </Link>
 
-          {/* Desktop Nav */}
-          <nav className="hidden min-[940px]:flex items-center gap-8">
-            {navLinks.map((link) => (
+          {/* Right — Secondary nav (Contact Us is a plain link, not a button) */}
+          <nav className="flex items-center gap-7 justify-end">
+            {rightLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 className={`text-sm font-medium tracking-wide transition-colors duration-200 font-[family-name:var(--font-karla)] ${
-                  scrolled
-                    ? "text-gray-800 hover:text-[#15234b]"
+                  scrolled || !isHome
+                    ? "text-gray-800 hover:text-[#3aaacf]"
                     : "text-white hover:text-white/70"
                 }`}
               >
                 {link.label}
               </Link>
             ))}
-            <Link
-              href="/contact"
-              className="ml-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-white transition-opacity hover:opacity-90"
-              style={{ backgroundColor: "#15234b" }}
-            >
-              Contact Us
-            </Link>
           </nav>
-
-          {/* Mobile Hamburger — hidden when drawer is open */}
-          {!menuOpen && (
-            <button
-              type="button"
-              className="relative min-[940px]:hidden flex flex-col justify-center gap-1.5 p-2 z-[60] touch-manipulation"
-              onClick={() => setMenuOpen(true)}
-              aria-label="Open menu"
-            >
-              <span className={`pointer-events-none block h-0.5 w-6 transition-all duration-300 ${scrolled ? "bg-gray-800" : "bg-white"}`} />
-              <span className={`pointer-events-none block h-0.5 w-6 transition-all duration-300 ${scrolled ? "bg-gray-800" : "bg-white"}`} />
-              <span className={`pointer-events-none block h-0.5 w-6 transition-all duration-300 ${scrolled ? "bg-gray-800" : "bg-white"}`} />
-            </button>
-          )}
+          </div>
         </div>
       </header>
 
@@ -142,29 +200,17 @@ export default function Navbar() {
 
             {/* Drawer Links */}
             <nav className="flex flex-col flex-1 px-5 py-6 gap-1 overflow-y-auto">
-              {navLinks.map((link) => (
+              {mobileLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-sm font-medium text-gray-800 hover:text-[#15234b] hover:bg-gray-50 py-3.5 px-3 rounded-lg border-b border-gray-100 last:border-0 transition-colors"
+                  className="text-sm font-medium text-gray-800 hover:text-[#3aaacf] hover:bg-gray-50 py-3.5 px-3 rounded-lg border-b border-gray-100 last:border-0 transition-colors"
                   onClick={closeMenu}
                 >
                   {link.label}
                 </Link>
               ))}
             </nav>
-
-            {/* Drawer CTA */}
-            <div className="px-5 py-6 border-t border-gray-100">
-              <Link
-                href="/contact"
-                className="block w-full px-5 py-3 rounded-lg text-sm font-semibold text-white text-center transition-opacity hover:opacity-90"
-                style={{ backgroundColor: "#15234b" }}
-                onClick={closeMenu}
-              >
-                Contact Us
-              </Link>
-            </div>
           </div>
     </>
   );

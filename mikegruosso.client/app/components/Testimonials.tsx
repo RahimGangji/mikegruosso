@@ -40,7 +40,7 @@ function TestimonialCard({ t }: { t: typeof testimonials[0] }) {
     <div className="bg-white rounded-2xl p-7 shadow-sm hover:shadow-lg transition-shadow duration-300 flex flex-col h-full">
       <svg
         className="w-8 h-8 mb-4 flex-shrink-0"
-        style={{ color: "#15234b", opacity: 0.15 }}
+        style={{ color: "#3aaacf", opacity: 0.15 }}
         fill="currentColor"
         viewBox="0 0 32 32"
       >
@@ -51,12 +51,12 @@ function TestimonialCard({ t }: { t: typeof testimonials[0] }) {
       <div className="mt-6 pt-5 border-t border-gray-100 flex items-center gap-3">
         <div
           className="w-9 h-9 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0"
-          style={{ backgroundColor: "#15234b" }}
+          style={{ backgroundColor: "#3aaacf" }}
         >
           {t.name[0]}
         </div>
         <div>
-          <p className="text-sm font-bold" style={{ color: "#15234b" }}>{t.name}</p>
+          <p className="text-sm font-bold" style={{ color: "#3aaacf" }}>{t.name}</p>
           <p className="text-xs text-gray-400">Verified Client</p>
         </div>
       </div>
@@ -75,7 +75,7 @@ export default function Testimonials() {
           height: 8px;
         }
         .testimonials-swiper .swiper-pagination-bullet-active {
-          background: #15234b;
+          background: #3aaacf;
           width: 24px;
           border-radius: 4px;
         }
@@ -85,15 +85,15 @@ export default function Testimonials() {
 
         {/* Eyebrow */}
         <div className="flex items-center gap-3 mb-4">
-          <span className="block h-px w-8 bg-[#15234b]" />
-          <span className="text-xs font-semibold uppercase tracking-[0.18em]" style={{ color: "#15234b" }}>
+          <span className="block h-px w-8 bg-black" />
+          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-black">
             Client Testimonials
           </span>
         </div>
 
         {/* Heading */}
         <div className="mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold leading-tight tracking-tight" style={{ color: "#15234b" }}>
+          <h2 className="text-3xl sm:text-4xl font-bold leading-tight tracking-tight text-black">
             What Our Clients Are Saying.
           </h2>
           <p className="text-gray-500 text-base mt-3 max-w-xl leading-relaxed">

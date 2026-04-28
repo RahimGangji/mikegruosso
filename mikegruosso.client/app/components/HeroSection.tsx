@@ -25,7 +25,7 @@ export default function HeroSection() {
       {/* Background Video */}
       <video
         className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-        src="/herosection-video.mp4"
+        src="https://res.cloudinary.com/dd1e0iquz/video/upload/v1777408899/hero-section-video_qjl7qp.mp4"
         autoPlay
         muted
         loop
@@ -40,7 +40,7 @@ export default function HeroSection() {
         <div className="w-full max-w-3xl flex flex-col items-center text-center">
 
           {/* Tagline */}
-          <h1 className="text-3xl sm:text-4xl font-normal text-white leading-tight tracking-wide mb-5 font-[family-name:var(--font-arapey)] md:text-[57px]">
+          <h1 className="text-3xl sm:text-4xl font-normal text-white leading-tight tracking-wide mb-5 font-[family-name:var(--font-cormorant-garamond)] md:text-[57px]">
           UNLOCK YOUR FUTURE
           </h1>
 
@@ -84,7 +84,7 @@ export default function HeroSection() {
               <button
                 type="button"
                 className="flex-shrink-0 px-5 py-4 flex items-center justify-center touch-manipulation"
-                style={{ color: "#15234b" }}
+                style={{ color: "#3aaacf" }}
                 aria-label="Search"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2.2} viewBox="0 0 24 24">

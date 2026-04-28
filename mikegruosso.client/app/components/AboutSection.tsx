@@ -7,10 +7,10 @@ export default function AboutSection() {
   return (
     <section className="w-full bg-white">
       {/* Blue top — text + bottom padding that equals half the image height */}
-      <div className="bg-[#15234b] pb-36 sm:pb-48 md:pb-60">
+      <div className="bg-[#3aaacf] pb-36 sm:pb-48 md:pb-60">
         <div className={`${pageContainer} pt-20 pb-14 text-center`}>
           {/* Heading */}
-          <h2 className="text-3xl sm:text-4xl font-normal text-white tracking-wide mb-5 font-[family-name:var(--font-arapey)]">
+          <h2 className="text-3xl sm:text-4xl font-normal text-white tracking-wide mb-5 font-[family-name:var(--font-cormorant-garamond)]">
             About Us
           </h2>
 

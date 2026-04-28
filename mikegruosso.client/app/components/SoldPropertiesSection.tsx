@@ -108,7 +108,7 @@ export default function SoldPropertiesSection() {
           height: 8px;
         }
         .sold-swiper .swiper-pagination-bullet-active {
-          background: #15234b;
+          background: #3aaacf;
           width: 24px;
           border-radius: 4px;
         }
@@ -117,26 +117,20 @@ export default function SoldPropertiesSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         {/* Eyebrow */}
         <div className="flex items-center gap-3 mb-4">
-          <span className="block h-px w-8 bg-[#15234b]" />
-          <span
-            className="text-xs font-semibold uppercase tracking-[0.18em] font-[family-name:var(--font-manrope)]"
-            style={{ color: "#15234b" }}
-          >
+          <span className="block h-px w-8 bg-black" />
+          <span className="text-xs font-semibold uppercase tracking-[0.18em] font-[family-name:var(--font-manrope)] text-black">
             Success Stories
           </span>
         </div>
 
         {/* Heading + Nav */}
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
-          <h2
-            className="text-3xl sm:text-4xl font-normal leading-tight tracking-wide font-[family-name:var(--font-arapey)]"
-            style={{ color: "#15234b" }}
-          >
+          <h2 className="text-3xl sm:text-4xl font-normal leading-tight tracking-wide font-[family-name:var(--font-cormorant-garamond)] text-black">
             Our Properties Sold
           </h2>
           <div className="flex items-center gap-3 flex-shrink-0">
             <button
-              className="sold-prev w-11 h-11 rounded-full border-2 border-[#15234b] text-[#15234b] flex items-center justify-center"
+              className="sold-prev w-11 h-11 rounded-full border-2 border-[#3aaacf] text-[#3aaacf] flex items-center justify-center"
               aria-label="Previous"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
@@ -144,7 +138,7 @@ export default function SoldPropertiesSection() {
               </svg>
             </button>
             <button
-              className="sold-next w-11 h-11 rounded-full border-2 border-[#15234b] text-[#15234b] flex items-center justify-center"
+              className="sold-next w-11 h-11 rounded-full border-2 border-[#3aaacf] text-[#3aaacf] flex items-center justify-center"
               aria-label="Next"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
@@ -178,28 +172,34 @@ export default function SoldPropertiesSection() {
                     className="object-cover"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
-                  <span className="absolute top-3 left-3 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-white bg-[#15234b]/90 font-[family-name:var(--font-manrope)]">
+                  <span className="absolute top-3 left-3 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-white bg-[#3aaacf]/90 font-[family-name:var(--font-manrope)]">
                     Sold
                   </span>
                 </div>
 
-                <div className="p-5 flex flex-col gap-1">
+                <div className="p-5 pl-0 flex flex-col gap-1">
                   <p
-                    className="text-xl font-bold tracking-tight font-[family-name:var(--font-manrope)]"
-                    style={{ color: "#15234b" }}
+                    className="text-xl sm:text-[15px] font-bold sm:font-normal sm:tracking-[3.5px] sm:uppercase tracking-tight font-[family-name:var(--font-manrope)]"
+                    style={{ color: "#000000" }}
                   >
                     {listing.price}
                   </p>
 
-                  <p className="text-base font-normal leading-snug text-gray-900 font-[family-name:var(--font-arapey)]">
+                  <p className="text-base sm:text-[19px] font-normal leading-snug text-gray-900 font-[family-name:var(--font-arapey)] sm:tracking-[1.4px] sm:pt-2">
                     {listing.address}, {listing.city}
                   </p>
 
-                  <p className="text-xs text-gray-500 font-[family-name:var(--font-manrope)] mt-0.5">
+                  <p
+                    className="text-[15px] font-light tracking-[0.3px] text-gray-500 font-[family-name:var(--font-karla)] mt-0.5 sm:mt-0 sm:pt-2"
+                    style={{ color: "#000000" }}
+                  >
                     {listing.beds} BD&nbsp;|&nbsp;{listing.baths} BA&nbsp;|&nbsp;{listing.sqft.toLocaleString()} SQFT
                   </p>
 
-                  <p className="text-xs text-gray-400 font-[family-name:var(--font-manrope)] mt-1">
+                  <p
+                    className="text-[15px] font-light tracking-[0.28px] text-[#000000] font-[family-name:var(--font-karla)] mt-1 sm:mt-0 sm:pt-2"
+                    style={{ color: "#000000" }}
+                  >
                     Sold With {listing.listedWith}
                   </p>
                 </div>

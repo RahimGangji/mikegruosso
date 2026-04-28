@@ -30,7 +30,7 @@ export default function ListingsSection() {
           height: 8px;
         }
         .listings-swiper .swiper-pagination-bullet-active {
-          background: #15234b;
+          background: #3aaacf;
           width: 24px;
           border-radius: 4px;
         }
@@ -40,20 +40,20 @@ export default function ListingsSection() {
 
         {/* Eyebrow */}
         <div className="flex items-center gap-3 mb-4">
-          <span className="block h-px w-8 bg-[#15234b]" />
-          <span className="text-xs font-semibold uppercase tracking-[0.18em] font-[family-name:var(--font-manrope)]" style={{ color: "#15234b" }}>
+          <span className="block h-px w-8 bg-black" />
+          <span className="text-xs font-semibold uppercase tracking-[0.18em] font-[family-name:var(--font-manrope)] text-black">
             Our Listings
           </span>
         </div>
 
         {/* Heading + Nav */}
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
-          <h2 className="text-3xl sm:text-4xl font-normal leading-tight tracking-wide font-[family-name:var(--font-arapey)]" style={{ color: "#15234b" }}>
+          <h2 className="text-3xl sm:text-4xl font-normal leading-tight tracking-wide font-[family-name:var(--font-cormorant-garamond)] text-black">
             Check out our Newest Listings!
           </h2>
           <div className="flex items-center gap-3 flex-shrink-0">
             <button
-              className="listings-prev w-11 h-11 rounded-full border-2 border-[#15234b] text-[#15234b] flex items-center justify-center transition-all duration-200 hover:bg-[#15234b] hover:text-white"
+              className="listings-prev w-11 h-11 rounded-full border-2 border-[#3aaacf] text-[#3aaacf] flex items-center justify-center transition-all duration-200 hover:bg-[#3aaacf] hover:text-white"
               aria-label="Previous"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
@@ -61,7 +61,7 @@ export default function ListingsSection() {
               </svg>
             </button>
             <button
-              className="listings-next w-11 h-11 rounded-full border-2 border-[#15234b] text-[#15234b] flex items-center justify-center transition-all duration-200 hover:bg-[#15234b] hover:text-white"
+              className="listings-next w-11 h-11 rounded-full border-2 border-[#3aaacf] text-[#3aaacf] flex items-center justify-center transition-all duration-200 hover:bg-[#3aaacf] hover:text-white"
               aria-label="Next"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
@@ -101,28 +101,28 @@ export default function ListingsSection() {
                 </div>
 
                 {/* Card Body */}
-                <div className="p-5 flex flex-col gap-1">
+                <div className="p-5 pl-0 flex flex-col gap-1">
 
                   {/* Price */}
                   <p
-                    className="text-xl font-bold tracking-tight font-[family-name:var(--font-manrope)]"
-                    style={{ color: "#15234b" }}
+                    className="text-xl sm:text-[15px] font-bold sm:font-normal sm:tracking-[3.5px] sm:uppercase tracking-tight font-[family-name:var(--font-manrope)]"
+                    style={{ color: "#000000" }}
                   >
                     {listing.price}
                   </p>
 
                   {/* Address */}
-                  <p className="text-base font-normal leading-snug text-gray-900 font-[family-name:var(--font-arapey)]">
+                  <p className="text-base sm:text-[19px] font-normal leading-snug text-gray-900 font-[family-name:var(--font-arapey)] sm:tracking-[1.4px] sm:pt-2">
                     {listing.address}, {listing.city}
                   </p>
 
                   {/* Stats */}
-                  <p className="text-xs text-gray-500 font-[family-name:var(--font-manrope)] mt-0.5">
+                  <p className="text-[15px] font-light tracking-[0.3px] text-gray-500 font-[family-name:var(--font-karla)] mt-0.5 sm:mt-0 sm:pt-2" style={{ color: "#000000" }}>
                     {listing.beds} BD&nbsp;|&nbsp;{listing.baths} BA&nbsp;|&nbsp;{listing.sqft.toLocaleString()} SQFT
                   </p>
 
                   {/* Listed with */}
-                  <p className="text-xs text-gray-400 font-[family-name:var(--font-manrope)] mt-1">
+                  <p className="text-[15px] font-light tracking-[0.28px] text-[#000000] font-[family-name:var(--font-karla)] mt-1 sm:mt-0 sm:pt-2" style={{ color: "#000000" }}>
                     Listed With {listing.listedWith}
                   </p>
 

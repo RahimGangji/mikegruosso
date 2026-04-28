@@ -48,9 +48,12 @@ const socials = [
     label: "YouTube",
     href: "#",
     icon: (
-      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58z" />
-        <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white" />
+      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+        />
       </svg>
     ),
   },
@@ -58,7 +61,7 @@ const socials = [
 
 export default function Footer() {
   return (
-    <footer style={{ backgroundColor: "#15234b" }}>
+    <footer style={{ backgroundColor: "#3aaacf" }}>
       {/* Main Footer */}
       <div className="max-w-7xl mx-auto px-4 sm:px-8 py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
@@ -73,24 +76,24 @@ export default function Footer() {
                 className="object-contain"
               />
             </div>
-            <p className="text-white/60 text-sm leading-relaxed mb-6">
+            <p className="text-white/90 text-sm leading-relaxed mb-6">
               Your trusted real estate team along the Jersey Shore specializing in residential, commercial, and investment properties in Monmouth &amp; Ocean County.
             </p>
             {/* Address */}
             <div className="flex items-start gap-2.5 mb-3">
-              <svg className="w-4 h-4 text-white/40 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+              <svg className="w-4 h-4 text-white/80 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
-              <p className="text-white/60 text-sm leading-relaxed">
+              <p className="text-white/90 text-sm leading-relaxed">
                 830 Broad St, Shrewsbury, NJ 07702
               </p>
             </div>
             <div className="flex items-center gap-2.5">
-              <svg className="w-4 h-4 text-white/40 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+              <svg className="w-4 h-4 text-white/80 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
               </svg>
-              <a href="tel:+17327044033" className="text-white/60 text-sm hover:text-white transition-colors">
+              <a href="tel:+17327044033" className="text-white/90 text-sm hover:text-white transition-colors">
                 (732) 704-4033 ext. 126
               </a>
             </div>
@@ -104,7 +107,7 @@ export default function Footer() {
                 <li key={item.label}>
                   <Link
                     href={item.href}
-                    className="text-white/60 text-sm hover:text-white transition-colors duration-200"
+                    className="text-white/90 text-sm hover:text-white transition-colors duration-200"
                   >
                     {item.label}
                   </Link>
@@ -121,7 +124,7 @@ export default function Footer() {
                 <li key={item.label}>
                   <Link
                     href={item.href}
-                    className="text-white/60 text-sm hover:text-white transition-colors duration-200"
+                    className="text-white/90 text-sm hover:text-white transition-colors duration-200"
                   >
                     {item.label}
                   </Link>
@@ -139,7 +142,7 @@ export default function Footer() {
                   key={s.label}
                   href={s.href}
                   aria-label={s.label}
-                  className="w-10 h-10 rounded-lg flex items-center justify-center text-white/60 bg-white/[0.08] hover:bg-white/[0.18] transition-all duration-200"
+                  className="w-10 h-10 rounded-lg flex items-center justify-center text-white bg-white/[0.12] hover:bg-white/[0.22] hover:text-white transition-all duration-200"
                 >
                   {s.icon}
                 </a>
@@ -153,10 +156,10 @@ export default function Footer() {
       {/* Bottom Bar */}
       <div>
         <div className="max-w-7xl mx-auto px-4 sm:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-white/40 text-xs text-center sm:text-left">
+          <p className="text-white/75 text-xs text-center sm:text-left leading-relaxed">
             © {new Date().getFullYear()} The Gruosso Group. All rights reserved.
           </p>
-          <p className="text-white/40 text-xs">
+          <p className="text-white/75 text-xs leading-relaxed text-center sm:text-right">
             Powered by Keller Williams Realty East Monmouth
           </p>
         </div>
