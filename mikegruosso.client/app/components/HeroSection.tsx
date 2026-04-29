@@ -26,6 +26,7 @@ export default function HeroSection() {
       <video
         className="absolute inset-0 w-full h-full object-cover pointer-events-none"
         src="https://res.cloudinary.com/dd1e0iquz/video/upload/v1777408899/hero-section-video_qjl7qp.mp4"
+        poster="https://res.cloudinary.com/dd1e0iquz/video/upload/so_0,f_jpg/v1777408899/hero-section-video_qjl7qp.jpg"
         autoPlay
         muted
         loop

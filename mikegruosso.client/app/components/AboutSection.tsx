@@ -73,6 +73,7 @@ export default function AboutSection() {
             fill
             className="object-cover object-top"
             sizes="(max-width: 1280px) 100vw, 1280px"
+            loading="lazy"
           />
         </div>
       </div>

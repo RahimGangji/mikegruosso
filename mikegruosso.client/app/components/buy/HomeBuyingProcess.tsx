@@ -44,6 +44,7 @@ export default function HomeBuyingProcess() {
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 75vw, 40vw"
+                priority
               />
             </div>
 
@@ -55,6 +56,7 @@ export default function HomeBuyingProcess() {
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 55vw, 30vw"
+                priority
               />
             </div>
 

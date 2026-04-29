@@ -18,6 +18,7 @@ export default function TestimonialBannerSection() {
         className="object-cover"
         sizes="100vw"
         aria-hidden
+        loading="lazy"
       />
 
       <div className="absolute inset-0 bg-black/72" aria-hidden />
