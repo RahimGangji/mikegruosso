@@ -2,13 +2,47 @@ import Image from "next/image";
 import Link from "next/link";
 import { BLUR_PLACEHOLDER } from "@/app/lib/placeholder";
 
-export default function StartHomeSearch() {
+type StartHomeSearchProps = {
+  title?: string;
+  subtitle?: string;
+  paragraphs?: string[];
+  titleClassName?: string;
+  backgroundImage?: string;
+  featureImage?: {
+    src: string;
+    alt: string;
+  };
+  cta?: {
+    label: string;
+    href: string;
+  } | null;
+};
+
+const defaultParagraphs = [
+  "When buying a home, start by making a wish list and setting a budget. Our team can help you choose a lender to get you pre-approved for a loan, and then you're ready to start house hunting. Search for your dream home from any device on our website. You can even compare walk scores, school ratings, and neighborhood demographics for different listings.",
+  "You can search for the perfect property using this website on any device, including your desktop, laptop, tablet, or smartphone.",
+];
+
+export default function StartHomeSearch({
+  title = "Start Your Home Search",
+  subtitle = "Search for Homes Whereever Your Are",
+  paragraphs = defaultParagraphs,
+  titleClassName = "text-[30px] lg:text-[36px]",
+  backgroundImage = "/happy-familybg.avif",
+  featureImage = {
+    src: "/laptop-device.png",
+    alt: "Property search on a laptop",
+  },
+  cta = {
+    label: "Start Searching",
+    href: "/buy",
+  },
+}: StartHomeSearchProps) {
   return (
     <section
       className="relative w-full overflow-hidden"
       style={{
-        backgroundImage:
-          "url('/happy-familybg.avif')",
+        backgroundImage: `url('${backgroundImage}')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -24,8 +58,8 @@ export default function StartHomeSearch() {
           {/* Left — Laptop device */}
           <div className="relative w-full h-[260px] sm:h-[340px] lg:h-[420px] order-2 lg:order-1 lg:-ml-12 xl:-ml-20">
             <Image
-              src="/laptop-device.png"
-              alt="Property search on a laptop"
+              src={featureImage.src}
+              alt={featureImage.alt}
               fill
               className="object-contain object-center lg:object-left"
               sizes="(max-width: 1024px) 100vw, 50vw"
@@ -37,37 +71,30 @@ export default function StartHomeSearch() {
 
           {/* Right — Copy */}
           <div className="flex flex-col order-1 lg:order-2">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-normal text-white leading-tight tracking-wide font-[family-name:var(--font-cormorant-garamond)] mb-5">
-              Start Your Home Search
+            <h2 className={`${titleClassName} font-normal text-white leading-tight tracking-wide font-[family-name:var(--font-cormorant-garamond)] mb-5`}>
+              {title}
             </h2>
 
             <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.22em] text-white mb-7 font-[family-name:var(--font-manrope)]">
-              Search for Homes Whereever Your Are
+              {subtitle}
             </p>
 
             <div className="flex flex-col gap-5 text-white/85 text-sm sm:text-[15px] leading-relaxed font-[family-name:var(--font-karla)] mb-8">
-              <p>
-                When buying a home, start by making a wish list and setting a budget.
-                Our team can help you choose a lender to get you pre-approved for a
-                loan, and then you&apos;re ready to start house hunting. Search for your
-                dream home from any device on our website. You can even compare walk
-                scores, school ratings, and neighborhood demographics for different
-                listings.
-              </p>
-              <p>
-                You can search for the perfect property using this website on any device,
-                including your desktop, laptop, tablet, or smartphone.
-              </p>
+              {paragraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
             </div>
 
-            <div>
-              <Link
-                href="/buy"
-                className="inline-flex items-center justify-center rounded bg-[#3aaacf] hover:bg-[#2f95b6] transition-colors px-8 py-3.5 text-sm font-semibold text-white tracking-wide font-[family-name:var(--font-manrope)]"
-              >
-                Start Searching
-              </Link>
-            </div>
+            {cta ? (
+              <div>
+                <Link
+                  href={cta.href}
+                  className="inline-flex items-center justify-center rounded bg-[#3aaacf] hover:bg-[#2f95b6] transition-colors px-8 py-3.5 text-sm font-semibold text-white tracking-wide font-[family-name:var(--font-manrope)]"
+                >
+                  {cta.label}
+                </Link>
+              </div>
+            ) : null}
           </div>
 
         </div>

@@ -38,3 +38,30 @@ a,
 [role="button"] {
   touch-action: manipulation;
 }
+
+/* Animated rotating border for investment cards */
+@property --inv-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes inv-border-spin {
+  to { --inv-angle: 360deg; }
+}
+
+.inv-card {
+  border: 1.5px solid transparent;
+  background:
+    linear-gradient(#fff, #fff) padding-box,
+    conic-gradient(
+      from var(--inv-angle),
+      #e5e7eb 0deg,
+      #3aaacf 80deg,
+      #93d9f0 110deg,
+      #3aaacf 140deg,
+      #e5e7eb 220deg,
+      #e5e7eb 360deg
+    ) border-box;
+  animation: inv-border-spin 4s linear infinite;
+}

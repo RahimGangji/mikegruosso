@@ -1,6 +1,29 @@
-export default function MakingOfferClosing() {
+type MakingOfferClosingProps = {
+  title?: string;
+  subtitle?: string;
+  paragraphs?: string[];
+  formTitle?: string;
+  sectionClassName?: string;
+  headingClassName?: string;
+  formHeadingClassName?: string;
+};
+
+const defaultParagraphs = [
+  "When you find a home you love, The Gruosso Group will help you craft and submit a strong, competitive offer. We are skilled negotiators who know the Monmouth and Ocean County markets intimately, and we will work tirelessly to secure the best price and terms possible for you.",
+  "Once your offer is accepted, we will guide you through every step that follows from inspections and appraisals to mortgage milestones and the final walk through, ensuring a smooth, stress free closing. Best of all, our service comes at no cost to you as the buyer; we are compensated by the seller, so you get a full team of experts in your corner without adding to your bottom line.",
+];
+
+export default function MakingOfferClosing({
+  title = "Making an Offer and Closing",
+  subtitle = "Gruosso Partner Till The End",
+  paragraphs = defaultParagraphs,
+  formTitle = "Request A Call",
+  sectionClassName = "w-full bg-white pt-10 sm:pt-12 pb-24 sm:pb-32",
+  headingClassName = "text-[30px] lg:text-[36px]",
+  formHeadingClassName = "text-[30px] lg:text-[36px]",
+}: MakingOfferClosingProps) {
   return (
-    <section className="w-full bg-white pt-10 sm:pt-12 pb-24 sm:pb-32">
+    <section className={sectionClassName}>
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
 
@@ -8,8 +31,8 @@ export default function MakingOfferClosing() {
           <div className="flex flex-col">
 
             {/* Heading */}
-            <h2 className="text-[28px] sm:text-[36px] font-normal leading-tight tracking-wide text-gray-900 mb-6 font-[family-name:var(--font-cormorant-garamond)]">
-              Making an Offer and Closing
+            <h2 className={`${headingClassName} font-normal leading-tight tracking-wide text-gray-900 mb-6 font-[family-name:var(--font-cormorant-garamond)]`}>
+              {title}
             </h2>
 
             {/* Subheading */}
@@ -17,7 +40,7 @@ export default function MakingOfferClosing() {
               className="text-[16px] font-semibold uppercase tracking-[0.2em] text-[#000000] mb-8 font-[family-name:var(--font-manrope)]"
               style={{ fontWeight: 400 }}
             >
-              Gruosso  Partner Till The End
+              {subtitle}
             </p>
 
             {/* Paragraphs */}
@@ -25,20 +48,17 @@ export default function MakingOfferClosing() {
               className="flex flex-col gap-5 text-[14px] leading-relaxed font-[family-name:var(--font-karla)]"
               style={{ color: "#000000" }}
             >
-              <p>
-                When you find a home you love, The Gruosso Group will help you craft and submit a strong, competitive offer. We are skilled negotiators who know the Monmouth and Ocean County markets intimately, and we will work tirelessly to secure the best price and terms possible for you.
-              </p>
-              <p>
-                Once your offer is accepted, we will guide you through every step that follows from inspections and appraisals to mortgage milestones and the final walk through, ensuring a smooth, stress free closing. Best of all, our service comes at no cost to you as the buyer; we are compensated by the seller, so you get a full team of experts in your corner without adding to your bottom line.
-              </p>
+              {paragraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
             </div>
 
           </div>
 
           {/* Right — Request A Call form */}
           <div className="w-full">
-            <h3 className="text-[28px] sm:text-[36px] font-normal leading-tight tracking-wide text-gray-900 mb-8 font-[family-name:var(--font-cormorant-garamond)]">
-              Request A Call
+            <h3 className={`${formHeadingClassName} font-normal leading-tight tracking-wide text-gray-900 mb-8 font-[family-name:var(--font-cormorant-garamond)]`}>
+              {formTitle}
             </h3>
 
             <style>{`

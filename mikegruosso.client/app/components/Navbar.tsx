@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 
 const leftLinks = [
   { label: "Buy Properties", href: "/buy" },
-  { label: "Sell Properties", href: "/property-value" },
+  { label: "Sell Properties", href: "/sell" },
   { label: "Investment", href: "/investment" },
   { label: "Commercial", href: "/commercial" },
 ];
