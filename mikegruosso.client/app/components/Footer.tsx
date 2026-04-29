@@ -4,7 +4,7 @@ import Link from "next/link";
 const company = [
   { label: "About Us",              href: "/about"          },
   { label: "Buy My Next Home",      href: "/buy"            },
-  { label: "Get My Home Value",     href: "/property-value" },
+  { label: "Get My Home Value",     href: "/sell" },
   { label: "Invest in Real Estate", href: "/investment"     },
 ];
 
