@@ -3,6 +3,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, A11y } from "swiper/modules";
 import Image from "next/image";
+import { BLUR_PLACEHOLDER } from "@/app/lib/placeholder";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -171,6 +172,8 @@ export default function SoldPropertiesSection() {
                     fill
                     className="object-cover"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    placeholder="blur"
+                    blurDataURL={BLUR_PLACEHOLDER}
                   />
                   <span className="absolute top-3 left-3 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-white bg-[#3aaacf]/90 font-[family-name:var(--font-manrope)]">
                     Sold

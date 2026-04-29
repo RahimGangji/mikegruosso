@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { BLUR_PLACEHOLDER } from "@/app/lib/placeholder";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, A11y } from "swiper/modules";
 import "swiper/css";
@@ -18,6 +19,8 @@ export default function TestimonialBannerSection() {
         className="object-cover"
         sizes="100vw"
         aria-hidden
+        placeholder="blur"
+        blurDataURL={BLUR_PLACEHOLDER}
         loading="lazy"
       />
 

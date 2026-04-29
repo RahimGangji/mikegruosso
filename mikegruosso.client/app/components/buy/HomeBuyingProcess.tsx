@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { BLUR_PLACEHOLDER } from "@/app/lib/placeholder";
 
 export default function HomeBuyingProcess() {
   return (
@@ -34,7 +35,7 @@ export default function HomeBuyingProcess() {
           </div>
 
           {/* Right — Image Collage */}
-          <div className="relative w-full min-w-0 max-lg:overflow-x-clip lg:w-[70%] h-[320px] sm:h-[380px] lg:h-[420px]">
+          <div className="relative w-full min-w-0 max-lg:overflow-x-clip lg:w-[70%] h-[320px] sm:h-[380px] lg:h-[420px]" style={{ height: 320 }}>
 
             {/* Large image — top left */}
             <div className="absolute top-0 left-0 w-[88%] max-w-full h-[90%] overflow-hidden">
@@ -44,6 +45,8 @@ export default function HomeBuyingProcess() {
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 75vw, 40vw"
+                placeholder="blur"
+                blurDataURL={BLUR_PLACEHOLDER}
                 priority
               />
             </div>
@@ -56,6 +59,8 @@ export default function HomeBuyingProcess() {
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 55vw, 30vw"
+                placeholder="blur"
+                blurDataURL={BLUR_PLACEHOLDER}
                 priority
               />
             </div>

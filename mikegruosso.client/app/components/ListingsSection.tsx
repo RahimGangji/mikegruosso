@@ -3,6 +3,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, A11y } from "swiper/modules";
 import Image from "next/image";
+import { BLUR_PLACEHOLDER } from "@/app/lib/placeholder";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -97,6 +98,8 @@ export default function ListingsSection() {
                     fill
                     className="object-cover"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    placeholder="blur"
+                    blurDataURL={BLUR_PLACEHOLDER}
                   />
                 </div>
 

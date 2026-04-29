@@ -58,7 +58,7 @@ export default function Navbar() {
                 menuOpen ? "opacity-0 pointer-events-none" : "opacity-100"
               }`}
             >
-              <div className="relative w-[120px] h-[80px]">
+              <div className="relative w-[120px] h-[80px]" style={{ width: 120, height: 80 }}>
                 <Image
                   src="/mike-icon.png"
                   alt="The Gruosso Group"
@@ -118,7 +118,7 @@ export default function Navbar() {
               menuOpen ? "opacity-0 pointer-events-none" : "opacity-100"
             }`}
           >
-            <div className="relative w-[120px] h-[80px]">
+            <div className="relative w-[120px] h-[80px]" style={{ width: 120, height: 80 }}>
               <Image
                 src="/mike-icon.png"
                 alt="The Gruosso Group"

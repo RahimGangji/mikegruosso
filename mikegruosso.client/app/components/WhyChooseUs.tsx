@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { BLUR_PLACEHOLDER } from "@/app/lib/placeholder";
 
 const points = [
   {
@@ -53,6 +54,8 @@ export default function WhyChooseUs() {
               fill
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 50vw"
+              placeholder="blur"
+              blurDataURL={BLUR_PLACEHOLDER}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
           </div>

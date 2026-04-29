@@ -3,6 +3,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, A11y } from "swiper/modules";
 import Image from "next/image";
+import { BLUR_PLACEHOLDER } from "@/app/lib/placeholder";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -128,6 +129,8 @@ export default function OurAreas() {
                   quality={90}
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                   sizes="(max-width: 500px) 90vw, (max-width: 1024px) 50vw, 33vw"
+                  placeholder="blur"
+                  blurDataURL={BLUR_PLACEHOLDER}
                 />
 
                 {/* Bottom gradient for text legibility */}

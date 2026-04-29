@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { BLUR_PLACEHOLDER } from "@/app/lib/placeholder";
 
 /** Matches Navbar: max-w-7xl mx-auto px-4 sm:px-8 */
 const pageContainer = "max-w-7xl mx-auto px-4 sm:px-8 w-full";
@@ -66,13 +67,15 @@ export default function AboutSection() {
 
       {/* Image — same horizontal rhythm as navbar */}
       <div className={`${pageContainer} -mt-36 sm:-mt-48 md:-mt-60 pb-16 relative z-10`}>
-        <div className="relative w-full h-72 sm:h-96 md:h-[480px]">
+        <div className="relative w-full h-72 sm:h-96 md:h-[520px] lg:h-[620px] xl:h-[700px] overflow-hidden">
           <Image
             src="/mike-about.jpeg"
             alt="About The Gruosso Group"
             fill
             className="object-cover object-top"
             sizes="(max-width: 1280px) 100vw, 1280px"
+            placeholder="blur"
+            blurDataURL={BLUR_PLACEHOLDER}
             loading="lazy"
           />
         </div>

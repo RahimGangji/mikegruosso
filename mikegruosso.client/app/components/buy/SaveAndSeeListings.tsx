@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { BLUR_PLACEHOLDER } from "@/app/lib/placeholder";
 
 export default function SaveAndSeeListings() {
   return (
@@ -57,6 +58,8 @@ export default function SaveAndSeeListings() {
               height={800}
               className="block w-full h-auto rounded-sm"
               sizes="(max-width: 1024px) 100vw, 50vw"
+              placeholder="blur"
+              blurDataURL={BLUR_PLACEHOLDER}
               priority={false}
             />
           </div>
