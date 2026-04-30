@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { BLUR_PLACEHOLDER } from "@/app/lib/placeholder";
 
 type ProcessImage = {
@@ -15,6 +16,12 @@ type HomeBuyingProcessProps = {
     primary: ProcessImage;
     secondary: ProcessImage;
   };
+  cta?: {
+    label: string;
+    href: string;
+  } | null;
+  /** Use <h1> (default) for the page hero, or <h2> when this section isn't the page lede. */
+  headingTag?: "h1" | "h2";
 };
 
 const defaultImages = {
@@ -34,15 +41,18 @@ export default function HomeBuyingProcess({
   paragraphs,
   titleClassName = "text-[28px] sm:text-[36px]",
   images = defaultImages,
+  cta = null,
+  headingTag = "h1",
 }: HomeBuyingProcessProps) {
+  const HeadingTag = headingTag;
   return (
     <section className="w-full bg-white pt-36 sm:pt-40 pb-24 sm:pb-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         <div className="grid min-w-0 grid-cols-1 lg:grid-cols-[35%_65%] gap-12 lg:gap-36 items-center">
           <div className="flex flex-col justify-center">
-            <h1 className={`${titleClassName} font-normal leading-tight tracking-wide text-gray-900 mb-6 font-[family-name:var(--font-cormorant-garamond)]`}>
+            <HeadingTag className={`${titleClassName} font-normal leading-tight tracking-wide text-gray-900 mb-6 font-[family-name:var(--font-cormorant-garamond)]`}>
               {title}
-            </h1>
+            </HeadingTag>
 
             <p
               className="text-[16px] font-semibold uppercase tracking-[0.2em] text-[#000000] mb-8 font-[family-name:var(--font-manrope)]"
@@ -59,6 +69,17 @@ export default function HomeBuyingProcess({
                 <p key={paragraph}>{paragraph}</p>
               ))}
             </div>
+
+            {cta ? (
+              <div className="mt-8">
+                <Link
+                  href={cta.href}
+                  className="inline-flex items-center justify-center rounded bg-[#3aaacf] hover:bg-[#2f95b6] transition-colors px-8 py-3.5 text-sm font-semibold text-white tracking-wide font-[family-name:var(--font-manrope)]"
+                >
+                  {cta.label}
+                </Link>
+              </div>
+            ) : null}
           </div>
 
           <div

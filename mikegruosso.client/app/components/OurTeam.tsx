@@ -21,7 +21,7 @@ const team = [
 
 export default function OurTeam() {
   return (
-    <section className="w-full bg-white py-20">
+    <section className="w-full bg-white py-20 relative z-0">
       <style>{`
         .team-swiper .swiper-pagination-bullet {
           background: #cbd5e1;

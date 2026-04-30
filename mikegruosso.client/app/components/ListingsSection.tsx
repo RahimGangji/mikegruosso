@@ -22,7 +22,7 @@ const listings = [
 
 export default function ListingsSection() {
   return (
-    <section className="w-full bg-white py-20">
+    <section className="w-full bg-white py-20 relative z-0">
       <style>{`
         .listings-swiper .swiper-pagination-bullet {
           background: #cbd5e1;

@@ -53,7 +53,7 @@ const areas = [
 
 export default function OurAreas() {
   return (
-    <section className="w-full bg-white py-20">
+    <section className="w-full bg-white py-20 relative z-0">
       <style>{`
         .areas-swiper .swiper-pagination-bullet {
           background: #cbd5e1;

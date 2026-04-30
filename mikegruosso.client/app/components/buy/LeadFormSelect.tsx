@@ -5,7 +5,7 @@ import { useEffect, useId, useRef, useState } from "react";
 export type LeadFormOption = { value: string; label: string };
 
 const triggerBase =
-  "flex w-full items-center justify-between gap-3 border border-gray-200 bg-white px-3 py-2.5 text-left text-sm text-gray-900 transition-colors hover:border-[#3aaacf]/40 focus-visible:border-[#3aaacf] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3aaacf]/25 rounded-lg";
+  "flex w-full min-h-[38px] items-center justify-between gap-3 border-0 border-b border-gray-300 bg-transparent px-0 py-2 text-left text-sm text-gray-900 transition-colors focus-visible:border-[#3aaacf] focus-visible:outline-none focus-visible:ring-0";
 
 /** Outside-click check: scrollbar / overlay quirks can yield e.target outside the DOM subtree. */
 function pointerEventIsInside(wrapper: HTMLElement | null, e: MouseEvent | TouchEvent) {
@@ -76,7 +76,7 @@ export default function LeadFormSelect({
         ref={triggerRef}
         type="button"
         id={idBase}
-        className={`${triggerBase} ${empty ? "text-gray-400" : ""}`}
+        className={`${triggerBase} ${empty ? "text-gray-400" : ""} ${open ? "border-[#3aaacf]" : ""}`}
         aria-expanded={open}
         aria-controls={open ? listId : undefined}
         aria-haspopup="listbox"
@@ -86,7 +86,7 @@ export default function LeadFormSelect({
           {empty ? placeholder : picked.label}
         </span>
         <svg
-          className={`h-5 w-5 shrink-0 text-gray-400 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+          className={`h-4 w-4 shrink-0 text-gray-400 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
           fill="none"
           stroke="currentColor"
           strokeWidth={2}

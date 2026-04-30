@@ -7,8 +7,15 @@ type MakingOfferClosingProps = {
   subtitle?: string;
   paragraphs?: string[];
   formTitle?: string;
-  /** Buyer (`purchase`), seller (`sell`), investor (`investment`), or default contact (`contact`). */
-  leadFormVariant?: "contact" | "purchase" | "sell" | "investment";
+  /** Buyer (`purchase`), seller (`sell`), investor (`investment`), commercial inquiry (`commercial`), or default contact (`contact`). */
+  leadFormVariant?:
+    | "contact"
+    | "purchase"
+    | "sell"
+    | "investment"
+    | "commercial";
+  /** Optional anchor id (used by hero CTAs that scroll to the form). */
+  formAnchorId?: string;
   sectionClassName?: string;
   headingClassName?: string;
   formHeadingClassName?: string;
@@ -16,10 +23,10 @@ type MakingOfferClosingProps = {
 
 const purchaseBudgetOptions: LeadFormOption[] = [
   { value: "under-400k", label: "Under $400,000" },
-  { value: "400k-600k", label: "$400,000 – $600,000" },
-  { value: "600k-800k", label: "$600,000 – $800,000" },
-  { value: "800k-1m", label: "$800,000 – $1,000,000" },
-  { value: "1m-1.5m", label: "$1,000,000 – $1,500,000" },
+  { value: "400k-600k", label: "$400,000 to $600,000" },
+  { value: "600k-800k", label: "$600,000 to $800,000" },
+  { value: "800k-1m", label: "$800,000 to $1,000,000" },
+  { value: "1m-1.5m", label: "$1,000,000 to $1,500,000" },
   { value: "1.5m-plus", label: "$1,500,000+" },
   { value: "not-sure", label: "Not sure yet" },
 ];
@@ -35,15 +42,15 @@ const purchasePropertyTypeOptions: LeadFormOption[] = [
 
 const purchaseTimelineOptions: LeadFormOption[] = [
   { value: "asap", label: "As soon as possible" },
-  { value: "1-3-months", label: "1–3 months" },
-  { value: "3-6-months", label: "3–6 months" },
-  { value: "6-12-months", label: "6–12 months" },
+  { value: "1-3-months", label: "1 to 3 months" },
+  { value: "3-6-months", label: "3 to 6 months" },
+  { value: "6-12-months", label: "6 to 12 months" },
   { value: "exploring", label: "Just exploring" },
 ];
 
 const investmentTypeOptions: LeadFormOption[] = [
-  { value: "residential-rental", label: "Residential rental / buy & hold" },
-  { value: "fix-flip", label: "Fix & flip" },
+  { value: "residential-rental", label: "Residential rental / buy and hold" },
+  { value: "fix-flip", label: "Fix and flip" },
   { value: "multi-family", label: "Multi-family" },
   { value: "commercial", label: "Commercial" },
   { value: "short-term-rental", label: "Short-term rental" },
@@ -56,6 +63,28 @@ const investmentBudgetOptions = purchaseBudgetOptions;
 const investmentTimelineOptions = purchaseTimelineOptions;
 
 const sellerExpectedTimelineOptions = purchaseTimelineOptions;
+
+const commercialPropertyTypeOptions: LeadFormOption[] = [
+  { value: "retail", label: "Retail" },
+  { value: "office", label: "Office" },
+  { value: "industrial", label: "Industrial" },
+  { value: "mixed-use", label: "Mixed-use" },
+  { value: "land", label: "Land" },
+  { value: "development", label: "Development site" },
+  { value: "hospitality", label: "Hospitality" },
+  { value: "investment", label: "Investment property" },
+  { value: "other", label: "Other / not sure" },
+];
+
+const commercialBudgetOptions: LeadFormOption[] = [
+  { value: "under-500k", label: "Under $500,000" },
+  { value: "500k-1m", label: "$500,000 to $1,000,000" },
+  { value: "1m-2.5m", label: "$1,000,000 to $2,500,000" },
+  { value: "2.5m-5m", label: "$2,500,000 to $5,000,000" },
+  { value: "5m-10m", label: "$5,000,000 to $10,000,000" },
+  { value: "10m-plus", label: "$10,000,000+" },
+  { value: "not-sure", label: "Not sure yet" },
+];
 
 const defaultParagraphs = [
   "When you find a home you love, The Gruosso Group will help you craft and submit a strong, competitive offer. We are skilled negotiators who know the Monmouth and Ocean County markets intimately, and we will work tirelessly to secure the best price and terms possible for you.",
@@ -73,6 +102,7 @@ export default function MakingOfferClosing({
   paragraphs = defaultParagraphs,
   formTitle,
   leadFormVariant = "contact",
+  formAnchorId,
   sectionClassName = "w-full bg-white pt-10 sm:pt-12 pb-24 sm:pb-32",
   headingClassName = "text-[30px] lg:text-[36px]",
   formHeadingClassName = "text-[30px] lg:text-[36px]",
@@ -85,10 +115,12 @@ export default function MakingOfferClosing({
         ? "My Home Value"
         : leadFormVariant === "investment"
           ? "Get Investment Deals"
-          : "Request A Call");
+          : leadFormVariant === "commercial"
+            ? "Request Commercial Info"
+            : "Request A Call");
 
   return (
-    <section className={sectionClassName}>
+    <section id={formAnchorId} className={sectionClassName}>
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
 
@@ -369,6 +401,107 @@ export default function MakingOfferClosing({
                       className="inline-flex items-center justify-center rounded bg-[#3aaacf] hover:bg-[#2f95b6] transition-colors px-8 py-3.5 text-sm font-semibold text-white tracking-wide"
                     >
                       Request Home Value
+                    </button>
+                  </div>
+                </>
+              ) : leadFormVariant === "commercial" ? (
+                <>
+                  <div className="flex flex-col">
+                    <label htmlFor="com-full-name" className={labelClass}>
+                      Full Name
+                    </label>
+                    <input
+                      id="com-full-name"
+                      name="fullName"
+                      type="text"
+                      autoComplete="name"
+                      placeholder="Full Name"
+                      required
+                      className={inputClass}
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div className="flex flex-col">
+                      <label htmlFor="com-email" className={labelClass}>
+                        Email
+                      </label>
+                      <input
+                        id="com-email"
+                        name="email"
+                        type="email"
+                        autoComplete="email"
+                        placeholder="Email"
+                        required
+                        className={inputClass}
+                      />
+                    </div>
+                    <div className="flex flex-col">
+                      <label htmlFor="com-phone" className={labelClass}>
+                        Phone
+                      </label>
+                      <input
+                        id="com-phone"
+                        name="phone"
+                        type="tel"
+                        autoComplete="tel"
+                        placeholder="Phone"
+                        required
+                        className={inputClass}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <LeadFormSelect
+                      name="propertyType"
+                      label="Property Type"
+                      placeholder="Select property type"
+                      options={commercialPropertyTypeOptions}
+                      labelClassName={labelClass}
+                    />
+                    <LeadFormSelect
+                      name="budget"
+                      label="Budget"
+                      placeholder="Select budget range"
+                      options={commercialBudgetOptions}
+                      labelClassName={labelClass}
+                    />
+                  </div>
+
+                  <div className="flex flex-col">
+                    <label htmlFor="com-preferred-location" className={labelClass}>
+                      Preferred Location
+                    </label>
+                    <input
+                      id="com-preferred-location"
+                      name="preferredLocation"
+                      type="text"
+                      autoComplete="address-level2"
+                      placeholder="Preferred Location"
+                      className={inputClass}
+                    />
+                  </div>
+
+                  <div className="flex flex-col">
+                    <label htmlFor="com-message" className={labelClass}>
+                      Message
+                    </label>
+                    <textarea
+                      id="com-message"
+                      name="message"
+                      rows={4}
+                      placeholder="Message"
+                      className={`resize-none ${inputClass}`}
+                    />
+                  </div>
+
+                  <div>
+                    <button
+                      type="submit"
+                      className="inline-flex items-center justify-center rounded bg-[#3aaacf] hover:bg-[#2f95b6] transition-colors px-8 py-3.5 text-sm font-semibold text-white tracking-wide"
+                    >
+                      Submit Inquiry
                     </button>
                   </div>
                 </>

@@ -44,7 +44,7 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-[999] transition-all duration-300 ${
           scrolled || !isHome ? "bg-white shadow-md" : "bg-transparent"
         }`}
       >
@@ -160,7 +160,7 @@ export default function Navbar() {
 
       {/* Backdrop */}
       <div
-        className={`fixed inset-0 z-40 bg-black/60 min-[940px]:hidden transition-opacity duration-300 ${
+        className={`fixed inset-0 z-[998] bg-black/60 min-[940px]:hidden transition-opacity duration-300 ${
           menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
         onClick={closeMenu}
@@ -169,7 +169,7 @@ export default function Navbar() {
 
       {/* Drawer — always in DOM, slides via transform */}
       <div
-        className={`fixed top-0 left-0 z-50 h-full w-72 bg-white shadow-2xl flex flex-col min-[940px]:hidden transition-transform duration-300 ease-in-out ${
+        className={`fixed top-0 left-0 z-[999] h-full w-72 bg-white shadow-2xl flex flex-col min-[940px]:hidden transition-transform duration-300 ease-in-out ${
           menuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
         role="dialog"

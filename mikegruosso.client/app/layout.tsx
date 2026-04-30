@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Arapey, Manrope, Karla, Cormorant_Garamond } from "n
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import StickyCallButton from "./components/StickyCallButton";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -57,6 +58,7 @@ export default function RootLayout({
         <Navbar />
         {children}
         <Footer />
+        <StickyCallButton />
       </body>
     </html>
   );

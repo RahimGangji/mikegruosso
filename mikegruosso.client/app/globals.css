@@ -104,6 +104,27 @@ a,
   animation: service-card-border-spin 5s linear infinite;
 }
 
+/* Force Swiper compositing layers below the fixed navbar.
+   Problem: Swiper's JS sets an inline transform: translate3d() on .swiper-wrapper during
+   touch events. Inline transforms promote an element to a GPU compositing layer. Because
+   the inline transform bypasses CSS z-index, the layer can paint above position:fixed
+   elements regardless of z-index values.
+   Fix: promote .swiper itself to a compositing layer via translateZ(0). This makes .swiper
+   the compositing container for all its children — the wrapper's layer is now confined
+   inside it. Since .swiper lives in a section at z-0, it stays below the navbar at z-999. */
+.swiper {
+  position: relative !important;
+  z-index: 0 !important;
+  -webkit-transform: translateZ(0) !important;
+  transform: translateZ(0) !important;
+}
+.swiper-wrapper {
+  z-index: 0 !important;
+}
+.swiper-slide {
+  -webkit-tap-highlight-color: transparent;
+}
+
 /* ROI calculator — ranges use light system styling on phones with prefers-color-scheme: dark */
 .roi-calculator input.roi-cal-range[type="range"] {
   color-scheme: light;
