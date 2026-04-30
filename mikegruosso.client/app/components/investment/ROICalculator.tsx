@@ -52,7 +52,7 @@ function Slider({ label, hint, value, min, max, step, format, onChange }: Slider
         step={step}
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="roi-cal-range w-full h-1.5 rounded-full appearance-none cursor-pointer accent-[#3aaacf] [-webkit-tap-highlight-color:transparent] focus:outline-none focus-visible:outline-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-[18px] [&::-webkit-slider-thumb]:w-[18px] [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#3aaacf] [&::-webkit-slider-thumb]:shadow-md [&::-moz-range-thumb]:h-[18px] [&::-moz-range-thumb]:w-[18px] [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:bg-[#3aaacf]"
+        className="roi-cal-range w-full h-1.5 rounded-full appearance-none cursor-pointer accent-[#3aaacf] [-webkit-tap-highlight-color:transparent] focus:outline-none focus-visible:outline-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-[18px] [&::-webkit-slider-thumb]:w-[18px] [&::-webkit-slider-thumb]:mt-[-6px] [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#3aaacf] [&::-webkit-slider-thumb]:shadow-md [&::-moz-range-thumb]:h-[18px] [&::-moz-range-thumb]:w-[18px] [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:bg-[#3aaacf]"
         style={{
           background: `linear-gradient(to right, #3aaacf ${pct}%, #e5e7eb ${pct}%)`,
         }}
