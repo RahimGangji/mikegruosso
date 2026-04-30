@@ -52,7 +52,7 @@ function Slider({ label, hint, value, min, max, step, format, onChange }: Slider
         step={step}
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="w-full h-1.5 rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-[18px] [&::-webkit-slider-thumb]:h-[18px] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#3aaacf] [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:shadow-md [&::-moz-range-thumb]:w-[18px] [&::-moz-range-thumb]:h-[18px] [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-[#3aaacf] [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:cursor-pointer"
+        className="roi-cal-range w-full h-1.5 rounded-full appearance-none cursor-pointer accent-[#3aaacf] [-webkit-tap-highlight-color:transparent] focus:outline-none focus-visible:outline-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-[18px] [&::-webkit-slider-thumb]:w-[18px] [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#3aaacf] [&::-webkit-slider-thumb]:shadow-md [&::-moz-range-thumb]:h-[18px] [&::-moz-range-thumb]:w-[18px] [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:bg-[#3aaacf]"
         style={{
           background: `linear-gradient(to right, #3aaacf ${pct}%, #e5e7eb ${pct}%)`,
         }}
@@ -88,7 +88,7 @@ export default function ROICalculator() {
   const positive = calc.monthlyCashFlow >= 0;
 
   return (
-    <section className="w-full bg-white py-20 sm:py-24">
+    <section className="roi-calculator w-full bg-white py-20 sm:py-24 [color-scheme:light]">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
 
         <div className="flex items-center gap-3 mb-4">

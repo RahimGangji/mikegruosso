@@ -50,7 +50,7 @@ export default function SaveAndSeeListings() {
           </div>
 
           {/* Right — Image */}
-          <div className="w-full min-w-0 order-first lg:order-last">
+          <div className="w-full min-w-0">
             <Image
               src="/see-properties.avif"
               alt="Save and tour Gruosso Group property listings"

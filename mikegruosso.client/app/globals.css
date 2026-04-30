@@ -39,6 +39,17 @@ a,
   touch-action: manipulation;
 }
 
+@keyframes lead-form-dropdown-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 /* Animated rotating border for investment cards */
 @property --inv-angle {
   syntax: "<angle>";
@@ -64,4 +75,48 @@ a,
       #e5e7eb 360deg
     ) border-box;
   animation: inv-border-spin 4s linear infinite;
+}
+
+/* Animated rotating border — services grid cards */
+@property --service-card-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes service-card-border-spin {
+  to {
+    --service-card-angle: 360deg;
+  }
+}
+
+.service-card-animated-wrap {
+  padding: 2px;
+  background: conic-gradient(
+    from var(--service-card-angle),
+    #e5e7eb 0deg,
+    #3aaacf 75deg,
+    #93d9f0 105deg,
+    #3aaacf 135deg,
+    #e5e7eb 215deg,
+    #e5e7eb 360deg
+  );
+  animation: service-card-border-spin 5s linear infinite;
+}
+
+/* ROI calculator — ranges use light system styling on phones with prefers-color-scheme: dark */
+.roi-calculator input.roi-cal-range[type="range"] {
+  color-scheme: light;
+}
+
+.roi-calculator input.roi-cal-range[type="range"]::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 9999px;
+  background-color: transparent;
+}
+
+.roi-calculator input.roi-cal-range[type="range"]::-moz-range-track {
+  height: 6px;
+  border-radius: 9999px;
+  background-color: transparent;
 }

@@ -51,7 +51,7 @@ export default function InvestmentPage() {
       <StartHomeSearch {...searchData} />
       <ROICalculator />
       <InvestmentStats />
-      <MakingOfferClosing />
+      <MakingOfferClosing leadFormVariant="investment" />
     </main>
   );
 }

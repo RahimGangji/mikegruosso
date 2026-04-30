@@ -1,33 +1,33 @@
 const sellingSteps = [
   {
-    title: "Consultation & Goal Setting",
+    title: "Property Consultation",
     description:
-      "We begin by understanding your goals and needs to create a personalized selling plan. Your priorities drive the strategy.",
+      "We start with a clear conversation about your goals, timeline, and property so we understand what success looks like for you. You get honest feedback on condition, curb appeal, and how your home compares in today’s Shore market.",
   },
   {
     title: "Pricing Strategy",
     description:
-      "Using up-to-date market data, we price your home competitively to attract serious buyers while maximizing your profit potential.",
+      "Your list price is built on fresh comps, buyer demand in your neighborhood, and your positioning goals—not a rushed number from an algorithm. We explain the rationale so you can list with confidence and attract serious buyers.",
   },
   {
-    title: "Prepare & Stage",
+    title: "Marketing Launch",
     description:
-      "We help you get your home ready for sale with expert advice on staging and preparing it to shine for showings.",
+      "We roll out MLS exposure, polished photography and presentation, and targeted digital outreach so your listing launches strong. Every channel works together so the right audience sees your property from day one.",
   },
   {
-    title: "List & Market",
+    title: "Showings & Buyer Follow-Up",
     description:
-      "Your home will be marketed through the most effective channels, MLS, social media, and more, to gain maximum visibility.",
+      "We coordinate visits, communicate feedback, and help you tune the plan if buyer response suggests a change in strategy. You stay informed while we keep momentum with qualified prospects.",
   },
   {
-    title: "Showings & Negotiation",
+    title: "Offers & Negotiation",
     description:
-      "We manage showings, gather feedback, and skillfully negotiate offers to ensure you get the best deal possible.",
+      "When offers arrive, we break down price, contingencies, and timelines in plain language and negotiate strategically on your behalf. Our focus is securing terms that align with your bottom line—not just accepting the first number on paper.",
   },
   {
-    title: "Contract to Closing Support",
+    title: "Closing Coordination",
     description:
-      "From accepted offer to final paperwork, we guide you through the closing process, making sure everything goes smoothly.",
+      "From contract signatures through inspections, appraisal, lender milestones, and the final walkthrough, we coordinate deadlines and paperwork with your attorney and other professionals. Our job is to keep the path to closing organized and predictable.",
   },
 ];
 

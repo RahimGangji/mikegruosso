@@ -19,7 +19,7 @@ export default function BuyPage() {
       <HomeBuyingProcess {...homeBuyingProcessData} />
       <StartHomeSearch />
       <SaveAndSeeListings />
-      <MakingOfferClosing />
+      <MakingOfferClosing leadFormVariant="purchase" />
     </main>
   );
 }

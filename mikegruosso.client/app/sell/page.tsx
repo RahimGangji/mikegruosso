@@ -45,11 +45,11 @@ const sellingClosingData = {
   sectionClassName: "w-full bg-white py-20 sm:py-24",
   headingClassName: "text-[30px] lg:text-[36px]",
   formHeadingClassName: "text-[36px]",
+  leadFormVariant: "sell" as const,
   paragraphs: [
     "When the right offer comes in, The Gruosso Group helps you review every detail with confidence, from price and contingencies to timelines and buyer strength. We negotiate strategically to protect your goals and secure the best possible outcome.",
     "After an offer is accepted, we stay beside you through inspections, appraisal, paperwork, deadlines, and closing coordination. Our team keeps the process organized and clear so you can move forward with less stress and more confidence.",
   ],
-  formTitle: "Request A Call",
 };
 
 export default function SellPage() {

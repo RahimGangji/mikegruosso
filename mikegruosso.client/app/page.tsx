@@ -2,6 +2,7 @@ import HeroSection from "./components/HeroSection";
 import ElevatingSection from "./components/ElevatingSection";
 import WhyChooseUs from "./components/WhyChooseUs";
 import ListingsSection from "./components/ListingsSection";
+import ServicesSection from "./components/ServicesSection";
 import AboutSection from "./components/AboutSection";
 import OurTeam from "./components/OurTeam";
 import OurAreas from "./components/OurAreas";
@@ -17,6 +18,7 @@ export default function Home() {
       <ElevatingSection />
       {/* <WhyChooseUs /> */}
       <ListingsSection />
+      <ServicesSection />
       <AboutSection />
       <OurTeam />
       <OurAreas />
