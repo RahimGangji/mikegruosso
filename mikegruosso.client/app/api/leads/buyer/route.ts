@@ -85,9 +85,20 @@ export async function POST(req: Request) {
   const email = String(body.email ?? "").trim().toLowerCase();
   const phone = normalizePhone(String(body.phone ?? ""));
 
-  if (!fullName || !email || !phone) {
+  if (
+    !fullName ||
+    !email ||
+    !phone ||
+    !String(body.preferredArea ?? "").trim() ||
+    !String(body.budgetRange ?? "").trim() ||
+    !String(body.propertyType ?? "").trim() ||
+    !String(body.timeline ?? "").trim()
+  ) {
     return NextResponse.json(
-      { error: "Full name, email, and phone are required." },
+      {
+        error:
+          "Full name, email, phone, preferred area, budget range, property type, and timeline are required.",
+      },
       { status: 400 },
     );
   }

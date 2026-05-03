@@ -55,7 +55,7 @@ export default function HomeBuyingProcess({
             </HeadingTag>
 
             <p
-              className="text-[16px] font-semibold uppercase tracking-[0.2em] text-[#000000] mb-8 font-[family-name:var(--font-manrope)]"
+              className="text-[16px] font-semibold uppercase tracking-[0.2em] text-[#3aaacf] mb-8 font-[family-name:var(--font-manrope)]"
               style={{ fontWeight: 400 }}
             >
               {subtitle}

@@ -227,13 +227,6 @@ const statusColors: Record<Property["status"], string> = {
   Available: "bg-[#161f2d]",
 };
 
-const typeColors: Record<Property["type"], string> = {
-  Residential: "bg-white/20",
-  Commercial:  "bg-white/20",
-  Land:        "bg-white/20",
-  Investment:  "bg-white/20",
-};
-
 export default function PortfolioGrid() {
   const [active, setActive] = useState<FilterKey>("All");
 

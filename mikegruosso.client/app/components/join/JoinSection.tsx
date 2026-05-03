@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useMemo, useState, type FormEvent } from "react";
 
 import LeadFormSelect, {
   type LeadFormOption,
@@ -18,6 +18,22 @@ const inputClass =
   "border-0 border-b border-gray-300 bg-transparent px-0 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:border-[#3aaacf] focus:outline-none focus:ring-0";
 
 const labelClass = "text-[13px] font-semibold text-gray-900 mb-2";
+
+type JoinFields = {
+  fullName: string;
+  email: string;
+  phone: string;
+  role: string;
+};
+
+function emptyJoinFields(): JoinFields {
+  return {
+    fullName: "",
+    email: "",
+    phone: "",
+    role: "",
+  };
+}
 
 const benefits = [
   {
@@ -49,19 +65,50 @@ export default function JoinSection() {
   >("idle");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
+  const [joinFields, setJoinFields] = useState<JoinFields>(() =>
+    emptyJoinFields(),
+  );
+
+  const joinFormReady = useMemo(() => {
+    const fullName = joinFields.fullName.trim();
+    const email = joinFields.email.trim();
+    const phone = joinFields.phone.trim();
+    return Boolean(
+      fullName && email && phone && joinFields.role,
+    );
+  }, [joinFields]);
+
   async function submitJoinToGhl(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setStatus("sending");
+    if (!joinFormReady) {
+      setErrorMessage("Please complete all required fields.");
+      return;
+    }
     setErrorMessage(null);
     const form = e.currentTarget;
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+    setStatus("sending");
     const fd = new FormData(form);
     const payload = {
-      fullName: String(fd.get("fullName") ?? ""),
-      email: String(fd.get("email") ?? ""),
-      phone: String(fd.get("phone") ?? ""),
-      role: String(fd.get("role") ?? ""),
+      fullName: joinFields.fullName.trim(),
+      email: joinFields.email.trim(),
+      phone: joinFields.phone.trim(),
+      role: joinFields.role.trim(),
       message: String(fd.get("message") ?? ""),
     };
+    if (
+      !payload.fullName ||
+      !payload.email ||
+      !payload.phone ||
+      !payload.role
+    ) {
+      setStatus("idle");
+      setErrorMessage("Please complete all required fields.");
+      return;
+    }
     try {
       const res = await fetch("/api/leads/join", {
         method: "POST",
@@ -77,8 +124,8 @@ export default function JoinSection() {
         return;
       }
       setFormKey((k) => k + 1);
+      setJoinFields(emptyJoinFields());
       setStatus("success");
-      form.reset();
     } catch {
       setStatus("error");
       setErrorMessage(
@@ -100,7 +147,7 @@ export default function JoinSection() {
             </h1>
 
             <p
-              className="text-[16px] font-semibold uppercase tracking-[0.2em] text-[#000000] mb-8 font-[family-name:var(--font-manrope)]"
+              className="text-[16px] font-semibold uppercase tracking-[0.2em] text-[#3aaacf] mb-8 font-[family-name:var(--font-manrope)]"
               style={{ fontWeight: 400 }}
             >
               Be First To Know, First To Move
@@ -179,7 +226,10 @@ export default function JoinSection() {
             >
               <div className="flex flex-col">
                 <label htmlFor="join-full-name" className={labelClass}>
-                  Full Name
+                  Full Name{" "}
+                  <span className="text-red-600" aria-hidden>
+                    *
+                  </span>
                 </label>
                 <input
                   id="join-full-name"
@@ -188,6 +238,10 @@ export default function JoinSection() {
                   autoComplete="name"
                   placeholder="Full Name"
                   required
+                  value={joinFields.fullName}
+                  onChange={(e) =>
+                    setJoinFields((p) => ({ ...p, fullName: e.target.value }))
+                  }
                   className={inputClass}
                 />
               </div>
@@ -195,7 +249,10 @@ export default function JoinSection() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="flex flex-col">
                   <label htmlFor="join-email" className={labelClass}>
-                    Email
+                    Email{" "}
+                    <span className="text-red-600" aria-hidden>
+                      *
+                    </span>
                   </label>
                   <input
                     id="join-email"
@@ -204,12 +261,19 @@ export default function JoinSection() {
                     autoComplete="email"
                     placeholder="Email"
                     required
+                    value={joinFields.email}
+                    onChange={(e) =>
+                      setJoinFields((p) => ({ ...p, email: e.target.value }))
+                    }
                     className={inputClass}
                   />
                 </div>
                 <div className="flex flex-col">
                   <label htmlFor="join-phone" className={labelClass}>
-                    Phone
+                    Phone{" "}
+                    <span className="text-red-600" aria-hidden>
+                      *
+                    </span>
                   </label>
                   <input
                     id="join-phone"
@@ -218,6 +282,10 @@ export default function JoinSection() {
                     autoComplete="tel"
                     placeholder="Phone"
                     required
+                    value={joinFields.phone}
+                    onChange={(e) =>
+                      setJoinFields((p) => ({ ...p, phone: e.target.value }))
+                    }
                     className={inputClass}
                   />
                 </div>
@@ -229,6 +297,11 @@ export default function JoinSection() {
                 placeholder="Select an option"
                 options={roleOptions}
                 labelClassName={labelClass}
+                required
+                value={joinFields.role}
+                onValueChange={(v) =>
+                  setJoinFields((p) => ({ ...p, role: v }))
+                }
               />
 
               <div className="flex flex-col">
@@ -247,7 +320,15 @@ export default function JoinSection() {
               <div>
                 <button
                   type="submit"
-                  disabled={status === "sending"}
+                  disabled={status === "sending" || !joinFormReady}
+                  aria-disabled={
+                    status === "sending" || !joinFormReady
+                  }
+                  title={
+                    !joinFormReady
+                      ? "Complete all required fields to submit"
+                      : undefined
+                  }
                   className="inline-flex items-center justify-center rounded bg-[#3aaacf] hover:bg-[#2f95b6] transition-colors px-8 py-3.5 text-sm font-semibold text-white tracking-wide disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {status === "sending" ? "Sending…" : "Join Now"}

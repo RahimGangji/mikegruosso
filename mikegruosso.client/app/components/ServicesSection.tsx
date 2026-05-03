@@ -177,8 +177,8 @@ export default function ServicesSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-8 w-full">
         {/* Eyebrow */}
         <div className="flex items-center gap-3 mb-4">
-          <span className="block h-px w-8 bg-black" />
-          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-black font-[family-name:var(--font-karla)]">
+          <span className="block h-px w-8 bg-[#3aaacf]" />
+          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[#3aaacf] font-[family-name:var(--font-karla)]">
             Services
           </span>
         </div>

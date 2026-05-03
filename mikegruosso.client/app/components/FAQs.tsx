@@ -42,8 +42,8 @@ export default function FAQs() {
           {/* Left — sticky label */}
           <div className="lg:w-2/5 flex-shrink-0 lg:self-start lg:sticky lg:top-24">
             <div className="flex items-center gap-3 mb-4">
-              <span className="block h-px w-8 bg-black" />
-              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-black">
+              <span className="block h-px w-8 bg-[#3aaacf]" />
+              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[#3aaacf]">
                 FAQs
               </span>
             </div>

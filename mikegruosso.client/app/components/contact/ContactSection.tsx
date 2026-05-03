@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useMemo, useState, type FormEvent } from "react";
 
 import LeadFormSelect, {
   type LeadFormOption,
@@ -19,6 +19,22 @@ const inputClass =
 
 const labelClass = "text-[13px] font-semibold text-gray-900 mb-2";
 
+type ContactFields = {
+  fullName: string;
+  email: string;
+  phone: string;
+  interest: string;
+};
+
+function emptyContactFields(): ContactFields {
+  return {
+    fullName: "",
+    email: "",
+    phone: "",
+    interest: "",
+  };
+}
+
 export default function ContactSection() {
   const [formKey, setFormKey] = useState(0);
   const [status, setStatus] = useState<
@@ -26,19 +42,48 @@ export default function ContactSection() {
   >("idle");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
+  const [contactFields, setContactFields] = useState<ContactFields>(() =>
+    emptyContactFields(),
+  );
+
+  const contactFormReady = useMemo(() => {
+    const fullName = contactFields.fullName.trim();
+    const email = contactFields.email.trim();
+    const phone = contactFields.phone.trim();
+    return Boolean(fullName && email && phone && contactFields.interest);
+  }, [contactFields]);
+
   async function submitContactToGhl(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setStatus("sending");
+    if (!contactFormReady) {
+      setErrorMessage("Please complete all required fields.");
+      return;
+    }
     setErrorMessage(null);
     const form = e.currentTarget;
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+    setStatus("sending");
     const fd = new FormData(form);
     const payload = {
-      fullName: String(fd.get("name") ?? ""),
-      email: String(fd.get("email") ?? ""),
-      phone: String(fd.get("phone") ?? ""),
-      interest: String(fd.get("interest") ?? ""),
+      fullName: contactFields.fullName.trim(),
+      email: contactFields.email.trim(),
+      phone: contactFields.phone.trim(),
+      interest: contactFields.interest.trim(),
       message: String(fd.get("message") ?? ""),
     };
+    if (
+      !payload.fullName ||
+      !payload.email ||
+      !payload.phone ||
+      !payload.interest
+    ) {
+      setStatus("idle");
+      setErrorMessage("Please complete all required fields.");
+      return;
+    }
     try {
       const res = await fetch("/api/leads/contact", {
         method: "POST",
@@ -54,8 +99,8 @@ export default function ContactSection() {
         return;
       }
       setFormKey((k) => k + 1);
+      setContactFields(emptyContactFields());
       setStatus("success");
-      form.reset();
     } catch {
       setStatus("error");
       setErrorMessage(
@@ -77,7 +122,7 @@ export default function ContactSection() {
             </h1>
 
             <p
-              className="text-[16px] font-semibold uppercase tracking-[0.2em] text-[#000000] mb-8 font-[family-name:var(--font-manrope)]"
+              className="text-[16px] font-semibold uppercase tracking-[0.2em] text-[#3aaacf] mb-8 font-[family-name:var(--font-manrope)]"
               style={{ fontWeight: 400 }}
             >
               We&rsquo;re Ready When You Are
@@ -170,15 +215,25 @@ export default function ContactSection() {
             >
               <div className="flex flex-col">
                 <label htmlFor="contact-name" className={labelClass}>
-                  Name
+                  Name{" "}
+                  <span className="text-red-600" aria-hidden>
+                    *
+                  </span>
                 </label>
                 <input
                   id="contact-name"
-                  name="name"
+                  name="fullName"
                   type="text"
                   autoComplete="name"
                   placeholder="Name"
                   required
+                  value={contactFields.fullName}
+                  onChange={(e) =>
+                    setContactFields((p) => ({
+                      ...p,
+                      fullName: e.target.value,
+                    }))
+                  }
                   className={inputClass}
                 />
               </div>
@@ -186,7 +241,10 @@ export default function ContactSection() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="flex flex-col">
                   <label htmlFor="contact-email" className={labelClass}>
-                    Email
+                    Email{" "}
+                    <span className="text-red-600" aria-hidden>
+                      *
+                    </span>
                   </label>
                   <input
                     id="contact-email"
@@ -195,12 +253,22 @@ export default function ContactSection() {
                     autoComplete="email"
                     placeholder="Email"
                     required
+                    value={contactFields.email}
+                    onChange={(e) =>
+                      setContactFields((p) => ({
+                        ...p,
+                        email: e.target.value,
+                      }))
+                    }
                     className={inputClass}
                   />
                 </div>
                 <div className="flex flex-col">
                   <label htmlFor="contact-phone" className={labelClass}>
-                    Phone
+                    Phone{" "}
+                    <span className="text-red-600" aria-hidden>
+                      *
+                    </span>
                   </label>
                   <input
                     id="contact-phone"
@@ -209,6 +277,13 @@ export default function ContactSection() {
                     autoComplete="tel"
                     placeholder="Phone"
                     required
+                    value={contactFields.phone}
+                    onChange={(e) =>
+                      setContactFields((p) => ({
+                        ...p,
+                        phone: e.target.value,
+                      }))
+                    }
                     className={inputClass}
                   />
                 </div>
@@ -220,6 +295,11 @@ export default function ContactSection() {
                 placeholder="Select an interest"
                 options={interestOptions}
                 labelClassName={labelClass}
+                required
+                value={contactFields.interest}
+                onValueChange={(v) =>
+                  setContactFields((p) => ({ ...p, interest: v }))
+                }
               />
 
               <div className="flex flex-col">
@@ -238,7 +318,15 @@ export default function ContactSection() {
               <div>
                 <button
                   type="submit"
-                  disabled={status === "sending"}
+                  disabled={status === "sending" || !contactFormReady}
+                  aria-disabled={
+                    status === "sending" || !contactFormReady
+                  }
+                  title={
+                    !contactFormReady
+                      ? "Complete all required fields to submit"
+                      : undefined
+                  }
                   className="inline-flex items-center justify-center rounded bg-[#3aaacf] hover:bg-[#2f95b6] transition-colors px-8 py-3.5 text-sm font-semibold text-white tracking-wide disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {status === "sending" ? "Sending…" : "Send Message"}

@@ -76,11 +76,19 @@ export async function POST(req: Request) {
   const phone = normalizePhone(String(body.phone ?? ""));
   const propertyAddress = String(body.propertyAddress ?? "").trim();
 
-  if (!firstName || !lastName || !email || !phone || !propertyAddress) {
+  if (
+    !firstName ||
+    !lastName ||
+    !email ||
+    !phone ||
+    !propertyAddress ||
+    !String(body.propertyType ?? "").trim() ||
+    !String(body.expectedTimeline ?? "").trim()
+  ) {
     return NextResponse.json(
       {
         error:
-          "First name, last name, email, phone, and property address are required.",
+          "First name, last name, email, phone, property address, property type, and expected timeline are required.",
       },
       { status: 400 },
     );

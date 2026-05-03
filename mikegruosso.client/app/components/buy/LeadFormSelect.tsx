@@ -24,6 +24,9 @@ export default function LeadFormSelect({
   placeholder,
   options,
   required = false,
+  /** Selected option value (`""` = none). Controlled when `value` and/or `onValueChange` is provided. */
+  value: controlledValue,
+  onValueChange,
   labelClassName,
 }: {
   name: string;
@@ -31,12 +34,31 @@ export default function LeadFormSelect({
   placeholder: string;
   options: LeadFormOption[];
   required?: boolean;
+  value?: string;
+  onValueChange?: (value: string) => void;
   labelClassName: string;
 }) {
   const idBase = useId();
   const listId = `${idBase}-list`;
   const [open, setOpen] = useState(false);
-  const [picked, setPicked] = useState<LeadFormOption | null>(null);
+  const [internalPicked, setInternalPicked] = useState<LeadFormOption | null>(
+    null,
+  );
+  const controlled =
+    controlledValue !== undefined || onValueChange != null;
+  const picked = controlled
+    ? (options.find((o) => o.value === String(controlledValue ?? "")) ??
+        null)
+    : internalPicked;
+
+  function selectOption(opt: LeadFormOption | null) {
+    if (controlled) {
+      onValueChange?.(opt?.value ?? "");
+    } else {
+      setInternalPicked(opt);
+    }
+  }
+
   const wrapRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
 
@@ -62,15 +84,24 @@ export default function LeadFormSelect({
   const empty = picked === null;
 
   return (
-    <div ref={wrapRef} className="relative flex flex-col">
+    <div ref={wrapRef} className="relative flex flex-col" data-lead-form-select={name}>
       <label htmlFor={idBase} className={labelClassName}>
         {label}
+        {required ? (
+          <span className="text-red-600" aria-hidden>
+            {" "}
+            *
+          </span>
+        ) : null}
       </label>
       <input
         type="hidden"
         name={name}
         value={picked?.value ?? ""}
-        required={required}
+        required={required && !controlled}
+        onInvalid={() => {
+          requestAnimationFrame(() => triggerRef.current?.focus({ preventScroll: false }));
+        }}
       />
       <button
         ref={triggerRef}
@@ -121,7 +152,7 @@ export default function LeadFormSelect({
                         : "text-gray-700"
                     }`}
                     onClick={() => {
-                      setPicked(opt);
+                      selectOption(opt);
                       setOpen(false);
                       triggerRef.current?.focus({ preventScroll: true });
                     }}

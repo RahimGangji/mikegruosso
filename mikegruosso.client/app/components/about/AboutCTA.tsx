@@ -13,11 +13,11 @@ export default function AboutCTA() {
         >
           {/* Eyebrow */}
           <div className="flex items-center justify-center gap-3 mb-6">
-            <span className="block h-px w-8 bg-white/35" />
-            <span className="text-xs font-semibold uppercase tracking-[0.18em] font-[family-name:var(--font-manrope)] text-white/55">
+            <span className="block h-px w-8 bg-[#3aaacf]" />
+            <span className="text-xs font-semibold uppercase tracking-[0.18em] font-[family-name:var(--font-manrope)] text-[#3aaacf]">
               Let&apos;s Work Together
             </span>
-            <span className="block h-px w-8 bg-white/35" />
+            <span className="block h-px w-8 bg-[#3aaacf]" />
           </div>
 
           <h2 className="text-[36px] sm:text-5xl font-normal leading-tight tracking-wide font-[family-name:var(--font-cormorant-garamond)] text-white mb-5">

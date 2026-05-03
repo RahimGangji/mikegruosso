@@ -94,8 +94,8 @@ export default function AboutTeamSection() {
         {/* Header — left aligned, eyebrow matches site pattern */}
         <div className="mb-16">
           <div className="flex items-center gap-3 mb-4">
-            <span className="block h-px w-8 bg-black" />
-            <span className="text-xs font-semibold uppercase tracking-[0.18em] font-[family-name:var(--font-manrope)] text-black">
+            <span className="block h-px w-8 bg-[#3aaacf]" />
+            <span className="text-xs font-semibold uppercase tracking-[0.18em] font-[family-name:var(--font-manrope)] text-[#3aaacf]">
               Meet the Team
             </span>
           </div>

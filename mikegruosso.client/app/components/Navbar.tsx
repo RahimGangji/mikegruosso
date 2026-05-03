@@ -90,7 +90,7 @@ export default function Navbar() {
           </div>
 
           {/* Desktop — left nav · centered logo · right nav */}
-          <div className="hidden min-[940px]:grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center h-20 gap-6">
+          <div className="hidden min-[940px]:grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center min-h-[92px] py-2 gap-6">
 
           {/* Left — Primary nav */}
           <nav className="flex items-center gap-7 justify-start">
@@ -116,12 +116,12 @@ export default function Navbar() {
               menuOpen ? "opacity-0 pointer-events-none" : "opacity-100"
             }`}
           >
-            <div className="relative w-[120px] h-[80px]" style={{ width: 120, height: 80 }}>
+            <div className="relative h-[92px] w-[138px]">
               <Image
                 src="/new-logo.png"
                 alt="The Gruosso Group"
                 fill
-                sizes="120px"
+                sizes="138px"
                 className={headerLogoInvert}
                 priority
               />

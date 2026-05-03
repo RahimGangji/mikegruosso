@@ -58,9 +58,17 @@ export async function POST(req: Request) {
   const email = String(body.email ?? "").trim().toLowerCase();
   const phone = normalizePhone(String(body.phone ?? ""));
 
-  if (!fullName || !email || !phone) {
+  if (
+    !fullName ||
+    !email ||
+    !phone ||
+    !String(body.role ?? "").trim()
+  ) {
     return NextResponse.json(
-      { error: "Full name, email, and phone are required." },
+      {
+        error:
+          "Full name, email, phone, and I am a selection are required.",
+      },
       { status: 400 },
     );
   }

@@ -102,8 +102,8 @@ export default function Testimonials() {
 
         {/* Eyebrow */}
         <div className="flex items-center gap-3 mb-4">
-          <span className="block h-px w-8 bg-white/80" />
-          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-white/90">
+          <span className="block h-px w-8 bg-[#3aaacf]" />
+          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[#3aaacf]">
             Client Testimonials
           </span>
         </div>

@@ -4,23 +4,59 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, A11y } from "swiper/modules";
 import Image from "next/image";
 import { BLUR_PLACEHOLDER } from "@/app/lib/placeholder";
+import { IDXListing, formatListingPrice } from "@/app/lib/idxbroker";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-const listings = [
-  { id: 1, image: "/list-img-1.jpg", address: "2068 Route 130", city: "Florence, NJ 08518",             price: "$2,750,000", beds: 6,  baths: 4,   sqft: 5800, listedWith: "Gruosso Realty Group, LLC" },
-  { id: 2, image: "/list-img-2.jpg", address: "16 Robertsville Road", city: "Freehold, NJ 07728",       price: "$2,200,000", beds: 5,  baths: 3.5, sqft: 4920, listedWith: "Gruosso Realty Group, LLC" },
-  { id: 3, image: "/list-img-3.jpg", address: "245-249 Verona Avenue", city: "Newark, NJ 07104",        price: "$1,999,999", beds: 8,  baths: 6,   sqft: 6100, listedWith: "O'Brien Realty, LLC"        },
-  { id: 4, image: "/list-img-4.jpg", address: "210 Pine Brook Road", city: "Manalapan, NJ 07726",       price: "$999,999",   beds: 4,  baths: 3,   sqft: 3750, listedWith: "Gruosso Realty Group, LLC" },
-  { id: 5, image: "/list-img-5.jpg", address: "261 State Route 34", city: "Colts Neck, NJ 07722",       price: "$849,000",   beds: 4,  baths: 2.5, sqft: 3200, listedWith: "Shore Realty NJ, LLC"       },
-  { id: 6, image: "/list-img-6.jpg", address: "0 Adelphia-Farmingdale Rd", city: "Farmingdale, NJ 07727", price: "$799,900", beds: 3,  baths: 2,   sqft: 2640, listedWith: "Gruosso Realty Group, LLC" },
-  { id: 7, image: "/list-img-7.jpg", address: "0 US Route 130", city: "Cranbury Twp, NJ 08512",         price: "$499,900",   beds: 3,  baths: 1.5, sqft: 1980, listedWith: "Garden State Realty, LLC"  },
-  { id: 8, image: "/list-img-8.jpg", address: "7 Joyce Court", city: "Tinton Falls, NJ 07724",          price: "$499,900",   beds: 3,  baths: 2,   sqft: 2100, listedWith: "Shore Realty NJ, LLC"       },
-  { id: 9, image: "/list-img-9.jpg", address: "0 Route 9", city: "Howell, NJ 07731",                    price: "$350,000",   beds: 2,  baths: 1,   sqft: 1340, listedWith: "Gruosso Realty Group, LLC" },
+const FALLBACK_LISTINGS = [
+  // { id: "1", image: "/list-img-1.jpg", address: "2068 Route 130", city: "Florence, NJ 08518",               price: "$2,750,000", beds: "6",  baths: "4",   sqft: "5800", listedWith: "Gruosso Realty Group, LLC", url: "" },
+  { id: "2", image: "/list-img-2.jpg", address: "16 Robertsville Road", city: "Freehold, NJ 07728",         price: "$2,200,000", beds: "5",  baths: "3.5", sqft: "4920", listedWith: "Gruosso Realty Group, LLC", url: "" },
+  { id: "3", image: "/list-img-3.jpg", address: "245-249 Verona Avenue", city: "Newark, NJ 07104",          price: "$1,999,999", beds: "8",  baths: "6",   sqft: "6100", listedWith: "O'Brien Realty, LLC",        url: "" },
+  { id: "4", image: "/list-img-4.jpg", address: "210 Pine Brook Road", city: "Manalapan, NJ 07726",         price: "$999,999",   beds: "4",  baths: "3",   sqft: "3750", listedWith: "Gruosso Realty Group, LLC", url: "" },
+  { id: "5", image: "/list-img-5.jpg", address: "261 State Route 34", city: "Colts Neck, NJ 07722",         price: "$849,000",   beds: "4",  baths: "2.5", sqft: "3200", listedWith: "Shore Realty NJ, LLC",       url: "" },
+  { id: "6", image: "/list-img-6.jpg", address: "0 Adelphia-Farmingdale Rd", city: "Farmingdale, NJ 07727", price: "$799,900",   beds: "3",  baths: "2",   sqft: "2640", listedWith: "Gruosso Realty Group, LLC", url: "" },
+  { id: "7", image: "/list-img-7.jpg", address: "0 US Route 130", city: "Cranbury Twp, NJ 08512",           price: "$499,900",   beds: "3",  baths: "1.5", sqft: "1980", listedWith: "Garden State Realty, LLC",  url: "" },
+  { id: "8", image: "/list-img-8.jpg", address: "7 Joyce Court", city: "Tinton Falls, NJ 07724",            price: "$499,900",   beds: "3",  baths: "2",   sqft: "2100", listedWith: "Shore Realty NJ, LLC",       url: "" },
+  { id: "9", image: "/list-img-9.jpg", address: "0 Route 9", city: "Howell, NJ 07731",                      price: "$350,000",   beds: "2",  baths: "1",   sqft: "1340", listedWith: "Gruosso Realty Group, LLC", url: "" },
 ];
 
-export default function ListingsSection() {
+interface NormalizedListing {
+  id: string;
+  image: string;
+  address: string;
+  city: string;
+  price: string;
+  beds: string;
+  baths: string;
+  sqft: string;
+  listedWith: string;
+  url: string;
+}
+
+function normalize(listings: IDXListing[]): NormalizedListing[] {
+  return listings.map((l) => ({
+    id: l.listingID,
+    image: l.photos[0] ?? "/list-img-1.jpg",
+    address: l.address,
+    city: `${l.cityName}, ${l.stateAbbr} ${l.zipcode}`.trim(),
+    price: formatListingPrice(l.listPrice),
+    beds: l.bedrooms,
+    baths: l.totalBaths,
+    sqft: l.sqFt,
+    listedWith: "Gruosso Realty Group, LLC",
+    url: l.listingUrl ?? "",
+  }));
+}
+
+interface Props {
+  listings?: IDXListing[];
+}
+
+export default function ListingsSection({ listings }: Props) {
+  const items: NormalizedListing[] =
+    listings && listings.length > 0 ? normalize(listings) : FALLBACK_LISTINGS;
+
   return (
     <section className="w-full bg-white py-20 relative z-0">
       <style>{`
@@ -41,8 +77,8 @@ export default function ListingsSection() {
 
         {/* Eyebrow */}
         <div className="flex items-center gap-3 mb-4">
-          <span className="block h-px w-8 bg-black" />
-          <span className="text-xs font-semibold uppercase tracking-[0.18em] font-[family-name:var(--font-manrope)] text-black">
+          <span className="block h-px w-8 bg-[#3aaacf]" />
+          <span className="text-xs font-semibold uppercase tracking-[0.18em] font-[family-name:var(--font-manrope)] text-[#3aaacf]">
             Our Listings
           </span>
         </div>
@@ -86,21 +122,33 @@ export default function ListingsSection() {
           }}
           className="listings-swiper !pb-12"
         >
-          {listings.map((listing) => (
+          {items.map((listing) => (
             <SwiperSlide key={listing.id}>
-              <div className="overflow-hidden bg-white cursor-pointer">
+              <div
+                className="overflow-hidden bg-white cursor-pointer"
+                onClick={() => listing.url && window.open(listing.url, "_blank", "noopener,noreferrer")}
+              >
 
                 {/* Image */}
                 <div className="relative w-full aspect-[16/9] overflow-hidden">
-                  <Image
-                    src={listing.image}
-                    alt={listing.address}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    placeholder="blur"
-                    blurDataURL={BLUR_PLACEHOLDER}
-                  />
+                  {listing.image.startsWith("http") ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={listing.image}
+                      alt={listing.address}
+                      className="object-cover w-full h-full"
+                    />
+                  ) : (
+                    <Image
+                      src={listing.image}
+                      alt={listing.address}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      placeholder="blur"
+                      blurDataURL={BLUR_PLACEHOLDER}
+                    />
+                  )}
                 </div>
 
                 {/* Card Body */}
@@ -121,7 +169,7 @@ export default function ListingsSection() {
 
                   {/* Stats */}
                   <p className="text-[15px] font-light tracking-[0.3px] text-gray-500 font-[family-name:var(--font-karla)] mt-0.5 sm:mt-0 sm:pt-2" style={{ color: "#000000" }}>
-                    {listing.beds} BD&nbsp;|&nbsp;{listing.baths} BA&nbsp;|&nbsp;{listing.sqft.toLocaleString()} SQFT
+                    {listing.beds} BD&nbsp;|&nbsp;{listing.baths} BA&nbsp;|&nbsp;{Number(listing.sqft).toLocaleString() || listing.sqft} SQFT
                   </p>
 
                   {/* Listed with */}

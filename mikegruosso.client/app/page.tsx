@@ -1,6 +1,5 @@
 import HeroSection from "./components/HeroSection";
 import ElevatingSection from "./components/ElevatingSection";
-import WhyChooseUs from "./components/WhyChooseUs";
 import ListingsSection from "./components/ListingsSection";
 import ServicesSection from "./components/ServicesSection";
 import AboutSection from "./components/AboutSection";
@@ -10,14 +9,17 @@ import SoldPropertiesSection from "./components/SoldPropertiesSection";
 // import FAQs from "./components/FAQs";
 import TestimonialBannerSection from "./components/TestimonialBannerSection";
 import CTA from "./components/CTA";
+import { fetchFeaturedListings } from "./lib/idxbroker";
 
-export default function Home() {
+export default async function Home() {
+  const listings = await fetchFeaturedListings();
+
   return (
     <main>
       <HeroSection />
       <ElevatingSection />
       {/* <WhyChooseUs /> */}
-      <ListingsSection />
+      <ListingsSection listings={listings} />
       <ServicesSection />
       <AboutSection />
       <OurTeam />

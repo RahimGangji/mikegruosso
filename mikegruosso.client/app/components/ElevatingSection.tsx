@@ -27,7 +27,7 @@ export default function ElevatingSection() {
               smooth, efficient closings. From luxury waterfront homes to
               suburban neighborhoods and commercial opportunities, we put your
               goals first so you can move forward with confidence. We track neighborhood trends, buyer demand, and listing activity
-              across the Shore so your strategy fits today's market not last
+              across the Shore so your strategy fits today{"'"}s market not last
               season&apos;s. Expect clear communication, diligent follow through, and
               a full-service approach from first conversation to keys at closing.
             </p>

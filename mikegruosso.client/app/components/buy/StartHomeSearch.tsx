@@ -75,7 +75,7 @@ export default function StartHomeSearch({
               {title}
             </h2>
 
-            <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.22em] text-white mb-7 font-[family-name:var(--font-manrope)]">
+            <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.22em] text-[#3aaacf] mb-7 font-[family-name:var(--font-manrope)]">
               {subtitle}
             </p>
 

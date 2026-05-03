@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useMemo, useState, type FormEvent } from "react";
 
 import LeadFormSelect, {
   type LeadFormOption,
@@ -100,6 +100,92 @@ const inputClass =
 
 const labelClass = "text-[13px] font-semibold text-gray-900 mb-2";
 
+type BuyerPurchaseFields = {
+  fullName: string;
+  email: string;
+  phone: string;
+  preferredArea: string;
+  budgetRange: string;
+  propertyType: string;
+  timeline: string;
+};
+
+function emptyBuyerPurchaseFields(): BuyerPurchaseFields {
+  return {
+    fullName: "",
+    email: "",
+    phone: "",
+    preferredArea: "",
+    budgetRange: "",
+    propertyType: "",
+    timeline: "",
+  };
+}
+
+type SellerListingFields = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  propertyAddress: string;
+  propertyType: string;
+  expectedTimeline: string;
+};
+
+function emptySellerListingFields(): SellerListingFields {
+  return {
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    propertyAddress: "",
+    propertyType: "",
+    expectedTimeline: "",
+  };
+}
+
+type InvestmentListingFields = {
+  fullName: string;
+  email: string;
+  phone: string;
+  investmentType: string;
+  budget: string;
+  preferredArea: string;
+  timeline: string;
+};
+
+function emptyInvestmentListingFields(): InvestmentListingFields {
+  return {
+    fullName: "",
+    email: "",
+    phone: "",
+    investmentType: "",
+    budget: "",
+    preferredArea: "",
+    timeline: "",
+  };
+}
+
+type CommercialListingFields = {
+  fullName: string;
+  email: string;
+  phone: string;
+  propertyType: string;
+  budget: string;
+  preferredLocation: string;
+};
+
+function emptyCommercialListingFields(): CommercialListingFields {
+  return {
+    fullName: "",
+    email: "",
+    phone: "",
+    propertyType: "",
+    budget: "",
+    preferredLocation: "",
+  };
+}
+
 export default function MakingOfferClosing({
   title = "Making an Offer and Closing",
   subtitle = "Gruosso Partner Till The End",
@@ -117,11 +203,54 @@ export default function MakingOfferClosing({
   >("idle");
   const [buyerError, setBuyerError] = useState<string | null>(null);
 
+  const [purchaseFields, setPurchaseFields] = useState<BuyerPurchaseFields>(
+    emptyBuyerPurchaseFields,
+  );
+
+  const purchaseFormReady = useMemo(() => {
+    const fullName = purchaseFields.fullName.trim();
+    const email = purchaseFields.email.trim();
+    const phone = purchaseFields.phone.trim();
+    const preferredArea = purchaseFields.preferredArea.trim();
+    const { budgetRange, propertyType, timeline } = purchaseFields;
+    return (
+      Boolean(fullName) &&
+      Boolean(email) &&
+      Boolean(phone) &&
+      Boolean(preferredArea) &&
+      Boolean(budgetRange) &&
+      Boolean(propertyType) &&
+      Boolean(timeline)
+    );
+  }, [purchaseFields]);
+
   const [sellerFormKey, setSellerFormKey] = useState(0);
   const [sellerStatus, setSellerStatus] = useState<
     "idle" | "sending" | "success" | "error"
   >("idle");
   const [sellerError, setSellerError] = useState<string | null>(null);
+
+  const [sellerFields, setSellerFields] = useState<SellerListingFields>(
+    emptySellerListingFields,
+  );
+
+  const sellerFormReady = useMemo(() => {
+    const firstName = sellerFields.firstName.trim();
+    const lastName = sellerFields.lastName.trim();
+    const email = sellerFields.email.trim();
+    const phone = sellerFields.phone.trim();
+    const propertyAddress = sellerFields.propertyAddress.trim();
+    const { propertyType, expectedTimeline } = sellerFields;
+    return (
+      Boolean(firstName) &&
+      Boolean(lastName) &&
+      Boolean(email) &&
+      Boolean(phone) &&
+      Boolean(propertyAddress) &&
+      Boolean(propertyType) &&
+      Boolean(expectedTimeline)
+    );
+  }, [sellerFields]);
 
   const [investmentFormKey, setInvestmentFormKey] = useState(0);
   const [investmentStatus, setInvestmentStatus] = useState<
@@ -129,28 +258,92 @@ export default function MakingOfferClosing({
   >("idle");
   const [investmentError, setInvestmentError] = useState<string | null>(null);
 
+  const [investmentFields, setInvestmentFields] =
+    useState<InvestmentListingFields>(emptyInvestmentListingFields);
+
+  const investmentFormReady = useMemo(() => {
+    const fullName = investmentFields.fullName.trim();
+    const email = investmentFields.email.trim();
+    const phone = investmentFields.phone.trim();
+    const preferredArea = investmentFields.preferredArea.trim();
+    const { investmentType, budget, timeline } = investmentFields;
+    return (
+      Boolean(fullName) &&
+      Boolean(email) &&
+      Boolean(phone) &&
+      Boolean(preferredArea) &&
+      Boolean(investmentType) &&
+      Boolean(budget) &&
+      Boolean(timeline)
+    );
+  }, [investmentFields]);
+
   const [commercialFormKey, setCommercialFormKey] = useState(0);
   const [commercialStatus, setCommercialStatus] = useState<
     "idle" | "sending" | "success" | "error"
   >("idle");
   const [commercialError, setCommercialError] = useState<string | null>(null);
 
+  const [commercialFields, setCommercialFields] =
+    useState<CommercialListingFields>(emptyCommercialListingFields);
+
+  const commercialFormReady = useMemo(() => {
+    const fullName = commercialFields.fullName.trim();
+    const email = commercialFields.email.trim();
+    const phone = commercialFields.phone.trim();
+    const preferredLocation = commercialFields.preferredLocation.trim();
+    const { propertyType, budget } = commercialFields;
+    return (
+      Boolean(fullName) &&
+      Boolean(email) &&
+      Boolean(phone) &&
+      Boolean(preferredLocation) &&
+      Boolean(propertyType) &&
+      Boolean(budget)
+    );
+  }, [commercialFields]);
+
   async function submitBuyerToGhl(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setBuyerStatus("sending");
-    setBuyerError(null);
     const form = e.currentTarget;
+
+    if (!purchaseFormReady) {
+      setBuyerError("Please complete all required fields.");
+      return;
+    }
+
+    setBuyerError(null);
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    setBuyerStatus("sending");
     const fd = new FormData(form);
     const payload = {
-      fullName: String(fd.get("fullName") ?? ""),
-      email: String(fd.get("email") ?? ""),
-      phone: String(fd.get("phone") ?? ""),
-      preferredArea: String(fd.get("preferredArea") ?? ""),
-      budgetRange: String(fd.get("budgetRange") ?? ""),
-      propertyType: String(fd.get("propertyType") ?? ""),
-      timeline: String(fd.get("timeline") ?? ""),
+      fullName: purchaseFields.fullName.trim(),
+      email: purchaseFields.email.trim(),
+      phone: purchaseFields.phone.trim(),
+      preferredArea: purchaseFields.preferredArea.trim(),
+      budgetRange: purchaseFields.budgetRange.trim(),
+      propertyType: purchaseFields.propertyType.trim(),
+      timeline: purchaseFields.timeline.trim(),
       message: String(fd.get("message") ?? ""),
     };
+    if (
+      !payload.fullName ||
+      !payload.email ||
+      !payload.phone ||
+      !payload.preferredArea ||
+      !payload.budgetRange ||
+      !payload.propertyType ||
+      !payload.timeline
+    ) {
+      setBuyerStatus("idle");
+      setBuyerError("Please complete all required fields.");
+      return;
+    }
     try {
       const res = await fetch("/api/leads/buyer", {
         method: "POST",
@@ -166,8 +359,8 @@ export default function MakingOfferClosing({
         return;
       }
       setBuyerFormKey((k) => k + 1);
+      setPurchaseFields(emptyBuyerPurchaseFields());
       setBuyerStatus("success");
-      form.reset();
     } catch {
       setBuyerStatus("error");
       setBuyerError(
@@ -178,20 +371,41 @@ export default function MakingOfferClosing({
 
   async function submitSellerToGhl(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSellerStatus("sending");
+    if (!sellerFormReady) {
+      setSellerError("Please complete all required fields.");
+      return;
+    }
     setSellerError(null);
     const form = e.currentTarget;
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+    setSellerStatus("sending");
     const fd = new FormData(form);
     const payload = {
-      firstName: String(fd.get("firstName") ?? ""),
-      lastName: String(fd.get("lastName") ?? ""),
-      email: String(fd.get("email") ?? ""),
-      phone: String(fd.get("phone") ?? ""),
-      propertyAddress: String(fd.get("propertyAddress") ?? ""),
-      propertyType: String(fd.get("propertyType") ?? ""),
-      expectedTimeline: String(fd.get("expectedTimeline") ?? ""),
+      firstName: sellerFields.firstName.trim(),
+      lastName: sellerFields.lastName.trim(),
+      email: sellerFields.email.trim(),
+      phone: sellerFields.phone.trim(),
+      propertyAddress: sellerFields.propertyAddress.trim(),
+      propertyType: sellerFields.propertyType.trim(),
+      expectedTimeline: sellerFields.expectedTimeline.trim(),
       message: String(fd.get("message") ?? ""),
     };
+    if (
+      !payload.firstName ||
+      !payload.lastName ||
+      !payload.email ||
+      !payload.phone ||
+      !payload.propertyAddress ||
+      !payload.propertyType ||
+      !payload.expectedTimeline
+    ) {
+      setSellerStatus("idle");
+      setSellerError("Please complete all required fields.");
+      return;
+    }
     try {
       const res = await fetch("/api/leads/seller", {
         method: "POST",
@@ -207,8 +421,8 @@ export default function MakingOfferClosing({
         return;
       }
       setSellerFormKey((k) => k + 1);
+      setSellerFields(emptySellerListingFields());
       setSellerStatus("success");
-      form.reset();
     } catch {
       setSellerStatus("error");
       setSellerError(
@@ -219,20 +433,41 @@ export default function MakingOfferClosing({
 
   async function submitInvestmentToGhl(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setInvestmentStatus("sending");
+    if (!investmentFormReady) {
+      setInvestmentError("Please complete all required fields.");
+      return;
+    }
     setInvestmentError(null);
     const form = e.currentTarget;
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+    setInvestmentStatus("sending");
     const fd = new FormData(form);
     const payload = {
-      fullName: String(fd.get("name") ?? ""),
-      email: String(fd.get("email") ?? ""),
-      phone: String(fd.get("phone") ?? ""),
-      investmentType: String(fd.get("investmentType") ?? ""),
-      budget: String(fd.get("budget") ?? ""),
-      preferredArea: String(fd.get("preferredArea") ?? ""),
-      timeline: String(fd.get("timeline") ?? ""),
+      fullName: investmentFields.fullName.trim(),
+      email: investmentFields.email.trim(),
+      phone: investmentFields.phone.trim(),
+      investmentType: investmentFields.investmentType.trim(),
+      budget: investmentFields.budget.trim(),
+      preferredArea: investmentFields.preferredArea.trim(),
+      timeline: investmentFields.timeline.trim(),
       message: String(fd.get("message") ?? ""),
     };
+    if (
+      !payload.fullName ||
+      !payload.email ||
+      !payload.phone ||
+      !payload.investmentType ||
+      !payload.budget ||
+      !payload.preferredArea ||
+      !payload.timeline
+    ) {
+      setInvestmentStatus("idle");
+      setInvestmentError("Please complete all required fields.");
+      return;
+    }
     try {
       const res = await fetch("/api/leads/investment", {
         method: "POST",
@@ -248,8 +483,8 @@ export default function MakingOfferClosing({
         return;
       }
       setInvestmentFormKey((k) => k + 1);
+      setInvestmentFields(emptyInvestmentListingFields());
       setInvestmentStatus("success");
-      form.reset();
     } catch {
       setInvestmentStatus("error");
       setInvestmentError(
@@ -260,19 +495,39 @@ export default function MakingOfferClosing({
 
   async function submitCommercialToGhl(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setCommercialStatus("sending");
+    if (!commercialFormReady) {
+      setCommercialError("Please complete all required fields.");
+      return;
+    }
     setCommercialError(null);
     const form = e.currentTarget;
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+    setCommercialStatus("sending");
     const fd = new FormData(form);
     const payload = {
-      fullName: String(fd.get("fullName") ?? ""),
-      email: String(fd.get("email") ?? ""),
-      phone: String(fd.get("phone") ?? ""),
-      propertyType: String(fd.get("propertyType") ?? ""),
-      budget: String(fd.get("budget") ?? ""),
-      preferredLocation: String(fd.get("preferredLocation") ?? ""),
+      fullName: commercialFields.fullName.trim(),
+      email: commercialFields.email.trim(),
+      phone: commercialFields.phone.trim(),
+      propertyType: commercialFields.propertyType.trim(),
+      budget: commercialFields.budget.trim(),
+      preferredLocation: commercialFields.preferredLocation.trim(),
       message: String(fd.get("message") ?? ""),
     };
+    if (
+      !payload.fullName ||
+      !payload.email ||
+      !payload.phone ||
+      !payload.propertyType ||
+      !payload.budget ||
+      !payload.preferredLocation
+    ) {
+      setCommercialStatus("idle");
+      setCommercialError("Please complete all required fields.");
+      return;
+    }
     try {
       const res = await fetch("/api/leads/commercial", {
         method: "POST",
@@ -288,8 +543,8 @@ export default function MakingOfferClosing({
         return;
       }
       setCommercialFormKey((k) => k + 1);
+      setCommercialFields(emptyCommercialListingFields());
       setCommercialStatus("success");
-      form.reset();
     } catch {
       setCommercialStatus("error");
       setCommercialError(
@@ -325,7 +580,7 @@ export default function MakingOfferClosing({
 
             {/* Subheading */}
             <p
-              className="text-[16px] font-semibold uppercase tracking-[0.2em] text-[#000000] mb-8 font-[family-name:var(--font-manrope)]"
+              className="text-[16px] font-semibold uppercase tracking-[0.2em] text-[#3aaacf] mb-8 font-[family-name:var(--font-manrope)]"
               style={{ fontWeight: 400 }}
             >
               {subtitle}
@@ -409,7 +664,10 @@ export default function MakingOfferClosing({
                 <>
                   <div className="flex flex-col">
                     <label htmlFor="moc-full-name" className={labelClass}>
-                      Full Name
+                      Full Name{" "}
+                      <span className="text-red-600" aria-hidden>
+                        *
+                      </span>
                     </label>
                     <input
                       id="moc-full-name"
@@ -418,6 +676,13 @@ export default function MakingOfferClosing({
                       autoComplete="name"
                       placeholder="Full Name"
                       required
+                      value={purchaseFields.fullName}
+                      onChange={(e) =>
+                        setPurchaseFields((p) => ({
+                          ...p,
+                          fullName: e.target.value,
+                        }))
+                      }
                       className={inputClass}
                     />
                   </div>
@@ -425,7 +690,10 @@ export default function MakingOfferClosing({
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="flex flex-col">
                       <label htmlFor="moc-email" className={labelClass}>
-                        Email
+                        Email{" "}
+                        <span className="text-red-600" aria-hidden>
+                          *
+                        </span>
                       </label>
                       <input
                         id="moc-email"
@@ -434,12 +702,22 @@ export default function MakingOfferClosing({
                         autoComplete="email"
                         placeholder="Email"
                         required
+                        value={purchaseFields.email}
+                        onChange={(e) =>
+                          setPurchaseFields((p) => ({
+                            ...p,
+                            email: e.target.value,
+                          }))
+                        }
                         className={inputClass}
                       />
                     </div>
                     <div className="flex flex-col">
                       <label htmlFor="moc-phone" className={labelClass}>
-                        Phone
+                        Phone{" "}
+                        <span className="text-red-600" aria-hidden>
+                          *
+                        </span>
                       </label>
                       <input
                         id="moc-phone"
@@ -448,6 +726,13 @@ export default function MakingOfferClosing({
                         autoComplete="tel"
                         placeholder="Phone"
                         required
+                        value={purchaseFields.phone}
+                        onChange={(e) =>
+                          setPurchaseFields((p) => ({
+                            ...p,
+                            phone: e.target.value,
+                          }))
+                        }
                         className={inputClass}
                       />
                     </div>
@@ -455,7 +740,10 @@ export default function MakingOfferClosing({
 
                   <div className="flex flex-col">
                     <label htmlFor="moc-preferred-area" className={labelClass}>
-                      Preferred Area
+                      Preferred Area{" "}
+                      <span className="text-red-600" aria-hidden>
+                        *
+                      </span>
                     </label>
                     <input
                       id="moc-preferred-area"
@@ -463,6 +751,14 @@ export default function MakingOfferClosing({
                       type="text"
                       autoComplete="address-level2"
                       placeholder="Preferred Area"
+                      required
+                      value={purchaseFields.preferredArea}
+                      onChange={(e) =>
+                        setPurchaseFields((p) => ({
+                          ...p,
+                          preferredArea: e.target.value,
+                        }))
+                      }
                       className={inputClass}
                     />
                   </div>
@@ -474,6 +770,11 @@ export default function MakingOfferClosing({
                       placeholder="Select budget range"
                       options={purchaseBudgetOptions}
                       labelClassName={labelClass}
+                      required
+                      value={purchaseFields.budgetRange}
+                      onValueChange={(v) =>
+                        setPurchaseFields((p) => ({ ...p, budgetRange: v }))
+                      }
                     />
                     <LeadFormSelect
                       name="propertyType"
@@ -481,6 +782,11 @@ export default function MakingOfferClosing({
                       placeholder="Select property type"
                       options={purchasePropertyTypeOptions}
                       labelClassName={labelClass}
+                      required
+                      value={purchaseFields.propertyType}
+                      onValueChange={(v) =>
+                        setPurchaseFields((p) => ({ ...p, propertyType: v }))
+                      }
                     />
                   </div>
 
@@ -490,6 +796,11 @@ export default function MakingOfferClosing({
                     placeholder="Select timeline"
                     options={purchaseTimelineOptions}
                     labelClassName={labelClass}
+                    required
+                    value={purchaseFields.timeline}
+                    onValueChange={(v) =>
+                      setPurchaseFields((p) => ({ ...p, timeline: v }))
+                    }
                   />
 
                   <div className="flex flex-col">
@@ -508,7 +819,17 @@ export default function MakingOfferClosing({
                   <div>
                     <button
                       type="submit"
-                      disabled={buyerStatus === "sending"}
+                      disabled={
+                        buyerStatus === "sending" || !purchaseFormReady
+                      }
+                      aria-disabled={
+                        buyerStatus === "sending" || !purchaseFormReady
+                      }
+                      title={
+                        !purchaseFormReady
+                          ? "Complete all required fields to submit"
+                          : undefined
+                      }
                       className="inline-flex items-center justify-center rounded bg-[#3aaacf] hover:bg-[#2f95b6] transition-colors px-8 py-3.5 text-sm font-semibold text-white tracking-wide disabled:cursor-not-allowed disabled:opacity-60"
                     >
                       {buyerStatus === "sending"
@@ -539,7 +860,10 @@ export default function MakingOfferClosing({
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="flex flex-col">
                       <label htmlFor="sell-first-name" className={labelClass}>
-                        First Name
+                        First Name{" "}
+                        <span className="text-red-600" aria-hidden>
+                          *
+                        </span>
                       </label>
                       <input
                         id="sell-first-name"
@@ -548,12 +872,22 @@ export default function MakingOfferClosing({
                         autoComplete="given-name"
                         placeholder="First Name"
                         required
+                        value={sellerFields.firstName}
+                        onChange={(e) =>
+                          setSellerFields((p) => ({
+                            ...p,
+                            firstName: e.target.value,
+                          }))
+                        }
                         className={inputClass}
                       />
                     </div>
                     <div className="flex flex-col">
                       <label htmlFor="sell-last-name" className={labelClass}>
-                        Last Name
+                        Last Name{" "}
+                        <span className="text-red-600" aria-hidden>
+                          *
+                        </span>
                       </label>
                       <input
                         id="sell-last-name"
@@ -562,6 +896,13 @@ export default function MakingOfferClosing({
                         autoComplete="family-name"
                         placeholder="Last Name"
                         required
+                        value={sellerFields.lastName}
+                        onChange={(e) =>
+                          setSellerFields((p) => ({
+                            ...p,
+                            lastName: e.target.value,
+                          }))
+                        }
                         className={inputClass}
                       />
                     </div>
@@ -570,7 +911,10 @@ export default function MakingOfferClosing({
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="flex flex-col">
                       <label htmlFor="sell-email" className={labelClass}>
-                        Email Address
+                        Email Address{" "}
+                        <span className="text-red-600" aria-hidden>
+                          *
+                        </span>
                       </label>
                       <input
                         id="sell-email"
@@ -579,12 +923,22 @@ export default function MakingOfferClosing({
                         autoComplete="email"
                         placeholder="Email Address"
                         required
+                        value={sellerFields.email}
+                        onChange={(e) =>
+                          setSellerFields((p) => ({
+                            ...p,
+                            email: e.target.value,
+                          }))
+                        }
                         className={inputClass}
                       />
                     </div>
                     <div className="flex flex-col">
                       <label htmlFor="sell-phone" className={labelClass}>
-                        Phone Number
+                        Phone Number{" "}
+                        <span className="text-red-600" aria-hidden>
+                          *
+                        </span>
                       </label>
                       <input
                         id="sell-phone"
@@ -593,6 +947,13 @@ export default function MakingOfferClosing({
                         autoComplete="tel"
                         placeholder="Phone Number"
                         required
+                        value={sellerFields.phone}
+                        onChange={(e) =>
+                          setSellerFields((p) => ({
+                            ...p,
+                            phone: e.target.value,
+                          }))
+                        }
                         className={inputClass}
                       />
                     </div>
@@ -600,7 +961,10 @@ export default function MakingOfferClosing({
 
                   <div className="flex flex-col">
                     <label htmlFor="sell-property-address" className={labelClass}>
-                      Property Address
+                      Property Address{" "}
+                      <span className="text-red-600" aria-hidden>
+                        *
+                      </span>
                     </label>
                     <input
                       id="sell-property-address"
@@ -609,6 +973,13 @@ export default function MakingOfferClosing({
                       autoComplete="street-address"
                       placeholder="Property Address"
                       required
+                      value={sellerFields.propertyAddress}
+                      onChange={(e) =>
+                        setSellerFields((p) => ({
+                          ...p,
+                          propertyAddress: e.target.value,
+                        }))
+                      }
                       className={inputClass}
                     />
                   </div>
@@ -620,6 +991,11 @@ export default function MakingOfferClosing({
                       placeholder="Select property type"
                       options={purchasePropertyTypeOptions}
                       labelClassName={labelClass}
+                      required
+                      value={sellerFields.propertyType}
+                      onValueChange={(v) =>
+                        setSellerFields((p) => ({ ...p, propertyType: v }))
+                      }
                     />
                     <LeadFormSelect
                       name="expectedTimeline"
@@ -627,6 +1003,14 @@ export default function MakingOfferClosing({
                       placeholder="Select expected timeline"
                       options={sellerExpectedTimelineOptions}
                       labelClassName={labelClass}
+                      required
+                      value={sellerFields.expectedTimeline}
+                      onValueChange={(v) =>
+                        setSellerFields((p) => ({
+                          ...p,
+                          expectedTimeline: v,
+                        }))
+                      }
                     />
                   </div>
 
@@ -646,8 +1030,18 @@ export default function MakingOfferClosing({
                   <div>
                     <button
                       type="submit"
-                      disabled={sellerStatus === "sending"}
-                      className="inline-flex items-center justify-center rounded bg-[#3aaacf] hover:bg-[#2f95b6] transition-colors px-8 py-3.5 text-sm font-semibold text-white tracking-wide disabled:opacity-60 disabled:pointer-events-none"
+                      disabled={
+                        sellerStatus === "sending" || !sellerFormReady
+                      }
+                      aria-disabled={
+                        sellerStatus === "sending" || !sellerFormReady
+                      }
+                      title={
+                        !sellerFormReady
+                          ? "Complete all required fields to submit"
+                          : undefined
+                      }
+                      className="inline-flex items-center justify-center rounded bg-[#3aaacf] hover:bg-[#2f95b6] transition-colors px-8 py-3.5 text-sm font-semibold text-white tracking-wide disabled:cursor-not-allowed disabled:opacity-60"
                     >
                       {sellerStatus === "sending"
                         ? "Sending…"
@@ -676,7 +1070,10 @@ export default function MakingOfferClosing({
                 <>
                   <div className="flex flex-col">
                     <label htmlFor="com-full-name" className={labelClass}>
-                      Full Name
+                      Full Name{" "}
+                      <span className="text-red-600" aria-hidden>
+                        *
+                      </span>
                     </label>
                     <input
                       id="com-full-name"
@@ -685,6 +1082,13 @@ export default function MakingOfferClosing({
                       autoComplete="name"
                       placeholder="Full Name"
                       required
+                      value={commercialFields.fullName}
+                      onChange={(e) =>
+                        setCommercialFields((p) => ({
+                          ...p,
+                          fullName: e.target.value,
+                        }))
+                      }
                       className={inputClass}
                     />
                   </div>
@@ -692,7 +1096,10 @@ export default function MakingOfferClosing({
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="flex flex-col">
                       <label htmlFor="com-email" className={labelClass}>
-                        Email
+                        Email{" "}
+                        <span className="text-red-600" aria-hidden>
+                          *
+                        </span>
                       </label>
                       <input
                         id="com-email"
@@ -701,12 +1108,22 @@ export default function MakingOfferClosing({
                         autoComplete="email"
                         placeholder="Email"
                         required
+                        value={commercialFields.email}
+                        onChange={(e) =>
+                          setCommercialFields((p) => ({
+                            ...p,
+                            email: e.target.value,
+                          }))
+                        }
                         className={inputClass}
                       />
                     </div>
                     <div className="flex flex-col">
                       <label htmlFor="com-phone" className={labelClass}>
-                        Phone
+                        Phone{" "}
+                        <span className="text-red-600" aria-hidden>
+                          *
+                        </span>
                       </label>
                       <input
                         id="com-phone"
@@ -715,6 +1132,13 @@ export default function MakingOfferClosing({
                         autoComplete="tel"
                         placeholder="Phone"
                         required
+                        value={commercialFields.phone}
+                        onChange={(e) =>
+                          setCommercialFields((p) => ({
+                            ...p,
+                            phone: e.target.value,
+                          }))
+                        }
                         className={inputClass}
                       />
                     </div>
@@ -727,6 +1151,14 @@ export default function MakingOfferClosing({
                       placeholder="Select property type"
                       options={commercialPropertyTypeOptions}
                       labelClassName={labelClass}
+                      required
+                      value={commercialFields.propertyType}
+                      onValueChange={(v) =>
+                        setCommercialFields((p) => ({
+                          ...p,
+                          propertyType: v,
+                        }))
+                      }
                     />
                     <LeadFormSelect
                       name="budget"
@@ -734,12 +1166,20 @@ export default function MakingOfferClosing({
                       placeholder="Select budget range"
                       options={commercialBudgetOptions}
                       labelClassName={labelClass}
+                      required
+                      value={commercialFields.budget}
+                      onValueChange={(v) =>
+                        setCommercialFields((p) => ({ ...p, budget: v }))
+                      }
                     />
                   </div>
 
                   <div className="flex flex-col">
                     <label htmlFor="com-preferred-location" className={labelClass}>
-                      Preferred Location
+                      Preferred Location{" "}
+                      <span className="text-red-600" aria-hidden>
+                        *
+                      </span>
                     </label>
                     <input
                       id="com-preferred-location"
@@ -747,6 +1187,14 @@ export default function MakingOfferClosing({
                       type="text"
                       autoComplete="address-level2"
                       placeholder="Preferred Location"
+                      required
+                      value={commercialFields.preferredLocation}
+                      onChange={(e) =>
+                        setCommercialFields((p) => ({
+                          ...p,
+                          preferredLocation: e.target.value,
+                        }))
+                      }
                       className={inputClass}
                     />
                   </div>
@@ -767,7 +1215,17 @@ export default function MakingOfferClosing({
                   <div>
                     <button
                       type="submit"
-                      disabled={commercialStatus === "sending"}
+                      disabled={
+                        commercialStatus === "sending" || !commercialFormReady
+                      }
+                      aria-disabled={
+                        commercialStatus === "sending" || !commercialFormReady
+                      }
+                      title={
+                        !commercialFormReady
+                          ? "Complete all required fields to submit"
+                          : undefined
+                      }
                       className="inline-flex items-center justify-center rounded bg-[#3aaacf] hover:bg-[#2f95b6] transition-colors px-8 py-3.5 text-sm font-semibold text-white tracking-wide disabled:cursor-not-allowed disabled:opacity-60"
                     >
                       {commercialStatus === "sending"
@@ -797,15 +1255,25 @@ export default function MakingOfferClosing({
                 <>
                   <div className="flex flex-col">
                     <label htmlFor="inv-full-name" className={labelClass}>
-                      Name
+                      Name{" "}
+                      <span className="text-red-600" aria-hidden>
+                        *
+                      </span>
                     </label>
                     <input
                       id="inv-full-name"
-                      name="name"
+                      name="fullName"
                       type="text"
                       autoComplete="name"
                       placeholder="Name"
                       required
+                      value={investmentFields.fullName}
+                      onChange={(e) =>
+                        setInvestmentFields((p) => ({
+                          ...p,
+                          fullName: e.target.value,
+                        }))
+                      }
                       className={inputClass}
                     />
                   </div>
@@ -813,7 +1281,10 @@ export default function MakingOfferClosing({
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="flex flex-col">
                       <label htmlFor="inv-email" className={labelClass}>
-                        Email
+                        Email{" "}
+                        <span className="text-red-600" aria-hidden>
+                          *
+                        </span>
                       </label>
                       <input
                         id="inv-email"
@@ -822,12 +1293,22 @@ export default function MakingOfferClosing({
                         autoComplete="email"
                         placeholder="Email"
                         required
+                        value={investmentFields.email}
+                        onChange={(e) =>
+                          setInvestmentFields((p) => ({
+                            ...p,
+                            email: e.target.value,
+                          }))
+                        }
                         className={inputClass}
                       />
                     </div>
                     <div className="flex flex-col">
                       <label htmlFor="inv-phone" className={labelClass}>
-                        Phone
+                        Phone{" "}
+                        <span className="text-red-600" aria-hidden>
+                          *
+                        </span>
                       </label>
                       <input
                         id="inv-phone"
@@ -836,6 +1317,13 @@ export default function MakingOfferClosing({
                         autoComplete="tel"
                         placeholder="Phone"
                         required
+                        value={investmentFields.phone}
+                        onChange={(e) =>
+                          setInvestmentFields((p) => ({
+                            ...p,
+                            phone: e.target.value,
+                          }))
+                        }
                         className={inputClass}
                       />
                     </div>
@@ -848,6 +1336,14 @@ export default function MakingOfferClosing({
                       placeholder="Select investment type"
                       options={investmentTypeOptions}
                       labelClassName={labelClass}
+                      required
+                      value={investmentFields.investmentType}
+                      onValueChange={(v) =>
+                        setInvestmentFields((p) => ({
+                          ...p,
+                          investmentType: v,
+                        }))
+                      }
                     />
                     <LeadFormSelect
                       name="budget"
@@ -855,12 +1351,20 @@ export default function MakingOfferClosing({
                       placeholder="Select budget range"
                       options={investmentBudgetOptions}
                       labelClassName={labelClass}
+                      required
+                      value={investmentFields.budget}
+                      onValueChange={(v) =>
+                        setInvestmentFields((p) => ({ ...p, budget: v }))
+                      }
                     />
                   </div>
 
                   <div className="flex flex-col">
                     <label htmlFor="inv-preferred-area" className={labelClass}>
-                      Preferred Area
+                      Preferred Area{" "}
+                      <span className="text-red-600" aria-hidden>
+                        *
+                      </span>
                     </label>
                     <input
                       id="inv-preferred-area"
@@ -868,6 +1372,14 @@ export default function MakingOfferClosing({
                       type="text"
                       autoComplete="address-level2"
                       placeholder="Preferred Area"
+                      required
+                      value={investmentFields.preferredArea}
+                      onChange={(e) =>
+                        setInvestmentFields((p) => ({
+                          ...p,
+                          preferredArea: e.target.value,
+                        }))
+                      }
                       className={inputClass}
                     />
                   </div>
@@ -878,6 +1390,11 @@ export default function MakingOfferClosing({
                     placeholder="Select timeline"
                     options={investmentTimelineOptions}
                     labelClassName={labelClass}
+                    required
+                    value={investmentFields.timeline}
+                    onValueChange={(v) =>
+                      setInvestmentFields((p) => ({ ...p, timeline: v }))
+                    }
                   />
 
                   <div className="flex flex-col">
@@ -896,7 +1413,17 @@ export default function MakingOfferClosing({
                   <div>
                     <button
                       type="submit"
-                      disabled={investmentStatus === "sending"}
+                      disabled={
+                        investmentStatus === "sending" || !investmentFormReady
+                      }
+                      aria-disabled={
+                        investmentStatus === "sending" || !investmentFormReady
+                      }
+                      title={
+                        !investmentFormReady
+                          ? "Complete all required fields to submit"
+                          : undefined
+                      }
                       className="inline-flex items-center justify-center rounded bg-[#3aaacf] hover:bg-[#2f95b6] transition-colors px-8 py-3.5 text-sm font-semibold text-white tracking-wide disabled:cursor-not-allowed disabled:opacity-60"
                     >
                       {investmentStatus === "sending"
