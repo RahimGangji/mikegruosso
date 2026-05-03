@@ -64,9 +64,26 @@ function TestimonialCard({ t }: { t: typeof testimonials[0] }) {
   );
 }
 
+const TESTIMONIAL_BG_VIDEO =
+  "https://res.cloudinary.com/dd1e0iquz/video/upload/v1777810133/testimonial_stmyeu.mp4";
+const TESTIMONIAL_BG_POSTER =
+  "https://res.cloudinary.com/dd1e0iquz/video/upload/so_0,f_jpg/v1777810133/testimonial_stmyeu.jpg";
+
 export default function Testimonials() {
   return (
-    <section className="w-full bg-[#f7f8fb] py-20">
+    <section className="relative w-full overflow-hidden py-20">
+      <video
+        className="absolute inset-0 h-full w-full object-cover pointer-events-none"
+        src={TESTIMONIAL_BG_VIDEO}
+        poster={TESTIMONIAL_BG_POSTER}
+        autoPlay
+        muted
+        loop
+        playsInline
+        aria-hidden
+      />
+      <div className="absolute inset-0 bg-slate-900/60 pointer-events-none" />
+
       <style>{`
         .testimonials-swiper .swiper-pagination-bullet {
           background: #cbd5e1;
@@ -81,22 +98,22 @@ export default function Testimonials() {
         }
       `}</style>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8">
 
         {/* Eyebrow */}
         <div className="flex items-center gap-3 mb-4">
-          <span className="block h-px w-8 bg-black" />
-          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-black">
+          <span className="block h-px w-8 bg-white/80" />
+          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-white/90">
             Client Testimonials
           </span>
         </div>
 
         {/* Heading */}
         <div className="mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold leading-tight tracking-tight text-black">
+          <h2 className="text-3xl sm:text-4xl font-bold leading-tight tracking-tight text-white">
             What Our Clients Are Saying.
           </h2>
-          <p className="text-gray-500 text-base mt-3 max-w-xl leading-relaxed">
+          <p className="text-white/80 text-base mt-3 max-w-xl leading-relaxed">
             Real stories from real people our reputation is built one satisfied client at a time.
           </p>
         </div>

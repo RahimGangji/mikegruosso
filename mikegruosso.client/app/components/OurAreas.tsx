@@ -12,42 +12,42 @@ const areas = [
   {
     name: "Red Bank",
     county: "Monmouth County",
-    image: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=1600&q=85&auto=format&fit=crop",
+    image: "/redbank.avif",
   },
   {
     name: "Middletown",
     county: "Monmouth County",
-    image: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1600&q=85&auto=format&fit=crop",
+    image: "/middletown.jpeg",
   },
   {
     name: "Shrewsbury",
     county: "Monmouth County",
-    image: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1600&q=85&auto=format&fit=crop",
+    image: "/shrewsbury-nj.jpg",
   },
   {
     name: "Freehold",
     county: "Monmouth County",
-    image: "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=1600&q=85&auto=format&fit=crop",
+    image: "/freehold-nj.jpg",
   },
   {
     name: "Tinton Falls",
     county: "Monmouth County",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=85&auto=format&fit=crop",
+    image: "/tintonfalls.webp",
   },
   {
     name: "Jackson",
     county: "Ocean County",
-    image: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1600&q=85&auto=format&fit=crop",
+    image: "/jacksonnj.webp",
   },
   {
     name: "Manalapan",
     county: "Monmouth County",
-    image: "https://images.unsplash.com/photo-1592595896551-12b371d546d5?w=1600&q=85&auto=format&fit=crop",
+    image: "/manlaapan.webp",
   },
   {
     name: "Colts Neck",
     county: "Monmouth County",
-    image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1600&q=85&auto=format&fit=crop",
+    image: "/colts-neck-nj-2.jpg",
   },
 ];
 

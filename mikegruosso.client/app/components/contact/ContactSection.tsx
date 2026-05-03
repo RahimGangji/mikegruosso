@@ -1,3 +1,7 @@
+"use client";
+
+import { useState, type FormEvent } from "react";
+
 import LeadFormSelect, {
   type LeadFormOption,
 } from "../buy/LeadFormSelect";
@@ -16,6 +20,50 @@ const inputClass =
 const labelClass = "text-[13px] font-semibold text-gray-900 mb-2";
 
 export default function ContactSection() {
+  const [formKey, setFormKey] = useState(0);
+  const [status, setStatus] = useState<
+    "idle" | "sending" | "success" | "error"
+  >("idle");
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  async function submitContactToGhl(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setStatus("sending");
+    setErrorMessage(null);
+    const form = e.currentTarget;
+    const fd = new FormData(form);
+    const payload = {
+      fullName: String(fd.get("name") ?? ""),
+      email: String(fd.get("email") ?? ""),
+      phone: String(fd.get("phone") ?? ""),
+      interest: String(fd.get("interest") ?? ""),
+      message: String(fd.get("message") ?? ""),
+    };
+    try {
+      const res = await fetch("/api/leads/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const data = (await res.json().catch(() => ({}))) as { error?: string };
+      if (!res.ok) {
+        setStatus("error");
+        setErrorMessage(
+          data.error ?? "Something went wrong. Please try again.",
+        );
+        return;
+      }
+      setFormKey((k) => k + 1);
+      setStatus("success");
+      form.reset();
+    } catch {
+      setStatus("error");
+      setErrorMessage(
+        "Network error. Please check your connection and try again.",
+      );
+    }
+  }
+
   return (
     <section className="w-full bg-white pt-36 sm:pt-40 pb-24 sm:pb-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
@@ -42,7 +90,7 @@ export default function ContactSection() {
 
             {/* Address */}
             <a
-              href="https://www.google.com/maps/search/?api=1&query=830+Broad+St+Shrewsbury+NJ+07702"
+              href="https://www.google.com/maps/search/?api=1&query=236+Norwood+Ave+Oakhurst+NJ+07755"
               target="_blank"
               rel="noopener noreferrer"
               className="group flex items-start gap-4 py-4 border-t border-[#161f2d]/10 hover:border-[#3aaacf]/40 transition-colors"
@@ -62,7 +110,7 @@ export default function ContactSection() {
                   Office
                 </span>
                 <span className="text-[15px] text-gray-900 font-[family-name:var(--font-karla)]">
-                  830 Broad St, Shrewsbury, NJ 07702
+                  236 Norwood Ave, Oakhurst, NJ 07755
                 </span>
               </div>
             </a>
@@ -114,8 +162,10 @@ export default function ContactSection() {
             `}</style>
 
             <form
-              action="/contact"
-              method="post"
+              key={formKey}
+              onSubmit={(ev) => {
+                void submitContactToGhl(ev);
+              }}
               className="contact-form flex flex-col gap-6 font-[family-name:var(--font-manrope)]"
             >
               <div className="flex flex-col">
@@ -158,6 +208,7 @@ export default function ContactSection() {
                     type="tel"
                     autoComplete="tel"
                     placeholder="Phone"
+                    required
                     className={inputClass}
                   />
                 </div>
@@ -187,11 +238,26 @@ export default function ContactSection() {
               <div>
                 <button
                   type="submit"
-                  className="inline-flex items-center justify-center rounded bg-[#3aaacf] hover:bg-[#2f95b6] transition-colors px-8 py-3.5 text-sm font-semibold text-white tracking-wide"
+                  disabled={status === "sending"}
+                  className="inline-flex items-center justify-center rounded bg-[#3aaacf] hover:bg-[#2f95b6] transition-colors px-8 py-3.5 text-sm font-semibold text-white tracking-wide disabled:cursor-not-allowed disabled:opacity-60"
                 >
-                  Send Message
+                  {status === "sending" ? "Sending…" : "Send Message"}
                 </button>
               </div>
+              {status === "success" ? (
+                <p
+                  className="text-sm font-medium text-green-700"
+                  role="status"
+                >
+                  Thank you — we received your message and will be in touch
+                  soon.
+                </p>
+              ) : null}
+              {status === "error" && errorMessage ? (
+                <p className="text-sm font-medium text-red-600" role="alert">
+                  {errorMessage}
+                </p>
+              ) : null}
             </form>
           </div>
 

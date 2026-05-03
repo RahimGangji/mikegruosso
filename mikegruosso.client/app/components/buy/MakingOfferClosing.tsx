@@ -1,3 +1,7 @@
+"use client";
+
+import { useState, type FormEvent } from "react";
+
 import LeadFormSelect, {
   type LeadFormOption,
 } from "./LeadFormSelect";
@@ -107,6 +111,193 @@ export default function MakingOfferClosing({
   headingClassName = "text-[30px] lg:text-[36px]",
   formHeadingClassName = "text-[30px] lg:text-[36px]",
 }: MakingOfferClosingProps) {
+  const [buyerFormKey, setBuyerFormKey] = useState(0);
+  const [buyerStatus, setBuyerStatus] = useState<
+    "idle" | "sending" | "success" | "error"
+  >("idle");
+  const [buyerError, setBuyerError] = useState<string | null>(null);
+
+  const [sellerFormKey, setSellerFormKey] = useState(0);
+  const [sellerStatus, setSellerStatus] = useState<
+    "idle" | "sending" | "success" | "error"
+  >("idle");
+  const [sellerError, setSellerError] = useState<string | null>(null);
+
+  const [investmentFormKey, setInvestmentFormKey] = useState(0);
+  const [investmentStatus, setInvestmentStatus] = useState<
+    "idle" | "sending" | "success" | "error"
+  >("idle");
+  const [investmentError, setInvestmentError] = useState<string | null>(null);
+
+  const [commercialFormKey, setCommercialFormKey] = useState(0);
+  const [commercialStatus, setCommercialStatus] = useState<
+    "idle" | "sending" | "success" | "error"
+  >("idle");
+  const [commercialError, setCommercialError] = useState<string | null>(null);
+
+  async function submitBuyerToGhl(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setBuyerStatus("sending");
+    setBuyerError(null);
+    const form = e.currentTarget;
+    const fd = new FormData(form);
+    const payload = {
+      fullName: String(fd.get("fullName") ?? ""),
+      email: String(fd.get("email") ?? ""),
+      phone: String(fd.get("phone") ?? ""),
+      preferredArea: String(fd.get("preferredArea") ?? ""),
+      budgetRange: String(fd.get("budgetRange") ?? ""),
+      propertyType: String(fd.get("propertyType") ?? ""),
+      timeline: String(fd.get("timeline") ?? ""),
+      message: String(fd.get("message") ?? ""),
+    };
+    try {
+      const res = await fetch("/api/leads/buyer", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const data = (await res.json().catch(() => ({}))) as { error?: string };
+      if (!res.ok) {
+        setBuyerStatus("error");
+        setBuyerError(
+          data.error ?? "Something went wrong. Please try again.",
+        );
+        return;
+      }
+      setBuyerFormKey((k) => k + 1);
+      setBuyerStatus("success");
+      form.reset();
+    } catch {
+      setBuyerStatus("error");
+      setBuyerError(
+        "Network error. Please check your connection and try again.",
+      );
+    }
+  }
+
+  async function submitSellerToGhl(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setSellerStatus("sending");
+    setSellerError(null);
+    const form = e.currentTarget;
+    const fd = new FormData(form);
+    const payload = {
+      firstName: String(fd.get("firstName") ?? ""),
+      lastName: String(fd.get("lastName") ?? ""),
+      email: String(fd.get("email") ?? ""),
+      phone: String(fd.get("phone") ?? ""),
+      propertyAddress: String(fd.get("propertyAddress") ?? ""),
+      propertyType: String(fd.get("propertyType") ?? ""),
+      expectedTimeline: String(fd.get("expectedTimeline") ?? ""),
+      message: String(fd.get("message") ?? ""),
+    };
+    try {
+      const res = await fetch("/api/leads/seller", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const data = (await res.json().catch(() => ({}))) as { error?: string };
+      if (!res.ok) {
+        setSellerStatus("error");
+        setSellerError(
+          data.error ?? "Something went wrong. Please try again.",
+        );
+        return;
+      }
+      setSellerFormKey((k) => k + 1);
+      setSellerStatus("success");
+      form.reset();
+    } catch {
+      setSellerStatus("error");
+      setSellerError(
+        "Network error. Please check your connection and try again.",
+      );
+    }
+  }
+
+  async function submitInvestmentToGhl(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setInvestmentStatus("sending");
+    setInvestmentError(null);
+    const form = e.currentTarget;
+    const fd = new FormData(form);
+    const payload = {
+      fullName: String(fd.get("name") ?? ""),
+      email: String(fd.get("email") ?? ""),
+      phone: String(fd.get("phone") ?? ""),
+      investmentType: String(fd.get("investmentType") ?? ""),
+      budget: String(fd.get("budget") ?? ""),
+      preferredArea: String(fd.get("preferredArea") ?? ""),
+      timeline: String(fd.get("timeline") ?? ""),
+      message: String(fd.get("message") ?? ""),
+    };
+    try {
+      const res = await fetch("/api/leads/investment", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const data = (await res.json().catch(() => ({}))) as { error?: string };
+      if (!res.ok) {
+        setInvestmentStatus("error");
+        setInvestmentError(
+          data.error ?? "Something went wrong. Please try again.",
+        );
+        return;
+      }
+      setInvestmentFormKey((k) => k + 1);
+      setInvestmentStatus("success");
+      form.reset();
+    } catch {
+      setInvestmentStatus("error");
+      setInvestmentError(
+        "Network error. Please check your connection and try again.",
+      );
+    }
+  }
+
+  async function submitCommercialToGhl(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setCommercialStatus("sending");
+    setCommercialError(null);
+    const form = e.currentTarget;
+    const fd = new FormData(form);
+    const payload = {
+      fullName: String(fd.get("fullName") ?? ""),
+      email: String(fd.get("email") ?? ""),
+      phone: String(fd.get("phone") ?? ""),
+      propertyType: String(fd.get("propertyType") ?? ""),
+      budget: String(fd.get("budget") ?? ""),
+      preferredLocation: String(fd.get("preferredLocation") ?? ""),
+      message: String(fd.get("message") ?? ""),
+    };
+    try {
+      const res = await fetch("/api/leads/commercial", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const data = (await res.json().catch(() => ({}))) as { error?: string };
+      if (!res.ok) {
+        setCommercialStatus("error");
+        setCommercialError(
+          data.error ?? "Something went wrong. Please try again.",
+        );
+        return;
+      }
+      setCommercialFormKey((k) => k + 1);
+      setCommercialStatus("success");
+      form.reset();
+    } catch {
+      setCommercialStatus("error");
+      setCommercialError(
+        "Network error. Please check your connection and try again.",
+      );
+    }
+  }
+
   const resolvedFormTitle =
     formTitle ??
     (leadFormVariant === "purchase"
@@ -173,8 +364,45 @@ export default function MakingOfferClosing({
             `}</style>
 
             <form
-              action="/contact"
+              key={
+                leadFormVariant === "purchase"
+                  ? `purchase-${buyerFormKey}`
+                  : leadFormVariant === "sell"
+                    ? `sell-${sellerFormKey}`
+                    : leadFormVariant === "investment"
+                      ? `investment-${investmentFormKey}`
+                      : leadFormVariant === "commercial"
+                        ? `commercial-${commercialFormKey}`
+                        : leadFormVariant
+              }
+              action={
+                leadFormVariant === "purchase" ||
+                leadFormVariant === "sell" ||
+                leadFormVariant === "investment" ||
+                leadFormVariant === "commercial"
+                  ? undefined
+                  : "/contact"
+              }
               method="post"
+              onSubmit={
+                leadFormVariant === "purchase"
+                  ? (ev) => {
+                      void submitBuyerToGhl(ev);
+                    }
+                  : leadFormVariant === "sell"
+                    ? (ev) => {
+                        void submitSellerToGhl(ev);
+                      }
+                    : leadFormVariant === "investment"
+                      ? (ev) => {
+                          void submitInvestmentToGhl(ev);
+                        }
+                      : leadFormVariant === "commercial"
+                        ? (ev) => {
+                            void submitCommercialToGhl(ev);
+                          }
+                        : undefined
+              }
               className="moc-form flex flex-col gap-6 font-[family-name:var(--font-manrope)]"
             >
               {leadFormVariant === "purchase" ? (
@@ -280,11 +508,31 @@ export default function MakingOfferClosing({
                   <div>
                     <button
                       type="submit"
-                      className="inline-flex items-center justify-center rounded bg-[#3aaacf] hover:bg-[#2f95b6] transition-colors px-8 py-3.5 text-sm font-semibold text-white tracking-wide"
+                      disabled={buyerStatus === "sending"}
+                      className="inline-flex items-center justify-center rounded bg-[#3aaacf] hover:bg-[#2f95b6] transition-colors px-8 py-3.5 text-sm font-semibold text-white tracking-wide disabled:cursor-not-allowed disabled:opacity-60"
                     >
-                      Start Your Home Search
+                      {buyerStatus === "sending"
+                        ? "Sending…"
+                        : "Start Your Home Search"}
                     </button>
                   </div>
+                  {buyerStatus === "success" ? (
+                    <p
+                      className="text-sm font-medium text-green-700"
+                      role="status"
+                    >
+                      Thank you — we received your request and will be in touch
+                      soon.
+                    </p>
+                  ) : null}
+                  {buyerStatus === "error" && buyerError ? (
+                    <p
+                      className="text-sm font-medium text-red-600"
+                      role="alert"
+                    >
+                      {buyerError}
+                    </p>
+                  ) : null}
                 </>
               ) : leadFormVariant === "sell" ? (
                 <>
@@ -398,11 +646,31 @@ export default function MakingOfferClosing({
                   <div>
                     <button
                       type="submit"
-                      className="inline-flex items-center justify-center rounded bg-[#3aaacf] hover:bg-[#2f95b6] transition-colors px-8 py-3.5 text-sm font-semibold text-white tracking-wide"
+                      disabled={sellerStatus === "sending"}
+                      className="inline-flex items-center justify-center rounded bg-[#3aaacf] hover:bg-[#2f95b6] transition-colors px-8 py-3.5 text-sm font-semibold text-white tracking-wide disabled:opacity-60 disabled:pointer-events-none"
                     >
-                      Request Home Value
+                      {sellerStatus === "sending"
+                        ? "Sending…"
+                        : "Request Home Value"}
                     </button>
                   </div>
+                  {sellerStatus === "success" ? (
+                    <p
+                      className="text-sm font-medium text-green-700"
+                      role="status"
+                    >
+                      Thank you — we received your request and will be in touch
+                      soon.
+                    </p>
+                  ) : null}
+                  {sellerStatus === "error" && sellerError ? (
+                    <p
+                      className="text-sm font-medium text-red-600"
+                      role="alert"
+                    >
+                      {sellerError}
+                    </p>
+                  ) : null}
                 </>
               ) : leadFormVariant === "commercial" ? (
                 <>
@@ -499,11 +767,31 @@ export default function MakingOfferClosing({
                   <div>
                     <button
                       type="submit"
-                      className="inline-flex items-center justify-center rounded bg-[#3aaacf] hover:bg-[#2f95b6] transition-colors px-8 py-3.5 text-sm font-semibold text-white tracking-wide"
+                      disabled={commercialStatus === "sending"}
+                      className="inline-flex items-center justify-center rounded bg-[#3aaacf] hover:bg-[#2f95b6] transition-colors px-8 py-3.5 text-sm font-semibold text-white tracking-wide disabled:cursor-not-allowed disabled:opacity-60"
                     >
-                      Submit Inquiry
+                      {commercialStatus === "sending"
+                        ? "Sending…"
+                        : "Submit Inquiry"}
                     </button>
                   </div>
+                  {commercialStatus === "success" ? (
+                    <p
+                      className="text-sm font-medium text-green-700"
+                      role="status"
+                    >
+                      Thank you — we received your request and will be in touch
+                      soon.
+                    </p>
+                  ) : null}
+                  {commercialStatus === "error" && commercialError ? (
+                    <p
+                      className="text-sm font-medium text-red-600"
+                      role="alert"
+                    >
+                      {commercialError}
+                    </p>
+                  ) : null}
                 </>
               ) : leadFormVariant === "investment" ? (
                 <>
@@ -608,11 +896,31 @@ export default function MakingOfferClosing({
                   <div>
                     <button
                       type="submit"
-                      className="inline-flex items-center justify-center rounded bg-[#3aaacf] hover:bg-[#2f95b6] transition-colors px-8 py-3.5 text-sm font-semibold text-white tracking-wide"
+                      disabled={investmentStatus === "sending"}
+                      className="inline-flex items-center justify-center rounded bg-[#3aaacf] hover:bg-[#2f95b6] transition-colors px-8 py-3.5 text-sm font-semibold text-white tracking-wide disabled:cursor-not-allowed disabled:opacity-60"
                     >
-                      Get Investment Opportunities
+                      {investmentStatus === "sending"
+                        ? "Sending…"
+                        : "Get Investment Opportunities"}
                     </button>
                   </div>
+                  {investmentStatus === "success" ? (
+                    <p
+                      className="text-sm font-medium text-green-700"
+                      role="status"
+                    >
+                      Thank you — we received your request and will be in touch
+                      soon.
+                    </p>
+                  ) : null}
+                  {investmentStatus === "error" && investmentError ? (
+                    <p
+                      className="text-sm font-medium text-red-600"
+                      role="alert"
+                    >
+                      {investmentError}
+                    </p>
+                  ) : null}
                 </>
               ) : (
                 <>

@@ -116,10 +116,10 @@ const services: Service[] = [
     ),
   },
   {
-    title: "Property Marketing",
+    title: "Land & Developments",
     description:
-      "We use digital marketing, listing exposure, buyer targeting, and professional presentation to position properties in front of the right audience.",
-    cta: { label: "Learn More", href: "/marketing" },
+      "Land parcels, infill lots, and development opportunities along the Shore with guidance on zoning, positioning, and bringing projects to market.",
+    cta: { label: "View Portfolio", href: "/portfolio" },
     icon: (
       <svg
         className={iconClass}
@@ -132,12 +132,17 @@ const services: Service[] = [
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
-          d="M3 10v4a1 1 0 0 0 1 1h3l7 5V4L7 9H4a1 1 0 0 0-1 1Z"
+          d="M12 3 3 8l9 5 9-5-9-5z"
         />
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
-          d="M17 8a5 5 0 0 1 0 8M19.5 5.5a8.5 8.5 0 0 1 0 13"
+          d="M3 13 12 18l9-5"
+        />
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M3 17 12 22l9-5"
         />
       </svg>
     ),

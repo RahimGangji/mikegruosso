@@ -17,6 +17,17 @@ const team = [
       "Finance degree from DePaul University in Chicago",
       "Fluent in Italian & some Spanish",
     ],
+  },{
+    name: "GianLuca Gruosso",
+    role: "Lead Sales Agent",
+    image: "/gian-sales.jpeg",
+    points: [
+      "Real estate runs in the family",
+      "Started in real estate marketing at 16",
+      "Founded his own real estate marketing company",
+      "Real Estate Pro, helping sellers get the highest and best price",
+      "Excited to train the new realtors of the Gruosso Group",
+    ],
   },
   {
     name: "Jaden Hudson",
@@ -30,18 +41,7 @@ const team = [
       "Dedicated to clients, always going the extra mile",
     ],
   },
-  {
-    name: "GianLuca Gruosso",
-    role: "Lead Sales Agent",
-    image: "/gian-sales.jpeg",
-    points: [
-      "Real estate runs in the family",
-      "Started in real estate marketing at 16",
-      "Founded his own real estate marketing company",
-      "Real Estate Pro, helping sellers get the highest and best price",
-      "Excited to train the new realtors of the Gruosso Group",
-    ],
-  },
+  
   {
     name: "Julianna Gruosso",
     role: "Sales Associate",
@@ -52,6 +52,17 @@ const team = [
       "Committed to serving clients with integrity & enthusiasm",
       "Combines market expertise with a personal touch to make dreams a reality",
       "Driven to create a positive impact in the lives of her clients",
+    ],
+  }, {
+    name: "Erika Gaetano",
+    role: "Sales Associate",
+    image: "/erika-sales.jpeg",
+    points: [
+      "Lifelong Monmouth County resident with deep local knowledge",
+      "11 years of customer service experience, prioritizing trust & communication",
+      "Background in Finance & Business — from loan assistance to running a family shop",
+      "Passionate about helping clients navigate the home buying & selling journey",
+      "Committed to finding not just a house, but a place to call home",
     ],
   },
   {
@@ -66,18 +77,7 @@ const team = [
       "Dedicated to helping you find your dream home",
     ],
   },
-  {
-    name: "Erika Gaetano",
-    role: "Sales Associate",
-    image: "/erika-sales.jpeg",
-    points: [
-      "Lifelong Monmouth County resident with deep local knowledge",
-      "11 years of customer service experience, prioritizing trust & communication",
-      "Background in Finance & Business — from loan assistance to running a family shop",
-      "Passionate about helping clients navigate the home buying & selling journey",
-      "Committed to finding not just a house, but a place to call home",
-    ],
-  },
+ 
 ];
 
 export default function AboutTeamSection() {

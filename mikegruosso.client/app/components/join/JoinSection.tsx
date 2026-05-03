@@ -1,3 +1,7 @@
+"use client";
+
+import { useState, type FormEvent } from "react";
+
 import LeadFormSelect, {
   type LeadFormOption,
 } from "../buy/LeadFormSelect";
@@ -39,6 +43,50 @@ const benefits = [
 ];
 
 export default function JoinSection() {
+  const [formKey, setFormKey] = useState(0);
+  const [status, setStatus] = useState<
+    "idle" | "sending" | "success" | "error"
+  >("idle");
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  async function submitJoinToGhl(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setStatus("sending");
+    setErrorMessage(null);
+    const form = e.currentTarget;
+    const fd = new FormData(form);
+    const payload = {
+      fullName: String(fd.get("fullName") ?? ""),
+      email: String(fd.get("email") ?? ""),
+      phone: String(fd.get("phone") ?? ""),
+      role: String(fd.get("role") ?? ""),
+      message: String(fd.get("message") ?? ""),
+    };
+    try {
+      const res = await fetch("/api/leads/join", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const data = (await res.json().catch(() => ({}))) as { error?: string };
+      if (!res.ok) {
+        setStatus("error");
+        setErrorMessage(
+          data.error ?? "Something went wrong. Please try again.",
+        );
+        return;
+      }
+      setFormKey((k) => k + 1);
+      setStatus("success");
+      form.reset();
+    } catch {
+      setStatus("error");
+      setErrorMessage(
+        "Network error. Please check your connection and try again.",
+      );
+    }
+  }
+
   return (
     <section className="w-full bg-white pt-36 sm:pt-40 pb-24 sm:pb-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
@@ -123,8 +171,10 @@ export default function JoinSection() {
             `}</style>
 
             <form
-              action="/contact"
-              method="post"
+              key={formKey}
+              onSubmit={(ev) => {
+                void submitJoinToGhl(ev);
+              }}
               className="join-form flex flex-col gap-6 font-[family-name:var(--font-manrope)]"
             >
               <div className="flex flex-col">
@@ -167,6 +217,7 @@ export default function JoinSection() {
                     type="tel"
                     autoComplete="tel"
                     placeholder="Phone"
+                    required
                     className={inputClass}
                   />
                 </div>
@@ -196,11 +247,26 @@ export default function JoinSection() {
               <div>
                 <button
                   type="submit"
-                  className="inline-flex items-center justify-center rounded bg-[#3aaacf] hover:bg-[#2f95b6] transition-colors px-8 py-3.5 text-sm font-semibold text-white tracking-wide"
+                  disabled={status === "sending"}
+                  className="inline-flex items-center justify-center rounded bg-[#3aaacf] hover:bg-[#2f95b6] transition-colors px-8 py-3.5 text-sm font-semibold text-white tracking-wide disabled:cursor-not-allowed disabled:opacity-60"
                 >
-                  Join Now
+                  {status === "sending" ? "Sending…" : "Join Now"}
                 </button>
               </div>
+              {status === "success" ? (
+                <p
+                  className="text-sm font-medium text-green-700"
+                  role="status"
+                >
+                  Thank you — you&apos;re on the list. We&apos;ll be in touch
+                  soon.
+                </p>
+              ) : null}
+              {status === "error" && errorMessage ? (
+                <p className="text-sm font-medium text-red-600" role="alert">
+                  {errorMessage}
+                </p>
+              ) : null}
             </form>
           </div>
 

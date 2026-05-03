@@ -1,7 +1,6 @@
 "use client";
 
-import Image from "next/image";
-import { BLUR_PLACEHOLDER } from "@/app/lib/placeholder";
+import { useEffect, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, A11y } from "swiper/modules";
 import "swiper/css";
@@ -9,22 +8,69 @@ import "swiper/css/pagination";
 
 import { testimonials } from "./Testimonials";
 
-export default function TestimonialBannerSection() {
-  return (
-    <section className="relative w-full min-h-[380px] sm:min-h-[440px] md:min-h-[480px] flex items-center overflow-hidden py-16 sm:py-20 md:py-24">
-      <Image
-        src="/cta-section-bg.avif"
-        alt=""
-        fill
-        className="object-cover"
-        sizes="100vw"
-        aria-hidden
-        placeholder="blur"
-        blurDataURL={BLUR_PLACEHOLDER}
-        loading="lazy"
-      />
+/** `f_mp4,q_auto` improves browser compatibility; omit poster so Safari does not stay on a static JPG if play is delayed. */
+const BANNER_BG_VIDEO =
+  "https://res.cloudinary.com/dd1e0iquz/video/upload/q_auto,f_mp4/v1777810133/testimonial_stmyeu.mp4";
 
-      <div className="absolute inset-0 bg-black/72" aria-hidden />
+export default function TestimonialBannerSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    const el = videoRef.current;
+    if (!section || !el) return;
+
+    el.muted = true;
+    el.defaultMuted = true;
+    el.setAttribute("playsinline", "");
+    el.setAttribute("webkit-playsinline", "true");
+
+    const tryPlay = () => {
+      void el.play().catch(() => {});
+    };
+
+    tryPlay();
+    el.addEventListener("loadeddata", tryPlay);
+    el.addEventListener("canplay", tryPlay);
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) tryPlay();
+        }
+      },
+      { threshold: 0.05, rootMargin: "64px" },
+    );
+    io.observe(section);
+
+    return () => {
+      io.disconnect();
+      el.removeEventListener("loadeddata", tryPlay);
+      el.removeEventListener("canplay", tryPlay);
+    };
+  }, []);
+
+  return (
+    <section
+      ref={sectionRef}
+      className="relative z-0 w-full min-h-[380px] sm:min-h-[440px] md:min-h-[480px] flex items-center overflow-hidden py-16 sm:py-20 md:py-24"
+    >
+      <video
+        ref={videoRef}
+        className="absolute inset-0 z-0 h-full min-h-full w-full object-cover pointer-events-none [&::-webkit-media-controls]:hidden"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        disablePictureInPicture
+        aria-hidden
+      >
+        <source src={BANNER_BG_VIDEO} type="video/mp4" />
+      </video>
+
+      <div className="absolute inset-0 z-[1] bg-black/72" aria-hidden />
 
       <style>{`
         .testimonial-banner-swiper {

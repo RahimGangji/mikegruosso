@@ -16,18 +16,18 @@ const customerCare = [
 const socials = [
   {
     label: "Facebook",
-    href: "#",
+    href: "https://www.facebook.com/mikenjrealestate",
     icon: (
-      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
         <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
       </svg>
     ),
   },
   {
     label: "Instagram",
-    href: "#",
+    href: "https://www.instagram.com/gruossogroup/",
     icon: (
-      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
         <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" strokeWidth="2" />
         <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" strokeWidth="2" />
         <circle cx="17.5" cy="6.5" r="1.5" />
@@ -35,18 +35,17 @@ const socials = [
     ),
   },
   {
-    label: "LinkedIn",
-    href: "#",
+    label: "TikTok",
+    href: "https://www.tiktok.com/@thegruossogroup",
     icon: (
-      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
-        <circle cx="4" cy="4" r="2" />
+      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
+        <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z" />
       </svg>
     ),
   },
   {
     label: "YouTube",
-    href: "#",
+    href: "https://www.youtube.com/@the_gruosso_group",
     icon: (
       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
         <path
@@ -57,11 +56,21 @@ const socials = [
       </svg>
     ),
   },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/company/103392069",
+    icon: (
+      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
+        <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+        <circle cx="4" cy="4" r="2" />
+      </svg>
+    ),
+  },
 ];
 
 export default function Footer() {
   return (
-    <footer style={{ backgroundColor: "#3aaacf" }}>
+    <footer style={{ backgroundColor: "#161f2d" }}>
       {/* Main Footer */}
       <div className="max-w-7xl mx-auto px-4 sm:px-8 py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
@@ -70,10 +79,10 @@ export default function Footer() {
           <div className="sm:col-span-2 lg:col-span-1">
             <div className="relative w-[130px] h-[80px] mb-6">
               <Image
-                src="/mike-icon.png"
+                src="/new-logo.png"
                 alt="The Gruosso Group"
                 fill
-                className="object-contain"
+                className="object-contain brightness-0 invert"
               />
             </div>
             <p className="text-white/90 text-sm leading-relaxed mb-6">
@@ -81,16 +90,16 @@ export default function Footer() {
             </p>
             {/* Address */}
             <div className="flex items-start gap-2.5 mb-3">
-              <svg className="w-4 h-4 text-white/80 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+              <svg className="w-4 h-4 text-[#3aaacf] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
               <p className="text-white/90 text-sm leading-relaxed">
-                830 Broad St, Shrewsbury, NJ 07702
+                236 Norwood Ave, Oakhurst, NJ 07755
               </p>
             </div>
             <div className="flex items-center gap-2.5">
-              <svg className="w-4 h-4 text-white/80 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+              <svg className="w-4 h-4 text-[#3aaacf] flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
               </svg>
               <a href="tel:+17327044033" className="text-white/90 text-sm hover:text-white transition-colors">
@@ -101,7 +110,7 @@ export default function Footer() {
 
           {/* Company */}
           <div>
-            <h4 className="text-white font-semibold text-sm tracking-wide mb-5">Company</h4>
+            <h4 className="text-[#3aaacf] font-semibold text-sm tracking-wide mb-5">Company</h4>
             <ul className="flex flex-col gap-3">
               {company.map((item) => (
                 <li key={item.label}>
@@ -118,7 +127,7 @@ export default function Footer() {
 
           {/* Customer Care */}
           <div>
-            <h4 className="text-white font-semibold text-sm tracking-wide mb-5">Customer Care</h4>
+            <h4 className="text-[#3aaacf] font-semibold text-sm tracking-wide mb-5">Customer Care</h4>
             <ul className="flex flex-col gap-3">
               {customerCare.map((item) => (
                 <li key={item.label}>
@@ -135,14 +144,16 @@ export default function Footer() {
 
           {/* Follow Us */}
           <div>
-            <h4 className="text-white font-semibold text-sm tracking-wide mb-5">Follow Us</h4>
+            <h4 className="text-[#3aaacf] font-semibold text-sm tracking-wide mb-5">Follow Us</h4>
             <div className="flex flex-wrap gap-3">
               {socials.map((s) => (
                 <a
                   key={s.label}
                   href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={s.label}
-                  className="w-10 h-10 rounded-lg flex items-center justify-center text-white bg-white/[0.12] hover:bg-white/[0.22] hover:text-white transition-all duration-200"
+                  className="w-10 h-10 rounded-lg flex items-center justify-center text-[#3aaacf] bg-white/[0.12] hover:bg-[#3aaacf]/20 transition-all duration-200"
                 >
                   {s.icon}
                 </a>

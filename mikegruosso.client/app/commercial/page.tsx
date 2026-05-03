@@ -23,8 +23,8 @@ const heroData = {
     },
   },
   cta: {
-    label: "Request Commercial Info",
-    href: `#${COMMERCIAL_FORM_ID}`,
+    label: "Contact us",
+    href: "/contact",
   },
 };
 

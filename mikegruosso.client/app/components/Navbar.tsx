@@ -29,6 +29,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -40,6 +41,11 @@ export default function Navbar() {
   }, [menuOpen]);
 
   const closeMenu = () => setMenuOpen(false);
+
+  const headerLogoInvert =
+    isHome && !scrolled
+      ? "object-contain brightness-0 invert transition-all duration-300"
+      : "object-contain transition-all duration-300";
 
   return (
     <>
@@ -60,19 +66,11 @@ export default function Navbar() {
             >
               <div className="relative w-[120px] h-[80px]" style={{ width: 120, height: 80 }}>
                 <Image
-                  src="/mike-icon.png"
+                  src="/new-logo.png"
                   alt="The Gruosso Group"
                   fill
                   sizes="120px"
-                  className={`object-contain transition-opacity duration-300 ${scrolled || !isHome ? "opacity-0" : "opacity-100"}`}
-                  priority
-                />
-                <Image
-                  src="/mike-icon-black-removebg-preview.png"
-                  alt="The Gruosso Group"
-                  fill
-                  sizes="120px"
-                  className={`object-contain transition-opacity duration-300 ${scrolled || !isHome ? "opacity-100" : "opacity-0"}`}
+                  className={headerLogoInvert}
                   priority
                 />
               </div>
@@ -120,19 +118,11 @@ export default function Navbar() {
           >
             <div className="relative w-[120px] h-[80px]" style={{ width: 120, height: 80 }}>
               <Image
-                src="/mike-icon.png"
+                src="/new-logo.png"
                 alt="The Gruosso Group"
                 fill
                 sizes="120px"
-                className={`object-contain transition-opacity duration-300 ${scrolled || !isHome ? "opacity-0" : "opacity-100"}`}
-                priority
-              />
-              <Image
-                src="/mike-icon-black-removebg-preview.png"
-                alt="The Gruosso Group"
-                fill
-                sizes="120px"
-                className={`object-contain transition-opacity duration-300 ${scrolled || !isHome ? "opacity-100" : "opacity-0"}`}
+                className={headerLogoInvert}
                 priority
               />
             </div>
@@ -179,7 +169,7 @@ export default function Navbar() {
             <div className="flex items-center justify-between px-5 py-5 border-b border-gray-100">
               <div className="relative w-[100px] h-[60px]">
                 <Image
-                  src="/mike-icon-black.png"
+                  src="/new-logo.png"
                   alt="The Gruosso Group"
                   fill
                   sizes="100px"
