@@ -28,6 +28,13 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+}
+
 body {
   overflow-x: clip;
   -webkit-tap-highlight-color: rgba(21, 35, 75, 0.25);

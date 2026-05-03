@@ -58,7 +58,7 @@ export default function ListingsSection({ listings }: Props) {
     listings && listings.length > 0 ? normalize(listings) : FALLBACK_LISTINGS;
 
   return (
-    <section className="w-full bg-white py-20 relative z-0">
+    <section id="our-listings" className="w-full bg-white py-20 relative z-0 scroll-mt-32 md:scroll-mt-36">
       <style>{`
         .listings-swiper .swiper-pagination-bullet {
           background: #cbd5e1;
