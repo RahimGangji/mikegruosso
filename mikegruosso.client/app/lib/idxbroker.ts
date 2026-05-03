@@ -89,6 +89,7 @@ function parseWidgetJs(js: string): IDXListing[] {
 export async function fetchFeaturedListings(): Promise<IDXListing[]> {
   try {
     const res = await fetch(WIDGET_URL, {
+      // Cache for 5 minutes to avoid IDX Broker rate-limiting short responses
       next: { revalidate: 300 },
       headers: { "User-Agent": "Mozilla/5.0 (compatible; Next.js)" },
     });
@@ -96,6 +97,10 @@ export async function fetchFeaturedListings(): Promise<IDXListing[]> {
     if (!res.ok) return [];
 
     const js = await res.text();
+
+    // IDX Broker returns a stripped ~9KB script when rate-limited — skip it
+    if (js.length < 20000) return [];
+
     return parseWidgetJs(js);
   } catch {
     return [];
