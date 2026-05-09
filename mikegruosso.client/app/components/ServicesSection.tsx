@@ -116,9 +116,9 @@ const services: Service[] = [
     ),
   },
   {
-    title: "Land & Developments",
+    title: "Properties Sold",
     description:
-      "Land parcels, infill lots, and development opportunities along the Shore with guidance on zoning, positioning, and bringing projects to market.",
+      "Over 1,000 properties sold across New Jersey backed by deep market knowledge, sharp negotiation, and a commitment to closing with confidence.",
     cta: { label: "View Portfolio", href: "/portfolio" },
     icon: (
       <svg

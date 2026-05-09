@@ -68,13 +68,13 @@ export default function HeroSection() {
 
           {/* Tagline */}
           <h1 className="text-3xl sm:text-4xl font-normal text-white leading-tight tracking-wide mb-5 font-[family-name:var(--font-cormorant-garamond)] md:text-[57px]">
-          Helping Homeowners, Investors & Businesses
+          Helping Homeowners<br />Investors & Businesses
           </h1>
 
           {/* Description */}
-          <p className="text-sm sm:text-base md:text-lg text-white font-bold max-w-2xl mb-10 leading-relaxed tracking-wide font-[family-name:var(--font-arapey)]">
+          {/* <p className="text-sm sm:text-base md:text-lg text-white font-bold max-w-2xl mb-10 leading-relaxed tracking-wide font-[family-name:var(--font-arapey)]">
           From Generation to Generation
-          </p>
+          </p> */}
 
           {/* Tab Card — transparent style */}
           <div className="w-full max-w-2xl">

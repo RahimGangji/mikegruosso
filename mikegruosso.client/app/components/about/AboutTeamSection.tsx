@@ -20,7 +20,7 @@ const team = [
   },{
     name: "GianLuca Gruosso",
     role: "Lead Sales Agent",
-    image: "/gian-sales.jpeg",
+    image: "/luca-headshot.png",
     points: [
       "Real estate runs in the family",
       "Started in real estate marketing at 16",
@@ -44,7 +44,7 @@ const team = [
   
   {
     name: "Julianna Gruosso",
-    role: "Sales Associate",
+    role: "Lead Sales Agent",
     image: "/julian-sale-associate.jpeg",
     points: [
       "Graduate of The College of New Jersey with a degree in Psychology & Italian",

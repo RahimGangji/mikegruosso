@@ -32,7 +32,7 @@ const areas = [
   {
     name: "Tinton Falls",
     county: "Monmouth County",
-    image: "/tintonfalls.webp",
+    image: "/tinton-falls.jpg",
   },
   {
     name: "Jackson",

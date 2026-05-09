@@ -54,10 +54,10 @@ export default function AboutSection() {
             <p>
               Visit us at 236 Norwood Ave, Oakhurst, NJ 07755, or call{" "}
               <a
-                href="tel:+17327044033"
+                href="tel:+17325312000"
                 className="text-white underline decoration-white/40 underline-offset-2 hover:decoration-white"
               >
-                (732) 704-4033 ext. 126
+                (732) 531-2000
               </a>
               . Curious about your home&apos;s value? Ask The Gruosso Group for a
               free, no-obligation home evaluation. We are here to help you move

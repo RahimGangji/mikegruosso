@@ -10,9 +10,9 @@ import "swiper/css/pagination";
 
 const team = [
   { name: "Michael Gruosso", role: "Founder &  Broker", image: "/mike-founder.jpeg"          },
-  { name: "GianLuca Gruosso",   role: "Lead Sales Agent",            image: "/gian-sales.jpeg"            },
+  { name: "GianLuca Gruosso",   role: "Lead Sales Agent",            image: "/luca-headshot.png"          },
   { name: "Jaden Hudson",   role: "Marketing Specialist",       image: "/jaden-marketing.jpeg"       },
-  { name: "Julianna Gruosso",         role: "Sales Associate",            image: "/julian-sale-associate.jpeg" },
+  { name: "Julianna Gruosso",         role: "Lead Sales Agent",            image: "/julian-sale-associate.jpeg" },
   { name: "Erika Gaetano",          role: "Sales Associate",            image: "/erika-sales.jpeg"           },
   { name: " Daniel Mullen",         role: "Sales Associate",            image: "/daniel-sales.jpeg"          },
 

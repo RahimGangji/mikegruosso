@@ -162,7 +162,7 @@ export default function ContactSection() {
 
             {/* Phone */}
             <a
-              href="tel:+17327044033,126"
+              href="tel:+17325312000"
               className="group flex items-start gap-4 py-4 border-t border-b border-[#161f2d]/10 hover:border-[#3aaacf]/40 transition-colors"
             >
               <span className="flex-shrink-0 inline-flex h-11 w-11 items-center justify-center rounded-full ring-1 ring-[#3aaacf]/35 text-[#3aaacf] transition-colors duration-300 group-hover:bg-[#3aaacf] group-hover:text-white group-hover:ring-[#3aaacf]">
@@ -179,7 +179,7 @@ export default function ContactSection() {
                   Phone
                 </span>
                 <span className="text-[15px] text-gray-900 font-[family-name:var(--font-karla)]">
-                  (732) 704-4033 ext. 126
+                  (732) 531-2000
                 </span>
               </div>
             </a>

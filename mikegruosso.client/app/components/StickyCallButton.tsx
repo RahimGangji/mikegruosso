@@ -1,7 +1,7 @@
 export default function StickyCallButton() {
   return (
     <a
-      href="tel:+17327044033"
+      href="tel:+17325312000"
       aria-label="Call The Gruosso Group"
       className="fixed bottom-6 right-6 z-[990] w-14 h-14 rounded-full bg-[#3aaacf] shadow-lg flex items-center justify-center transition-transform duration-200 hover:scale-110 active:scale-95"
     >

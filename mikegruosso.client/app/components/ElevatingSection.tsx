@@ -13,23 +13,14 @@ export default function ElevatingSection() {
               className="text-2xl sm:text-3xl font-normal leading-snug font-[family-name:var(--font-cormorant-garamond)] tracking-wide"
               style={{ color: "#3aaac5" }}
             >
-              Elevating Real Estate on the Jersey Shore
+              Make your next move with clarity.
             </h2>
           </div>
 
           {/* Right — Description */}
           <div className="flex flex-col justify-center gap-4">
             <p className="text-white/80 text-xs sm:text-sm leading-relaxed font-[family-name:var(--font-karla)]">
-              The Gruosso Group is your go-to team in Monmouth and Ocean County
-              for buying, selling, and investing along the Jersey Shore. With
-              1,000+ closed transactions and 20 years of experience, we pair
-              expert pricing with technology driven marketing and a focus on
-              smooth, efficient closings. From luxury waterfront homes to
-              suburban neighborhoods and commercial opportunities, we put your
-              goals first so you can move forward with confidence. We track neighborhood trends, buyer demand, and listing activity
-              across the Shore so your strategy fits today{"'"}s market not last
-              season&apos;s. Expect clear communication, diligent follow through, and
-              a full-service approach from first conversation to keys at closing.
+              The Gruosso Group is a boutique, family focused team guiding you across New Jersey with a white glove approach, full transparency, and strategy built for today&apos;s market. Whether you&apos;re buying your first home, selling a long-held property, or growing an investment portfolio, we bring 20+ years of local expertise and a dedicated, hands-on process to every transaction from first conversation to keys at closing. We stay ahead of neighborhood trends, buyer demand, and market shifts so your strategy is always grounded in real data not last season&apos;s numbers. With over 1,000 closed transactions behind us, you can expect clear communication, diligent follow through, and a full-service experience tailored to your goals at every step.
             </p>
             {/* <p className="text-white/80 text-xs sm:text-sm leading-relaxed font-[family-name:var(--font-karla)]">
              

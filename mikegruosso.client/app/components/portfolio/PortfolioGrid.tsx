@@ -264,7 +264,7 @@ export default function PortfolioGrid() {
           <div className="flex flex-wrap gap-8 mt-10 pt-10 border-t border-white/10">
             <div>
               <p className="text-3xl font-normal text-[#3aaacf] font-[family-name:var(--font-cormorant-garamond)]">
-                {properties.length}+
+                50+
               </p>
               <p className="text-white/50 text-[11px] uppercase tracking-[0.15em] mt-1 font-[family-name:var(--font-manrope)]">
                 Properties Listed
@@ -280,7 +280,7 @@ export default function PortfolioGrid() {
             </div>
             <div>
               <p className="text-3xl font-normal text-[#3aaacf] font-[family-name:var(--font-cormorant-garamond)]">
-                $27M+
+                $31M+
               </p>
               <p className="text-white/50 text-[11px] uppercase tracking-[0.15em] mt-1 font-[family-name:var(--font-manrope)]">
                 Sales Last Year

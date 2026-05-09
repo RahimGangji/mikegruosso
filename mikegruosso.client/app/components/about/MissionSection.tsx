@@ -21,11 +21,7 @@ export default function MissionSection() {
             </h1>
 
             <p className="text-white/65 text-base sm:text-lg leading-relaxed font-[family-name:var(--font-karla)] mb-12">
-              The Gruosso Group at Keller Williams East Monmouth specializes in
-              residential, commercial, and investment properties across Monmouth &amp;
-              Ocean County, NJ. With over 20 years of experience, 1,000+
-              transactions, and technology-driven marketing, we help you buy, sell,
-              and invest with confidence.
+              At the Gruosso Group, our mission is to deliver a thoughtful, relationship-driven real estate experience rooted in trust, transparency, and expertise. Led by Michael Gruosso, whose 20+ years in the industry shape the foundation of our approach, we combine seasoned guidance with a commitment to mentoring the next generation of talent. Together, we provide clients across New Jersey with a higher standard of service where every transaction is handled with care, clarity, and purpose.
             </p>
 
             {/* Stats */}
@@ -48,7 +44,7 @@ export default function MissionSection() {
               </div>
               <div>
                 <p className="text-3xl sm:text-4xl font-normal text-[#3aaacf] font-[family-name:var(--font-cormorant-garamond)]">
-                  $27M+
+                  $31M+
                 </p>
                 <p className="text-white/50 text-[11px] uppercase tracking-[0.15em] mt-1.5 font-[family-name:var(--font-manrope)]">
                   Sales Last Year

@@ -8,7 +8,7 @@ export default function AboutGroupSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
           {/* Image */}
-          <div className="relative w-full h-72 sm:h-96 lg:h-[380px] overflow-hidden order-2 lg:order-1">
+          <div className="relative w-full h-72 sm:h-96 lg:h-[420px] overflow-hidden order-2 lg:order-1">
             <Image
               src="/mike-about.jpeg"
               alt="About The Gruosso Group"
@@ -37,10 +37,7 @@ export default function AboutGroupSection() {
             <div className="w-12 h-px bg-[#3aaacf] mb-8" />
 
             <p className="text-gray-600 text-base sm:text-lg leading-relaxed font-[family-name:var(--font-karla)]">
-              The Gruosso Group is a trusted real estate team serving Monmouth County,
-              Ocean County, and the Jersey Shore. With 1,000+ closed transactions and
-              20+ years of experience, our team helps buyers, sellers, and investors
-              make smart real estate decisions.
+              The Gruosso Group, part of G&amp;G Realtors, is a family-focused, boutique real estate team serving clients across New Jersey. We combine a white-glove, relationship-driven approach with deep market expertise to guide buyers, sellers, and investors through every stage of their journey. Our proprietary client dashboard delivers full transparency throughout the process, while our use of advanced technology and AI allows us to operate efficiently so we can stay focused on what matters most: meaningful connections and exceptional results.
             </p>
           </div>
 

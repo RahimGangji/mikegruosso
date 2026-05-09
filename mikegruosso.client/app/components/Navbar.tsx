@@ -116,12 +116,12 @@ export default function Navbar() {
               menuOpen ? "opacity-0 pointer-events-none" : "opacity-100"
             }`}
           >
-            <div className="relative h-[92px] w-[138px]">
+            <div className="relative h-[116px] w-[174px]">
               <Image
                 src="/new-logo.png"
                 alt="The Gruosso Group"
                 fill
-                sizes="138px"
+                sizes="174px"
                 className={headerLogoInvert}
                 priority
               />

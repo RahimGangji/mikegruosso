@@ -44,7 +44,7 @@ export default function CTA() {
 
             <div className="flex justify-center">
               <Link
-                href="/property-value"
+                href="/sell"
                 className="group inline-flex items-center justify-center gap-2 rounded-lg bg-[#161f2d] px-9 py-3.5 text-sm font-semibold text-[#3aaacf] shadow-lg shadow-black/25 transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#0f1622] hover:shadow-xl font-[family-name:var(--font-manrope)] sm:px-11"
               >
                 Find Out

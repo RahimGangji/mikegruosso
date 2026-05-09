@@ -65,9 +65,9 @@ function TestimonialCard({ t }: { t: typeof testimonials[0] }) {
 }
 
 const TESTIMONIAL_BG_VIDEO =
-  "https://res.cloudinary.com/dd1e0iquz/video/upload/v1777810133/testimonial_stmyeu.mp4";
+  "https://res.cloudinary.com/dd1e0iquz/video/upload/v1778353141/testimonial-update_gwjsyg.mp4";
 const TESTIMONIAL_BG_POSTER =
-  "https://res.cloudinary.com/dd1e0iquz/video/upload/so_0,f_jpg/v1777810133/testimonial_stmyeu.jpg";
+  "https://res.cloudinary.com/dd1e0iquz/video/upload/so_0,f_jpg/v1778353141/testimonial-update_gwjsyg.jpg";
 
 export default function Testimonials() {
   return (

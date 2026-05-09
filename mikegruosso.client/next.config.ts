@@ -19,6 +19,14 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "images.unsplash.com",
       },
+      {
+        protocol: "https",
+        hostname: "*.idxbroker.com",
+      },
+      {
+        protocol: "https",
+        hostname: "*.mlsgrid.com",
+      },
     ],
   },
 };
