@@ -96,8 +96,8 @@ const commercialBudgetOptions: LeadFormOption[] = [
 ];
 
 const defaultParagraphs = [
-  "When you find a home you love, The Gruosso Group will help you craft and submit a strong, competitive offer. We are skilled negotiators who know the Monmouth and Ocean County markets intimately, and we will work tirelessly to secure the best price and terms possible for you.",
-  "Once your offer is accepted, we will guide you through every step that follows from inspections and appraisals to mortgage milestones and the final walk through, ensuring a smooth, stress free closing. Best of all, our service comes at no cost to you as the buyer; we are compensated by the seller, so you get a full team of experts in your corner without adding to your bottom line.",
+  "Buying a home is a big step! Whether you're buying your first home, your dream home, or your tenth investment property, your purchase will be a big investment. We know how important this is to you, and have an army of experts to make sure we find the perfect property for your unique circumstances. The Gruosso Group knows the market well and truly loves real estate, and we'll educate you throughout the entire buying experience.",
+  "Finding the perfect property is just one way our team can help you with your real estate purchase. Our top real estate agents and brokers have ongoing access to experts in every related field from lending to relocation so you're covered at every step of the journey.",
 ];
 
 const inputClass =
@@ -192,8 +192,8 @@ function emptyCommercialListingFields(): CommercialListingFields {
 }
 
 export default function MakingOfferClosing({
-  title = "Making an Offer and Closing",
-  subtitle = "Gruosso Partner Till The End",
+  title = "The Home Buying Process",
+  subtitle = "We Can Make It Easy",
   paragraphs = defaultParagraphs,
   formTitle,
   leadFormVariant = "contact",
@@ -563,7 +563,7 @@ export default function MakingOfferClosing({
   const resolvedFormTitle =
     formTitle ??
     (leadFormVariant === "purchase"
-      ? "Start Your Home Search"
+      ? "Your Next Home Starts Here"
       : leadFormVariant === "sell"
         ? "My Home Value"
         : leadFormVariant === "investment"

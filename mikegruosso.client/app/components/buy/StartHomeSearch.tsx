@@ -29,7 +29,7 @@ export default function StartHomeSearch({
   subtitle = "Search for Homes Whereever Your Are",
   paragraphs = defaultParagraphs,
   titleClassName = "text-[30px] lg:text-[36px]",
-  backgroundImage = "/happy-familybg.avif",
+  backgroundImage = "/home-search-bg.avif",
   featureImage = {
     src: "/laptop-device.png",
     alt: "Property search on a laptop",

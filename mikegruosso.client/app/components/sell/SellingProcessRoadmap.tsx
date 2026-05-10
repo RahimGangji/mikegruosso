@@ -7,7 +7,7 @@ const sellingSteps = [
   {
     title: "Pricing Strategy",
     description:
-      "Your list price is built on fresh comps, buyer demand in your neighborhood, and your positioning goals—not a rushed number from an algorithm. We explain the rationale so you can list with confidence and attract serious buyers.",
+      "Your list price is built on fresh comps, buyer demand in your neighborhood, and your positioning goals not a rushed number from an algorithm. We explain the rationale so you can list with confidence and attract serious buyers.",
   },
   {
     title: "Marketing Launch",
@@ -22,7 +22,7 @@ const sellingSteps = [
   {
     title: "Offers & Negotiation",
     description:
-      "When offers arrive, we break down price, contingencies, and timelines in plain language and negotiate strategically on your behalf. Our focus is securing terms that align with your bottom line—not just accepting the first number on paper.",
+      "When offers arrive, we break down price, contingencies, and timelines in plain language and negotiate strategically on your behalf. Our focus is securing terms that align with your bottom line not just accepting the first number on paper.",
   },
   {
     title: "Closing Coordination",

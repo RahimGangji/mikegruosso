@@ -1,6 +1,7 @@
 export const dynamic = "force-dynamic";
 
 import HeroSection from "./components/HeroSection";
+import HomeLeadPopup from "./components/HomeLeadPopup";
 import ElevatingSection from "./components/ElevatingSection";
 import ListingsSection from "./components/ListingsSection";
 import ServicesSection from "./components/ServicesSection";
@@ -18,6 +19,7 @@ export default async function Home() {
 
   return (
     <main>
+      <HomeLeadPopup />
       <HeroSection />
       <ElevatingSection />
       {/* <WhyChooseUs /> */}

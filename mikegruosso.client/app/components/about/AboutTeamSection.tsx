@@ -11,8 +11,8 @@ const team = [
     image: "/mike-founder.jpeg",
     points: [
       "Top 1% Realtor in New Jersey",
-      "NJAR Circle of Excellence Award Winner (Platinum Level) '08–'23",
-      "Over $27M in sales last year & hundreds of homes sold",
+      "NJAR Circle of Excellence Award Winner (Platinum Level) '08–'25",
+      "Over $31M in sales last year & hundreds of homes sold",
       "Renovation & construction expert",
       "Finance degree from DePaul University in Chicago",
       "Fluent in Italian & some Spanish",
@@ -60,7 +60,7 @@ const team = [
     points: [
       "Lifelong Monmouth County resident with deep local knowledge",
       "11 years of customer service experience, prioritizing trust & communication",
-      "Background in Finance & Business — from loan assistance to running a family shop",
+      "Background in Finance & Business from loan assistance to running a family shop",
       "Passionate about helping clients navigate the home buying & selling journey",
       "Committed to finding not just a house, but a place to call home",
     ],
@@ -70,7 +70,7 @@ const team = [
     role: "Sales Associate",
     image: "/daniel-sales.jpeg",
     points: [
-      "Grew up in Brooklyn — brings a unique urban & suburban market perspective",
+      "Grew up in Brooklyn brings a unique urban & suburban market perspective",
       "A Monmouth & Middlesex County specialist with deep local knowledge",
       "Ambitious approach guarantees a tailored and successful experience",
       "Keen eye for opportunity with a commitment to seamless transactions",

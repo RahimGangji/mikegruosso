@@ -62,13 +62,12 @@ export async function POST(req: Request) {
   if (
     !fullName ||
     !email ||
-    !phone ||
-    !String(body.interest ?? "").trim()
+    !phone
   ) {
     return NextResponse.json(
       {
         error:
-          "Name, email, phone, and interest are required.",
+          "Name, email, and phone are required.",
       },
       { status: 400 },
     );

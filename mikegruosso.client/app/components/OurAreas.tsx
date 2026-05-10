@@ -3,6 +3,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, A11y } from "swiper/modules";
 import Image from "next/image";
+import Link from "next/link";
 import { BLUR_PLACEHOLDER } from "@/app/lib/placeholder";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -120,7 +121,11 @@ export default function OurAreas() {
         >
           {areas.map((area) => (
             <SwiperSlide key={area.name}>
-              <div className="group relative h-[360px] sm:h-[400px] overflow-hidden cursor-pointer">
+              <Link
+                href="/buy"
+                aria-label={`View homes for sale in ${area.name}`}
+                className="group relative block h-[360px] sm:h-[400px] overflow-hidden cursor-pointer"
+              >
 
                 <Image
                   src={area.image}
@@ -146,7 +151,7 @@ export default function OurAreas() {
                   </p>
                 </div>
 
-              </div>
+              </Link>
             </SwiperSlide>
           ))}
         </Swiper>
