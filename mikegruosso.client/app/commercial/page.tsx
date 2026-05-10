@@ -14,11 +14,11 @@ const heroData = {
   ],
   images: {
     primary: {
-      src: "/commerical-img1.avif",
+      src: "/commercial-opportunity1.avif",
       alt: "Commercial property along the Jersey Shore",
     },
     secondary: {
-      src: "/commerical-img2.avif",
+      src: "/commercial-opportunity2.avif",
       alt: "Commercial property analysis and evaluation",
     },
   },
@@ -31,23 +31,28 @@ const heroData = {
 const commercialFormData = {
   title: "Talk to a Commercial Specialist",
   subtitle: "Sourcing, Underwriting, and Negotiation",
-  sectionClassName: "w-full bg-white py-20 sm:py-24",
+  sectionClassName: "w-full bg-white pt-36 lg:pt-52 pb-10 sm:pb-14",
   headingClassName: "text-[30px] lg:text-[36px]",
   formHeadingClassName: "text-[36px]",
   leadFormVariant: "commercial" as const,
   formAnchorId: COMMERCIAL_FORM_ID,
   paragraphs: [
     "Tell us about the type of commercial property you're targeting and the budget you're working with. We'll review fit, surface relevant on market and off market options, and follow up with a clear next step, no boilerplate and no pressure.",
-    "Our commercial team handles assignments across retail, office, industrial, mixed-use, land, hospitality, and stabilized investment assets, and routinely coordinates with attorneys, lenders, and inspection partners so you can move on the right deal quickly.",
   ],
+  stickyLeft: false,
+  leftImage: {
+    src: "/commerical-form-img.avif",
+    alt: "Commercial real estate",
+  },
 };
 
 export default function CommercialPage() {
   return (
     <main>
-      <HomeBuyingProcess {...heroData} />
+        <MakingOfferClosing {...commercialFormData} />
+      <HomeBuyingProcess {...heroData} sectionClassName="w-full bg-white pt-16 sm:pt-20 pb-10 sm:pb-14" />
+    
       <CommercialPropertyTypes />
-      <MakingOfferClosing {...commercialFormData} />
     </main>
   );
 }

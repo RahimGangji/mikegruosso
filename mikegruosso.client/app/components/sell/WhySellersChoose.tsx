@@ -6,17 +6,17 @@ const sellerBenefits = [
   "Targeted social media advertising campaigns",
   "Full MLS exposure via IDX Broker",
   "Expert staging & renovation advice",
-  "Proven negotiation - we get the highest price",
+  "Proven negotiation we get the highest price",
   "Bilingual service: English, Italian & Spanish",
-  "16+ years of NJ market expertise",
-  "NJAR Platinum Circle of Excellence '08-'23",
+  "20+ years of NJ market expertise",
+  "NJAR Platinum Circle of Excellence '08-'25",
 ];
 
 export default function WhySellersChoose() {
   return (
     <section className="relative w-full overflow-hidden py-20 sm:py-24">
       <Image
-        src="/real-estate-property.avif"
+        src="/why-seller-choose.avif"
         alt=""
         fill
         className="object-cover"
@@ -46,9 +46,9 @@ export default function WhySellersChoose() {
 
               <p>
                 Michael Gruosso&apos;s deep renovation expertise means he can
-                advise on cost-effective improvements that dramatically increase
+                advise on cost effective improvements that dramatically increase
                 your sale price. Combined with sharp negotiation skills refined
-                over 16+ years, we don&apos;t just list your home - we fight for
+                over 20+ years, we don&apos;t just list your home we fight for
                 every dollar.
               </p>
             </div>

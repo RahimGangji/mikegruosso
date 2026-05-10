@@ -10,7 +10,7 @@ import { testimonials } from "./Testimonials";
 
 /** `f_mp4,q_auto` improves browser compatibility; omit poster so Safari does not stay on a static JPG if play is delayed. */
 const BANNER_BG_VIDEO =
-  "https://res.cloudinary.com/dd1e0iquz/video/upload/q_auto,f_mp4/v1777810133/testimonial_stmyeu.mp4";
+  "https://res.cloudinary.com/dd1e0iquz/video/upload/v1778435135/download_cqtv1l.mp4";
 
 export default function TestimonialBannerSection() {
   const sectionRef = useRef<HTMLElement>(null);

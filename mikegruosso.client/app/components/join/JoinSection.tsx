@@ -6,12 +6,12 @@ import LeadFormSelect, {
   type LeadFormOption,
 } from "../buy/LeadFormSelect";
 
-const roleOptions: LeadFormOption[] = [
-  { value: "buyer", label: "Buyer" },
-  { value: "seller", label: "Seller" },
-  { value: "investor", label: "Investor" },
-  { value: "agent", label: "Agent" },
-  { value: "developer", label: "Developer" },
+const workWithUsOptions: LeadFormOption[] = [
+  { value: "give-leads", label: "Give Leads" },
+  { value: "marketing-admin", label: "Marketing & Admin Support" },
+  { value: "mentorship", label: "Mentorship" },
+  { value: "proven-systems", label: "Proven Systems" },
+  { value: "other", label: "Other" },
 ];
 
 const inputClass =
@@ -23,7 +23,7 @@ type JoinFields = {
   fullName: string;
   email: string;
   phone: string;
-  role: string;
+  workWithUs: string;
 };
 
 function emptyJoinFields(): JoinFields {
@@ -31,7 +31,7 @@ function emptyJoinFields(): JoinFields {
     fullName: "",
     email: "",
     phone: "",
-    role: "",
+    workWithUs: "",
   };
 }
 
@@ -74,7 +74,7 @@ export default function JoinSection() {
     const email = joinFields.email.trim();
     const phone = joinFields.phone.trim();
     return Boolean(
-      fullName && email && phone && joinFields.role,
+      fullName && email && phone && joinFields.workWithUs,
     );
   }, [joinFields]);
 
@@ -91,19 +91,17 @@ export default function JoinSection() {
       return;
     }
     setStatus("sending");
-    const fd = new FormData(form);
     const payload = {
       fullName: joinFields.fullName.trim(),
       email: joinFields.email.trim(),
       phone: joinFields.phone.trim(),
-      role: joinFields.role.trim(),
-      message: String(fd.get("message") ?? ""),
+      workWithUs: joinFields.workWithUs.trim(),
     };
     if (
       !payload.fullName ||
       !payload.email ||
       !payload.phone ||
-      !payload.role
+      !payload.workWithUs
     ) {
       setStatus("idle");
       setErrorMessage("Please complete all required fields.");
@@ -292,30 +290,17 @@ export default function JoinSection() {
               </div>
 
               <LeadFormSelect
-                name="role"
-                label="I am a"
+                name="workWithUs"
+                label="Work With Us"
                 placeholder="Select an option"
-                options={roleOptions}
+                options={workWithUsOptions}
                 labelClassName={labelClass}
                 required
-                value={joinFields.role}
+                value={joinFields.workWithUs}
                 onValueChange={(v) =>
-                  setJoinFields((p) => ({ ...p, role: v }))
+                  setJoinFields((p) => ({ ...p, workWithUs: v }))
                 }
               />
-
-              <div className="flex flex-col">
-                <label htmlFor="join-message" className={labelClass}>
-                  Message
-                </label>
-                <textarea
-                  id="join-message"
-                  name="message"
-                  rows={5}
-                  placeholder="Message"
-                  className={`resize-none ${inputClass}`}
-                />
-              </div>
 
               <div>
                 <button
@@ -331,7 +316,7 @@ export default function JoinSection() {
                   }
                   className="inline-flex items-center justify-center rounded bg-[#3aaacf] hover:bg-[#2f95b6] transition-colors px-8 py-3.5 text-sm font-semibold text-white tracking-wide disabled:cursor-not-allowed disabled:opacity-60"
                 >
-                  {status === "sending" ? "Sending…" : "Join Now"}
+                  {status === "sending" ? "Sending…" : "Request a Private Interview"}
                 </button>
               </div>
               {status === "success" ? (

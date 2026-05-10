@@ -15,11 +15,11 @@ const heroData = {
   ],
   images: {
     primary: {
-      src: "/real-estate-property.avif",
+      src: "/investment-opportunity1.avif",
       alt: "Investment property on the Jersey Shore",
     },
     secondary: {
-      src: "/home-evaluation.avif",
+      src: "/investment-opportunity2.avif",
       alt: "Property evaluation and analysis",
     },
   },
@@ -46,12 +46,17 @@ const searchData = {
 export default function InvestmentPage() {
   return (
     <main>
-      <HomeBuyingProcess {...heroData} />
+      <MakingOfferClosing
+        leadFormVariant="investment"
+        sectionClassName="w-full bg-white pt-36 lg:pt-52 pb-10 sm:pb-14"
+        stickyLeft={false}
+        leftImage={{ src: "/investment-lead1.avif", alt: "Investment property" }}
+      />
+      <HomeBuyingProcess {...heroData} sectionClassName="w-full bg-white pt-16 sm:pt-20 pb-24 sm:pb-32" />
       <InvestmentTypes />
-      <StartHomeSearch {...searchData} />
+      {/* <StartHomeSearch {...searchData} /> */}
       <ROICalculator />
       <InvestmentStats />
-      <MakingOfferClosing leadFormVariant="investment" />
     </main>
   );
 }

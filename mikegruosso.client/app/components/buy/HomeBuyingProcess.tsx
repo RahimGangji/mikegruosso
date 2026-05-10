@@ -22,15 +22,16 @@ type HomeBuyingProcessProps = {
   } | null;
   /** Use <h1> (default) for the page hero, or <h2> when this section isn't the page lede. */
   headingTag?: "h1" | "h2";
+  sectionClassName?: string;
 };
 
 const defaultImages = {
   primary: {
-    src: "/happyfamily.avif",
+    src: "/buying-process.avif",
     alt: "Family touring a house",
   },
   secondary: {
-    src: "/happyfamily2.avif",
+    src: "/buying-process2.avif",
     alt: "Couple on green couch",
   },
 };
@@ -43,10 +44,11 @@ export default function HomeBuyingProcess({
   images = defaultImages,
   cta = null,
   headingTag = "h1",
+  sectionClassName = "w-full bg-white pt-36 sm:pt-40 pb-24 sm:pb-32",
 }: HomeBuyingProcessProps) {
   const HeadingTag = headingTag;
   return (
-    <section className="w-full bg-white pt-36 sm:pt-40 pb-24 sm:pb-32">
+    <section className={sectionClassName}>
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         <div className="grid min-w-0 grid-cols-1 lg:grid-cols-[35%_65%] gap-12 lg:gap-36 items-center">
           <div className="flex flex-col justify-center">

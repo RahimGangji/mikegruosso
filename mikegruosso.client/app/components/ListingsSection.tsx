@@ -197,10 +197,7 @@ export default function ListingsSection({ listings }: Props) {
   ).slice(0, 8);
 
   const [selected, setSelected] = useState<NormalizedListing | null>(null);
-  const [mounted, setMounted]   = useState(false);
   const closeModal              = useCallback(() => setSelected(null), []);
-
-  useEffect(() => setMounted(true), []);
 
   return (
     <section id="our-listings" className="w-full bg-white py-20 relative z-0 scroll-mt-32 md:scroll-mt-36">
@@ -311,7 +308,7 @@ export default function ListingsSection({ listings }: Props) {
         {/* View All */}
         <div className="flex justify-center mt-4">
           <Link
-            href="/contact"
+            href="/listings"
             className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#3aaacf] px-10 py-3.5 text-sm font-semibold text-white shadow-md transition-all duration-200 hover:bg-[#2f95b6] hover:-translate-y-0.5 hover:shadow-lg font-[family-name:var(--font-manrope)]"
           >
             View All Listings
@@ -324,7 +321,7 @@ export default function ListingsSection({ listings }: Props) {
       </div>
 
       {/* Portal — outside all stacking contexts */}
-      {mounted && selected && createPortal(
+      {selected && createPortal(
         <ListingModal listing={selected} onClose={closeModal} />,
         document.body,
       )}

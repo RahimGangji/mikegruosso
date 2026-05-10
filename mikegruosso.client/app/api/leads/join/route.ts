@@ -9,27 +9,26 @@ import {
   type GhlContactFields,
 } from "@/app/lib/ghlSubmitContact";
 
-const ROLE_LABELS: Record<string, string> = {
-  buyer: "Buyer",
-  seller: "Seller",
-  investor: "Investor",
-  agent: "Agent",
-  developer: "Developer",
+const WORK_WITH_US_LABELS: Record<string, string> = {
+  "give-leads": "Give Leads",
+  "marketing-admin": "Marketing & Admin Support",
+  mentorship: "Mentorship",
+  "proven-systems": "Proven Systems",
+  other: "Other",
 };
 
 type JoinPayload = {
   fullName?: string;
   email?: string;
   phone?: string;
-  role?: string;
-  message?: string;
+  workWithUs?: string;
 };
 
 function buildNote(p: JoinPayload): string {
   const lines = [
     "Website join network form",
-    p.role && `I am a: ${ROLE_LABELS[p.role] ?? p.role}`,
-    p.message?.trim() && `Message:\n${p.message.trim()}`,
+    p.workWithUs &&
+      `Work With Us: ${WORK_WITH_US_LABELS[p.workWithUs] ?? p.workWithUs}`,
   ];
   return lines.filter(Boolean).join("\n");
 }
@@ -62,12 +61,12 @@ export async function POST(req: Request) {
     !fullName ||
     !email ||
     !phone ||
-    !String(body.role ?? "").trim()
+    !String(body.workWithUs ?? "").trim()
   ) {
     return NextResponse.json(
       {
         error:
-          "Full name, email, phone, and I am a selection are required.",
+          "Full name, email, phone, and Work With Us selection are required.",
       },
       { status: 400 },
     );

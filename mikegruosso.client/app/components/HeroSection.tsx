@@ -131,8 +131,7 @@ export default function HeroSection() {
                   Explore our curated listings across the Shore and discover your next home.
                 </p> */}
                 <a
-                  href={`#${LISTINGS_ANCHOR_ID}`}
-                  onClick={scrollToOurListings}
+                  href="/listings"
                   className="inline-flex w-full max-w-sm items-center justify-center rounded-md bg-[#3aaacf] px-8 py-3.5 text-sm font-semibold text-white shadow-lg transition-colors duration-200 hover:bg-[#2f95b6] touch-manipulation sm:w-auto font-[family-name:var(--font-manrope)]"
                 >
                   View Our Listings

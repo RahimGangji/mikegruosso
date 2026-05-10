@@ -12,6 +12,7 @@ type StartHomeSearchProps = {
     src: string;
     alt: string;
   };
+  bulletPoints?: string[];
   cta?: {
     label: string;
     href: string;
@@ -33,6 +34,7 @@ export default function StartHomeSearch({
     src: "/laptop-device.png",
     alt: "Property search on a laptop",
   },
+  bulletPoints,
   cta = {
     label: "Start Searching",
     href: "/buy",
@@ -56,21 +58,23 @@ export default function StartHomeSearch({
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
 
           {/* Left — Laptop device */}
-          <div className="relative w-full h-[260px] sm:h-[340px] lg:h-[420px] order-2 lg:order-1 lg:-ml-12 xl:-ml-20">
-            <Image
-              src={featureImage.src}
-              alt={featureImage.alt}
-              fill
-              className="object-contain object-center lg:object-left"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              placeholder="blur"
-              blurDataURL={BLUR_PLACEHOLDER}
-              priority={false}
-            />
-          </div>
+          {!bulletPoints ? (
+            <div className="relative w-full h-[260px] sm:h-[340px] lg:h-[420px] order-2 lg:order-1 lg:-ml-12 xl:-ml-20">
+              <Image
+                src={featureImage.src}
+                alt={featureImage.alt}
+                fill
+                className="object-contain object-center lg:object-left"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                placeholder="blur"
+                blurDataURL={BLUR_PLACEHOLDER}
+                priority={false}
+              />
+            </div>
+          ) : null}
 
           {/* Right — Copy */}
-          <div className="flex flex-col order-1 lg:order-2">
+          <div className={`flex flex-col order-1 ${bulletPoints ? "lg:order-1" : "lg:order-2"}`}>
             <h2 className={`${titleClassName} font-normal text-white leading-tight tracking-wide font-[family-name:var(--font-cormorant-garamond)] mb-5`}>
               {title}
             </h2>
@@ -96,6 +100,27 @@ export default function StartHomeSearch({
               </div>
             ) : null}
           </div>
+
+          {bulletPoints ? (
+            <div className="order-2 lg:order-2">
+              <ul className="flex flex-col border-y border-white/15">
+                {bulletPoints.map((point, index) => (
+                  <li
+                    key={point}
+                    className="flex gap-4 border-b border-white/15 py-5 text-[15px] leading-relaxed text-white font-[family-name:var(--font-karla)] last:border-b-0"
+                  >
+                    <span
+                      className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[#3aaacf] text-xs font-semibold leading-none text-[#3aaacf] font-[family-name:var(--font-manrope)]"
+                      aria-hidden="true"
+                    >
+                      {index + 1}
+                    </span>
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
 
         </div>
       </div>

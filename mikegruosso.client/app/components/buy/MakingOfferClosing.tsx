@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState, type FormEvent } from "react";
+import Image from "next/image";
 
 import LeadFormSelect, {
   type LeadFormOption,
@@ -23,6 +24,10 @@ type MakingOfferClosingProps = {
   sectionClassName?: string;
   headingClassName?: string;
   formHeadingClassName?: string;
+  /** Set to false to disable the sticky left-column behaviour. Defaults to true. */
+  stickyLeft?: boolean;
+  /** Optional image rendered below the left-column paragraphs. */
+  leftImage?: { src: string; alt: string };
 };
 
 const purchaseBudgetOptions: LeadFormOption[] = [
@@ -196,6 +201,8 @@ export default function MakingOfferClosing({
   sectionClassName = "w-full bg-white pt-10 sm:pt-12 pb-24 sm:pb-32",
   headingClassName = "text-[30px] lg:text-[36px]",
   formHeadingClassName = "text-[30px] lg:text-[36px]",
+  stickyLeft = true,
+  leftImage,
 }: MakingOfferClosingProps) {
   const [buyerFormKey, setBuyerFormKey] = useState(0);
   const [buyerStatus, setBuyerStatus] = useState<
@@ -570,8 +577,8 @@ export default function MakingOfferClosing({
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
 
-          {/* Left — sticky while long form scrolls (matches FAQ layout) */}
-          <div className="flex flex-col lg:sticky lg:top-24 lg:self-start">
+          {/* Left column */}
+          <div className={`flex flex-col${stickyLeft ? " lg:sticky lg:top-24 lg:self-start" : ""}`}>
 
             {/* Heading */}
             <h2 className={`${headingClassName} font-normal leading-tight tracking-wide text-gray-900 mb-6 font-[family-name:var(--font-cormorant-garamond)]`}>
@@ -595,6 +602,18 @@ export default function MakingOfferClosing({
                 <p key={paragraph}>{paragraph}</p>
               ))}
             </div>
+
+            {leftImage && (
+              <div className="relative mt-8 w-full overflow-hidden rounded-sm">
+                <Image
+                  src={leftImage.src}
+                  alt={leftImage.alt}
+                  width={800}
+                  height={500}
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+            )}
 
           </div>
 

@@ -11,42 +11,42 @@ import "swiper/css/pagination";
 const areas = [
   {
     name: "Red Bank",
-    county: "Monmouth County",
+    county: "New Jersey",
     image: "/redbank.avif",
   },
   {
     name: "Middletown",
-    county: "Monmouth County",
+    county: "New Jersey",
     image: "/middletown.jpeg",
   },
   {
     name: "Shrewsbury",
-    county: "Monmouth County",
+    county: "New Jersey",
     image: "/shrewsbury-nj.jpg",
   },
   {
     name: "Freehold",
-    county: "Monmouth County",
+    county: "New Jersey",
     image: "/freehold-nj.jpg",
   },
   {
     name: "Tinton Falls",
-    county: "Monmouth County",
+    county: "New Jersey",
     image: "/tinton-falls.jpg",
   },
   {
     name: "Jackson",
-    county: "Ocean County",
+    county: "New Jersey",
     image: "/jacksonnj.webp",
   },
   {
     name: "Manalapan",
-    county: "Monmouth County",
+    county: "New Jersey",
     image: "/manlaapan.webp",
   },
   {
     name: "Colts Neck",
-    county: "Monmouth County",
+    county: "New Jersey",
     image: "/colts-neck-nj-2.jpg",
   },
 ];

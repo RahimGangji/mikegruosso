@@ -4,7 +4,7 @@ import { BLUR_PLACEHOLDER } from "@/app/lib/placeholder";
 
 export default function SaveAndSeeListings() {
   return (
-    <section className="w-full bg-white pt-16 sm:pt-20 pb-24 sm:pb-32">
+    <section className="w-full bg-white pt-[49px] sm:pt-[65px] pb-24 sm:pb-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         <div className="grid min-w-0 grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
@@ -40,7 +40,7 @@ export default function SaveAndSeeListings() {
             {/* CTA */}
             <div>
               <Link
-                href="/portfolio"
+                href="/listings"
                 className="inline-flex items-center justify-center rounded bg-[#3aaacf] hover:bg-[#2f95b6] transition-colors px-8 py-3.5 text-sm font-semibold text-white tracking-wide font-[family-name:var(--font-manrope)]"
               >
                 Search Listings
@@ -52,7 +52,7 @@ export default function SaveAndSeeListings() {
           {/* Right — Image */}
           <div className="w-full min-w-0">
             <Image
-              src="/see-properties.avif"
+              src="/see-listing.avif"
               alt="Save and tour Gruosso Group property listings"
               width={1200}
               height={800}
