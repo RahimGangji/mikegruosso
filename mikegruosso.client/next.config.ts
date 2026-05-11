@@ -27,6 +27,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "*.mlsgrid.com",
       },
+      {
+        protocol: "https",
+        hostname: "cdn.photos.sparkplatform.com",
+      },
     ],
   },
 };

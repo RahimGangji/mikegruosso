@@ -4,11 +4,24 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, A11y } from "swiper/modules";
 import Image from "next/image";
 import { BLUR_PLACEHOLDER } from "@/app/lib/placeholder";
+import { formatListingPrice, type IDXListing } from "@/app/lib/idxbroker";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-const soldProperties = [
+interface SoldProperty {
+  id: number | string;
+  image: string;
+  address: string;
+  city: string;
+  price: string;
+  beds: number;
+  baths: number;
+  sqft: number;
+  listedWith: string;
+}
+
+const soldProperties: SoldProperty[] = [
   {
     id: 1,
     image: "/sold-list1.jpg",
@@ -98,7 +111,28 @@ const soldProperties = [
   },
 ];
 
-export default function SoldPropertiesSection() {
+function toNumber(value: string): number {
+  const number = Number(value.replace(/[^0-9.]/g, ""));
+  return Number.isFinite(number) ? number : 0;
+}
+
+function normalizeListings(listings: IDXListing[]): SoldProperty[] {
+  return listings.slice(0, 10).map((listing) => ({
+    id: listing.listingID,
+    image: listing.photos[0] ?? "/sold-list1.jpg",
+    address: listing.address,
+    city: `${listing.cityName}, ${listing.stateAbbr} ${listing.zipcode}`.trim(),
+    price: formatListingPrice(listing.listPrice),
+    beds: toNumber(listing.bedrooms),
+    baths: toNumber(listing.totalBaths),
+    sqft: toNumber(listing.sqFt),
+    listedWith: "The Gruosso Group",
+  }));
+}
+
+export default function SoldPropertiesSection({ listings = [] }: { listings?: IDXListing[] }) {
+  const items = listings.length > 0 ? normalizeListings(listings) : soldProperties;
+
   return (
     <section className="w-full bg-white py-20">
       <style>{`
@@ -162,7 +196,7 @@ export default function SoldPropertiesSection() {
           }}
           className="sold-swiper !pb-12"
         >
-          {soldProperties.map((listing) => (
+          {items.map((listing) => (
             <SwiperSlide key={listing.id}>
               <div className="overflow-hidden bg-white">
                 <div className="relative w-full aspect-[16/9] overflow-hidden">
@@ -196,7 +230,7 @@ export default function SoldPropertiesSection() {
                     className="text-[15px] font-light tracking-[0.3px] text-gray-500 font-[family-name:var(--font-karla)] mt-0.5 sm:mt-0 sm:pt-2"
                     style={{ color: "#000000" }}
                   >
-                    {listing.beds} BD&nbsp;|&nbsp;{listing.baths} BA&nbsp;|&nbsp;{listing.sqft.toLocaleString()} SQFT
+                    {listing.beds} BD&nbsp;|&nbsp;{listing.baths} BA&nbsp;|&nbsp;{listing.sqft > 0 ? listing.sqft.toLocaleString() : "-"} SQFT
                   </p>
 
                   <p

@@ -12,10 +12,13 @@ import SoldPropertiesSection from "./components/SoldPropertiesSection";
 // import FAQs from "./components/FAQs";
 import TestimonialBannerSection from "./components/TestimonialBannerSection";
 import CTA from "./components/CTA";
-import { fetchFeaturedListings } from "./lib/idxbroker";
+import { fetchFeaturedListings, fetchSoldPendingListings } from "./lib/idxbroker";
 
 export default async function Home() {
-  const listings = await fetchFeaturedListings();
+  const [listings, soldListings] = await Promise.all([
+    fetchFeaturedListings(),
+    fetchSoldPendingListings(),
+  ]);
 
   return (
     <main>
@@ -28,7 +31,7 @@ export default async function Home() {
       <AboutSection />
       <OurTeam />
       <OurAreas />
-      <SoldPropertiesSection />
+      <SoldPropertiesSection listings={soldListings.slice(0, 10)} />
       {/* <FAQs /> */}
       <TestimonialBannerSection />
       <CTA />

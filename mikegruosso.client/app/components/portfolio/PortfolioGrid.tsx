@@ -3,11 +3,12 @@
 import { useState } from "react";
 import Image from "next/image";
 import { BLUR_PLACEHOLDER } from "@/app/lib/placeholder";
+import { formatListingPrice, type IDXListing } from "@/app/lib/idxbroker";
 
 type FilterKey = "All" | "Residential" | "Commercial" | "Land" | "Investment" | "Sold" | "Available";
 
 interface Property {
-  id: number;
+  id: number | string;
   image: string;
   address: string;
   city: string;
@@ -227,13 +228,39 @@ const statusColors: Record<Property["status"], string> = {
   Available: "bg-[#161f2d]",
 };
 
-export default function PortfolioGrid() {
+function toNumber(value: string): number {
+  const number = Number(value.replace(/[^0-9.]/g, ""));
+  return Number.isFinite(number) ? number : 0;
+}
+
+function normalizeListings(listings: IDXListing[]): Property[] {
+  return listings.map((listing) => {
+    const rawStatus = listing.status?.toLowerCase() ?? "";
+
+    return {
+      id: listing.listingID,
+      image: listing.photos[0] ?? "/sold-list1.jpg",
+      address: listing.address,
+      city: `${listing.cityName}, ${listing.stateAbbr} ${listing.zipcode}`.trim(),
+      price: formatListingPrice(listing.listPrice),
+      beds: toNumber(listing.bedrooms),
+      baths: toNumber(listing.totalBaths),
+      sqft: toNumber(listing.sqFt),
+      type: "Residential",
+      status: rawStatus.includes("active") || rawStatus.includes("pending") ? "Available" : "Sold",
+      listedWith: "The Gruosso Group",
+    } satisfies Property;
+  });
+}
+
+export default function PortfolioGrid({ listings = [] }: { listings?: IDXListing[] }) {
   const [active, setActive] = useState<FilterKey>("All");
+  const displayProperties = listings.length > 0 ? normalizeListings(listings) : properties;
 
   const shown =
     active === "All"
-      ? properties
-      : properties.filter(
+      ? displayProperties
+      : displayProperties.filter(
           (p) => p.type === active || p.status === active
         );
 
@@ -264,7 +291,7 @@ export default function PortfolioGrid() {
           <div className="flex flex-wrap gap-8 mt-10 pt-10 border-t border-white/10">
             <div>
               <p className="text-3xl font-normal text-[#3aaac5] font-[family-name:var(--font-cormorant-garamond)]">
-                50+
+                {displayProperties.length || "50+"}
               </p>
               <p className="text-white/50 text-[11px] uppercase tracking-[0.15em] mt-1 font-[family-name:var(--font-manrope)]">
                 Properties Listed
@@ -377,7 +404,7 @@ export default function PortfolioGrid() {
 
                     <p className="text-[13px] text-gray-500 font-[family-name:var(--font-karla)] tracking-[0.3px]">
                       {p.beds} BD&nbsp;|&nbsp;{p.baths} BA&nbsp;|&nbsp;
-                      {p.sqft.toLocaleString()} SQFT
+                      {p.sqft > 0 ? p.sqft.toLocaleString() : "-"} SQFT
                     </p>
 
                     <p className="text-[13px] text-gray-400 font-[family-name:var(--font-karla)]">

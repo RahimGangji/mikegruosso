@@ -172,12 +172,18 @@ function ListingModal({ listing, onClose }: { listing: NormalizedListing; onClos
   );
 }
 
-export default function AllListingsClient({ listings }: { listings: IDXListing[] }) {
+export default function AllListingsClient({
+  listings,
+  initialSearch = "",
+}: {
+  listings: IDXListing[];
+  initialSearch?: string;
+}) {
   const items = useMemo(
     () => (listings.length > 0 ? normalize(listings) : FALLBACK_LISTINGS),
     [listings],
   );
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState(initialSearch);
   const [selected, setSelected] = useState<NormalizedListing | null>(null);
   const closeModal = useCallback(() => setSelected(null), []);
 

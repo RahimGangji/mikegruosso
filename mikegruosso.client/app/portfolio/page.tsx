@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import PortfolioGrid from "../components/portfolio/PortfolioGrid";
+import { fetchSoldPendingListings } from "../lib/idxbroker";
 
 export const metadata: Metadata = {
   title: "Portfolio | The Gruosso Group",
@@ -7,10 +8,14 @@ export const metadata: Metadata = {
     "Browse properties sold and listed by The Gruosso Group across Monmouth & Ocean County, NJ — residential, commercial, land, and investment.",
 };
 
-export default function PortfolioPage() {
+export const dynamic = "force-dynamic";
+
+export default async function PortfolioPage() {
+  const listings = await fetchSoldPendingListings();
+
   return (
     <main>
-      <PortfolioGrid />
+      <PortfolioGrid listings={listings} />
     </main>
   );
 }
