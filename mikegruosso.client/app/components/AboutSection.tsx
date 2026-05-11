@@ -13,7 +13,7 @@ export default function AboutSection() {
           {/* Heading */}
           <h2
             className="text-3xl sm:text-4xl font-normal tracking-wide mb-5 font-[family-name:var(--font-cormorant-garamond)]"
-            style={{ color: "#3aaaa8" }}
+            style={{ color: "#3aaac5" }}
           >
             About Us
           </h2>

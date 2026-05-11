@@ -36,7 +36,7 @@ export default function ElevatingSection() {
         className="relative z-0 w-full h-56 sm:h-72 md:h-96 -mt-24 sm:-mt-32 md:-mt-44"
         style={{
           backgroundImage:
-            "url('/sell-opportunity2.avif')",
+            "url('/slide-elevating.avif')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
